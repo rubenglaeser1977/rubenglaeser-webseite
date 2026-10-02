@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farbwandler</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  .grid > * { min-width: 0; }
+  .row { display: grid; grid-template-columns: 26px minmax(0, 1fr) 64px; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .row b { font-family: "Gemunu Libre"; font-size: 1.4rem; }
+  .row input[type=number] { padding: 6px 8px; text-align: right; }
+  input[type=range] { padding: 0; accent-color: var(--magenta); border: 0; background: none; }
+  .swatch { border-radius: 12px; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; transition: background .2s; }
+  .swatch .s { font-family: "Gemunu Libre"; font-weight: 800; font-size: 2.6rem; line-height: .9; }
+  .vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; margin-top: 16px; }
+  .val { background: var(--s2); border-radius: 10px; padding: 10px 12px; }
+  .val small { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+  .val code { font-size: .9rem; font-weight: 600; white-space: nowrap; }
+  .val button { margin-top: 6px; }
+  .contrast { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; font-size: .85rem; }
+  .contrast div { border-radius: 10px; padding: 10px 12px; border: 1px solid var(--border); }
+  .pill { font-weight: 700; }
+  .ok { color: var(--ok); } .no { color: var(--warn); }
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .presets button { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border); }
+  .note { font-size: .78rem; color: var(--muted); margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Farbwandler<em>/</em></h1>
+  <p class="lead">CMYK-Werte eingeben, Bildschirmfarbe sehen, HEX und RGB kopieren – und prüfen, ob Text darauf lesbar ist.</p>
+  <div class="grid">
+    <div class="card" id="inputs">
+      <div class="row"><b>C</b><input type="range" min="0" max="100" data-k="c"><input type="number" min="0" max="100" data-n="c" aria-label="Cyan"></div>
+      <div class="row"><b>M</b><input type="range" min="0" max="100" data-k="m"><input type="number" min="0" max="100" data-n="m" aria-label="Magenta"></div>
+      <div class="row"><b>Y</b><input type="range" min="0" max="100" data-k="y"><input type="number" min="0" max="100" data-n="y" aria-label="Yellow"></div>
+      <div class="row"><b>K</b><input type="range" min="0" max="100" data-k="k"><input type="number" min="0" max="100" data-n="k" aria-label="Key/Schwarz"></div>
+      <label style="margin-top:18px">Markenfarben</label>
+      <div class="presets">
+        <button type="button" title="Indigo C100 M100 Y0 K0" style="background:#312783" data-p="100,100,0,0"></button>
+        <button type="button" title="Magenta C0 M100 Y0 K0" style="background:#e6007e" data-p="0,100,0,0"></button>
+        <button type="button" title="Hellblau C36 M0 Y0 K0" style="background:#acddf9" data-p="36,0,0,0"></button>
+        <button type="button" title="Schwarz K100" style="background:#1d1d1b" data-p="0,0,0,100"></button>
+      </div>
+      <p class="note">Hinweis: Näherung an FOGRA39 (ISO Coated v2). Für verbindliche Werte die Farbumrechnung in Illustrator oder InDesign verwenden.</p>
+    </div>
+    <div class="card">
+      <div class="swatch" id="swatch"><span class="s" id="sw-text">Aa / Lesbar?</span></div>
+      <div class="vals">
+        <div class="val"><small>HEX</small><code id="hex"></code><br><button class="btn" data-copy="hex">Kopieren</button></div>
+        <div class="val"><small>RGB</small><code id="rgb"></code><br><button class="btn" data-copy="rgb">Kopieren</button></div>
+        <div class="val"><small>CMYK</small><code id="cmyk"></code><br><button class="btn" data-copy="cmyk">Kopieren</button></div>
+      </div>
+      <div class="contrast">
+        <div>Weiße Schrift: <span class="pill" id="c-white"></span></div>
+        <div>Dunkle Schrift: <span class="pill" id="c-dark"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const st = { c: 0, m: 100, y: 0, k: 0 };
+  const $ = (s) => document.querySelector(s);
+  const hex2 = (n) => n.toString(16).padStart(2, "0");
+  const lum = ([r, g, b]) => { const f = (v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(r) + .7152 * f(g) + .0722 * f(b); };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + .05) / (y + .05); };
+  // Näherung an FOGRA39 (ISO Coated v2): Interpolation zwischen gemessenen Druck-Primärfarben
+  const P = { "0000":"ffffff","1000":"009fe3","0100":"e6007e","0010":"ffed00","1100":"312783","1010":"009640","0110":"e30613","1110":"2b2a29",
+              "0001":"1d1d1b","1001":"0b1a2a","0101":"2a0d1c","0011":"1e1c0e","1101":"110f22","1011":"0c1a13","0111":"1f0d0e","1111":"0a0a0a" };
+  const PL = Object.fromEntries(Object.entries(P).map(([k, h]) => [k, [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16))]));
+  function cmyk2rgb(c, m, y, k) {
+    const out = [0, 0, 0], v = [c, m, y, k];
+    for (const key in PL) {
+      let w = 1;
+      for (let i = 0; i < 4; i++) w *= key[i] === "1" ? v[i] : 1 - v[i];
+      if (w) PL[key].forEach((x, j) => (out[j] += w * x));
+    }
+    return out.map((x) => Math.max(0, Math.min(255, Math.round(x))));
+  }
+  function update() {
+    const { c, m, y, k } = st;
+    const rgb = cmyk2rgb(c / 100, m / 100, y / 100, k / 100);
+    const hex = "#" + rgb.map(hex2).join("").toUpperCase();
+    $("#hex").textContent = hex; $("#rgb").textContent = rgb.join(", "); $("#cmyk").textContent = `${c}/${m}/${y}/${k}`;
+    $("#swatch").style.background = hex;
+    const rw = ratio(rgb, [255, 255, 255]), rd = ratio(rgb, [23, 21, 63]);
+    const lbl = (r) => `${r.toFixed(1)} : 1 – ${r >= 4.5 ? "gut" : r >= 3 ? "nur große Schrift" : "zu schwach"}`;
+    $("#c-white").textContent = lbl(rw); $("#c-white").className = "pill " + (rw >= 4.5 ? "ok" : "no");
+    $("#c-dark").textContent = lbl(rd); $("#c-dark").className = "pill " + (rd >= 4.5 ? "ok" : "no");
+    $("#sw-text").style.color = rw >= rd ? "#fff" : "#17153f";
+    document.querySelectorAll("[data-k]").forEach((el) => (el.value = st[el.dataset.k]));
+    document.querySelectorAll("[data-n]").forEach((el) => (el.value = st[el.dataset.n]));
+  }
+  document.querySelector("#inputs").addEventListener("input", (e) => {
+    const key = e.target.dataset.k || e.target.dataset.n; if (!key) return;
+    st[key] = Math.max(0, Math.min(100, +e.target.value || 0)); update();
+  });
+  document.querySelectorAll("[data-p]").forEach((b) => b.addEventListener("click", () => {
+    const [c, m, y, k] = b.dataset.p.split(",").map(Number); Object.assign(st, { c, m, y, k }); update();
+  }));
+  document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText($("#" + b.dataset.copy).textContent); b.textContent = "Kopiert"; setTimeout(() => (b.textContent = "Kopieren"), 1200); } catch (e) {}
+  }));
+  // Theme von der Hauptseite übernehmen
+  if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme = "dark";
+  addEventListener("message", (e) => { if (e.data && e.data.type === "theme") document.documentElement.dataset.theme = e.data.theme; });
+  update();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeichenzähler</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+  textarea { min-height: 200px; resize: vertical; line-height: 1.55; }
+  .stats { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 12px; font-size: .85rem; color: var(--muted); }
+  .stats b { color: var(--text); }
+  .limits { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 20px; }
+  .lim { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .lim h2 { margin: 0; font-size: .95rem; font-weight: 600; }
+  .lim small { color: var(--muted); font-size: .75rem; }
+  .bar { height: 6px; border-radius: 99px; background: var(--s2); margin: 12px 0 8px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--indigo); border-radius: inherit; transition: width .2s, background .2s; }
+  [data-theme="dark"] .bar i { background: var(--sky); }
+  .lim.over .bar i { background: var(--magenta); }
+  .lim .count { font-size: .85rem; font-weight: 600; }
+  .lim.over .count { color: var(--magenta); }
+  .hint { font-size: .78rem; color: var(--muted); margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Zeichenzähler<em>/</em></h1>
+  <p class="lead">Text einfügen und sofort sehen, ob er in die Zeichengrenzen von Social Media und Google Ads passt.</p>
+  <div class="card">
+    <label for="t">Dein Text</label>
+    <textarea id="t" placeholder="Hier Text einfügen …">Ausbildung mit Sinn: Starte bei uns in einen Beruf, der Menschen hilft. Jetzt bewerben!</textarea>
+    <div class="stats"><span><b id="chars">0</b> Zeichen</span><span><b id="words">0</b> Wörter</span><span><b id="lines">0</b> Zeilen</span><span><b id="tags">0</b> Hashtags</span></div>
+  </div>
+  <div class="limits" id="limits"></div>
+  <p class="hint">Richtwerte – Plattformen ändern ihre Grenzen gelegentlich. Emojis zählen je nach Plattform als ein oder zwei Zeichen.</p>
+</div>
+<script>
+  const L = [
+    { n: "Google Ads Anzeigentitel", d: "Responsive Suchanzeige", max: 30 },
+    { n: "Google Ads Beschreibung", d: "Responsive Suchanzeige", max: 90 },
+    { n: "Instagram Vorschau", d: "sichtbar vor „mehr“", max: 125 },
+    { n: "Instagram Caption", d: "Gesamtlänge", max: 2200 },
+    { n: "LinkedIn Vorschau", d: "sichtbar vor „mehr“", max: 210 },
+    { n: "LinkedIn Beitrag", d: "Gesamtlänge", max: 3000 },
+    { n: "Meta-Description", d: "Suchergebnis (SEO)", max: 155 },
+    { n: "SEO-Titel", d: "Suchergebnis (SEO)", max: 60 }
+  ];
+  const t = document.getElementById("t"), box = document.getElementById("limits");
+  box.innerHTML = L.map((l, i) => `<div class="lim" id="l${i}"><h2>${l.n}</h2><small>${l.d}</small><div class="bar"><i></i></div><span class="count"></span></div>`).join("");
+  function update() {
+    const v = t.value, n = [...v].length;
+    document.getElementById("chars").textContent = n.toLocaleString("de-DE");
+    document.getElementById("words").textContent = (v.trim().match(/\S+/g) || []).length;
+    document.getElementById("lines").textContent = v ? v.split("\n").length : 0;
+    document.getElementById("tags").textContent = (v.match(/#[\p{L}\d_]+/gu) || []).length;
+    L.forEach((l, i) => {
+      const el = document.getElementById("l" + i), over = n > l.max;
+      el.classList.toggle("over", over);
+      el.querySelector("i").style.width = Math.min(100, (n / l.max) * 100) + "%";
+      el.querySelector(".count").textContent = over ? `${n - l.max} Zeichen zu viel` : `${n} / ${l.max} – noch ${l.max - n}`;
+    });
+  }
+  t.addEventListener("input", update);
+  if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme = "dark";
+  addEventListener("message", (e) => { if (e.data && e.data.type === "theme") document.documentElement.dataset.theme = e.data.theme; });
+  update();
+</script>
+</body>
+</html>

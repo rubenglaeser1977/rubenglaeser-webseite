@@ -1,0 +1,18 @@
+/* Gemeinsame Basis für Beispiel-Apps – nutzt die Schriften der Hauptseite */
+@font-face { font-family: "Gemunu Libre"; src: url("../assets/fonts/gemunu-libre-latin.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+:root { --indigo:#312783; --magenta:#e6007e; --sky:#acddf9; --bg:#f7f6fb; --surface:#fff; --s2:#eeedf6; --border:#dddbeb; --text:#17153f; --muted:#57557a; --ok:#0f8a5f; --warn:#c2410c; color-scheme: light; }
+[data-theme="dark"] { --bg:#110f2b; --surface:#1a1840; --s2:#232050; --border:#322f66; --text:#ecebf8; --muted:#b3b1d3; --ok:#4ade80; --warn:#fb923c; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Gemunu Libre", system-ui, sans-serif; font-size: 17px; background: var(--bg); color: var(--text); line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding: clamp(20px, 4vw, 48px); }
+h1 { font-family: "Gemunu Libre", sans-serif; font-weight: 800; font-size: clamp(2.2rem, 1.6rem + 3vw, 3.5rem); line-height: .9; margin: 0; color: var(--indigo); }
+[data-theme="dark"] h1 { color: #fff; }
+h1 em { font-style: normal; color: var(--magenta); }
+.lead { color: var(--muted); margin: 12px 0 28px; max-width: 56ch; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: clamp(16px, 3vw, 28px); }
+label { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+input, textarea, select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; width: 100%; }
+input:focus, textarea:focus { outline: 2px solid var(--magenta); outline-offset: 1px; border-color: transparent; }
+button { font: inherit; cursor: pointer; }
+.btn { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 600; }
+.btn:hover { border-color: var(--muted); }

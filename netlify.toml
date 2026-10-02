@@ -1,0 +1,27 @@
+# Netlify-Konfiguration – statische Seite, kein Build-Schritt nötig
+[build]
+  publish = "."
+  command = ""
+
+# Sicherheits-Header für alle Seiten
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Eigene Seiten nur von der eigenen Domain einbetten lassen
+    X-Frame-Options = "SAMEORIGIN"
+
+# Schriften und Bilder lange cachen
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Hinweis: Netlify liefert /grafik automatisch als grafik.html aus (Pretty URLs).
