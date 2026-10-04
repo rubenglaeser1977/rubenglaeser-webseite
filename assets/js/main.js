@@ -132,10 +132,10 @@
     });
   }
 
-  /* ---------- Grafik ---------- */
-  const grafikGrid = $("#grafik-grid");
-  if (grafikGrid) {
-    const items = (window.GRAFIK || []).map((x, i) => ({ ...x, _i: i }));
+  /* ---------- Grafik & Video ---------- */
+  function workGrid(grafikGrid, data, filtersEl) {
+    if (!grafikGrid) return;
+    const items = (data || []).map((x, i) => ({ ...x, _i: i }));
     const render = (filter) => {
       const list = items.filter((x) => !filter || x.kategorie === filter);
       if (!list.length) { grafikGrid.innerHTML = '<p class="empty">Hier erscheinen bald Arbeiten.</p>'; return; }
@@ -157,9 +157,12 @@
           ${it.link ? `<a class="btn btn-primary lb-link" href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.linkText || "Mehr ansehen")}</a>` : ""}`)));
       observeReveals();
     };
-    buildFilters($("#grafik-filters"), items, "kategorie", render);
+    if (filtersEl) buildFilters(filtersEl, items, "kategorie", render);
     render(null);
   }
+  workGrid($("#grafik-grid"), window.GRAFIK, $("#grafik-filters"));
+  workGrid($("#video-grid"), window.VIDEO, $("#video-filters"));
+  workGrid($("#om-grid"), window.ONLINE, $("#om-filters"));
 
   /* ---------- Fotografie ---------- */
   const gallery = $("#foto-gallery");

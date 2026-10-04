@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Zeitwerk</title>
+  <meta name="theme-color" content="#E5484D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Zeitwerk" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 64 64" aria-label="Zeitwerk Logo" role="img">
+          <rect width="64" height="64" rx="15" fill="var(--accent)" />
+          <circle cx="32" cy="35.5" r="17" fill="none" stroke="#FFF6F0" stroke-opacity=".3" stroke-width="4.5" />
+          <path d="M32 18.5 A17 17 0 1 1 15 35.5" fill="none" stroke="#FFF6F0" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M32 35.5 V26 M32 35.5 L38.5 39.5" stroke="#FFF6F0" stroke-width="4" stroke-linecap="round" />
+          <path d="M32 16 C29 11.5 24.5 10.5 21.3 11.5 C23.8 14.8 27.8 16.5 32 16 Z" fill="#7BC47F" />
+          <path d="M32 16 C35 11.5 39.5 10.5 42.7 11.5 C40.2 14.8 36.2 16.5 32 16 Z" fill="#5FAE67" />
+        </svg>
+        <span class="brand-name">Zeitwerk</span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeBtn" aria-label="Hell/Dunkel umschalten" data-testid="button-theme">
+          <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- Timer -->
+      <section class="panel timer-panel" aria-label="Timer">
+        <div class="projects-row" id="projectsRow" role="tablist" aria-label="Projekte"></div>
+
+        <div class="elsewhere" id="elsewhere" hidden>
+          <span class="dot"></span>
+          <span id="elsewhereText"></span>
+          <button class="link-btn" id="elsewhereGo" data-testid="button-goto-running">Anzeigen</button>
+        </div>
+
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="ring-track" cx="100" cy="100" r="88" />
+            <g class="ring-ticks" id="ticks"></g>
+            <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88" />
+          </svg>
+          <div class="ring-center">
+            <div class="ring-project" id="ringProject">–</div>
+            <div class="time" id="timeDisplay" data-testid="text-timer">00:00</div>
+            <div class="ring-sub" id="ringSub">Bereit</div>
+          </div>
+        </div>
+
+        <div class="task-field">
+          <label for="taskInput" class="visually-hidden">Aufgabe (optional)</label>
+          <input id="taskInput" type="text" placeholder="Woran arbeitest du? (optional)" autocomplete="off" list="taskSuggestions" maxlength="200" data-testid="input-task" />
+          <datalist id="taskSuggestions"></datalist>
+        </div>
+
+        <button class="main-btn" id="mainBtn" data-testid="button-start-stop">
+          <svg class="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>
+          <svg class="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+          <span id="mainBtnLabel">Start</span>
+        </button>
+      </section>
+
+      <!-- Protokoll -->
+      <section class="panel log-panel" aria-label="Protokoll">
+        <div class="log-head">
+          <div class="log-title">
+            <span class="swatch" id="logSwatch"></span>
+            <h2 id="logTitle">Protokoll</h2>
+            <button class="icon-btn sm" id="editProjectBtn" aria-label="Projekt bearbeiten" data-testid="button-edit-project">
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            </button>
+          </div>
+          <div class="log-actions">
+            <button class="chip-btn" id="addEntryBtn" data-testid="button-add-entry">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Nachtragen
+            </button>
+            <a class="chip-btn" id="csvBtn" href="#" data-testid="link-export-csv">
+              <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CSV
+            </a>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><span class="stat-label">Heute</span><span class="stat-val" id="statToday" data-testid="text-stat-today">0:00</span></div>
+          <div class="stat"><span class="stat-label">Diese Woche</span><span class="stat-val" id="statWeek" data-testid="text-stat-week">0:00</span></div>
+          <div class="stat"><span class="stat-label">Gesamt</span><span class="stat-val" id="statTotal" data-testid="text-stat-total">0:00</span></div>
+        </div>
+
+        <div class="log-list" id="logList"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Projekt-Dialog -->
+  <dialog id="projectDialog" class="sheet">
+    <form method="dialog" id="projectForm">
+      <h3 id="projectDialogTitle">Neues Projekt</h3>
+      <label class="field">
+        <span>Name</span>
+        <input id="projectName" type="text" required maxlength="60" placeholder="z. B. Kampagne Herbst" data-testid="input-project-name" />
+      </label>
+      <div class="field">
+        <span>Farbe</span>
+        <div class="colors" id="colorPicker"></div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="ghost danger" id="deleteProjectBtn" data-testid="button-delete-project" aria-label="Projekt löschen" title="Löschen"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg></button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" data-close>Abbrechen</button>
+        <button type="submit" class="primary" data-testid="button-save-project">Speichern</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Eintrag-Dialog -->
+  <dialog id="entryDialog" class="sheet">
+    <form method="dialog" id="entryForm">
+      <h3 id="entryDialogTitle">Eintrag bearbeiten</h3>
+      <label class="field">
+        <span>Aufgabe</span>
+        <input id="entryTask" type="text" maxlength="200" placeholder="Ohne Aufgabe" data-testid="input-entry-task" />
+      </label>
+      <label class="field">
+        <span>Datum</span>
+        <input id="entryDate" type="date" required data-testid="input-entry-date" />
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>Start</span>
+          <input id="entryStart" type="time" required data-testid="input-entry-start" />
+        </label>
+        <label class="field">
+          <span>Ende</span>
+          <input id="entryEnd" type="time" required data-testid="input-entry-end" />
+        </label>
+      </div>
+      <p class="form-error" id="entryError" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" class="ghost danger" id="deleteEntryBtn" data-testid="button-delete-entry" aria-label="Eintrag löschen" title="Löschen"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg></button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" data-close>Abbrechen</button>
+        <button type="submit" class="primary" data-testid="button-save-entry">Speichern</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Bestätigung -->
+  <dialog id="confirmDialog" class="sheet small">
+    <form method="dialog">
+      <h3 id="confirmTitle">Wirklich löschen?</h3>
+      <p id="confirmText" class="muted"></p>
+      <div class="dialog-actions">
+        <span class="spacer"></span>
+        <button value="no" class="ghost">Abbrechen</button>
+        <button value="yes" class="primary danger-fill" data-testid="button-confirm">Löschen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

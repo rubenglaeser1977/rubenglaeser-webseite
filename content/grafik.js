@@ -31,15 +31,6 @@ window.GRAFIK = [
     beschreibung: "Imagekampagne mit lokalem Bezug – in Varianten für Partner wie die Dresdner Eislöwen und Dynamo Dresden."
   },
   {
-    titel: "Social Media im Landtagswahlkampf",
-    kategorie: "Social Media",
-    jahr: "2024",
-    bild: "assets/img/grafik/social-media-wahlkampf-2024.jpg",
-    kunde: "Martin Modschiedler, MdL",
-    leistung: "Strategie, Content-Erstellung, Meta-Werbung",
-    beschreibung: "Strategische Planung, Erstellung und Ausspielung von Content auf mehreren Plattformen. Schwerpunkt Imagewerbung im Meta-Netzwerk. Die Betreuung läuft ehrenamtlich weiter."
-  },
-  {
     titel: "19:53 – Dresdner Fußball-Talk",
     kategorie: "Digital",
     jahr: "",
@@ -168,50 +159,5 @@ window.GRAFIK = [
     kunde: "",
     leistung: "Motivgestaltung Textildruck",
     beschreibung: ""
-  },
-
-  /* ---------- Video & Animation ---------- */
-  {
-    titel: "Logoanimation Party Piloten",
-    kategorie: "Video & Animation",
-    jahr: "",
-    bild: "assets/img/grafik/logoanimation-partypiloten.webp",
-    video: "assets/video/logoanimation-partypiloten.mp4",
-    kunde: "Party Piloten",
-    leistung: "Logoanimation",
-    beschreibung: "Kurzes Logo-Intro mit Glitch-Effekt für Videos und Social Media."
-  },
-  {
-    titel: "Sing Bach! – Abschlusskonzert",
-    kategorie: "Video & Animation",
-    jahr: "2018",
-    bild: "assets/img/grafik/video-sing-bach-2018.jpg",
-    kunde: "Sing Bach!",
-    leistung: "Kamera, Schnitt, DVD-Produktion",
-    beschreibung: "Konzertmitschnitt eines Grundschulprojekts, das Kindern klassische Musik und Chorsingen nahebringt. Kamera: Panasonic AG-UX90, GoPro. Software: Adobe Premiere.",
-    link: "https://bit.ly/3UM3Z5W",
-    linkText: "Videos ansehen"
-  },
-  {
-    titel: "HITRADIO RTL Golf-Cup",
-    kategorie: "Video & Animation",
-    jahr: "2013",
-    bild: "assets/img/grafik/video-golf-cup-2013.jpg",
-    kunde: "HITRADIO RTL Sachsen",
-    leistung: "Kamera, Ton, Schnitt",
-    beschreibung: "Zusammenschnitt eines Golf-Charity-Events.",
-    link: "https://bit.ly/3UM3Z5W",
-    linkText: "Videos ansehen"
-  },
-  {
-    titel: "Rerik – iPhone-Film",
-    kategorie: "Video & Animation",
-    jahr: "",
-    bild: "assets/img/grafik/video-rerik.jpg",
-    kunde: "Privat",
-    leistung: "Kamera und Schnitt auf dem iPhone",
-    beschreibung: "Von der Aufnahme bis zum fertigen Schnitt in weniger als 90 Minuten – mit iPhone 12 und iMovie.",
-    link: "https://bit.ly/3UM3Z5W",
-    linkText: "Videos ansehen"
   }
 ];

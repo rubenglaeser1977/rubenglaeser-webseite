@@ -25,6 +25,28 @@ window.WEBAPPS = [
     jahr: "2026"
   },
   {
+    id: "zeitwerk",
+    titel: "Zeitwerk",
+    kurz: "Zeittracker für Projekte und Aufgaben – mit Tages- und Wochenübersicht.",
+    beschreibung: "Projekte anlegen, Timer starten, fertig: Zeitwerk protokolliert die Arbeitszeit pro Projekt und Aufgabe, zeigt Heute, Woche und Gesamt und exportiert alles als CSV. Die Daten bleiben im eigenen Browser.",
+    url: "apps/zeitwerk/",
+    vorschau: "assets/img/apps/zeitwerk.jpg",
+    status: "Live",
+    tags: ["Produktivität", "Zeiterfassung", "CSV"],
+    jahr: "2026"
+  },
+  {
+    id: "pomodoro",
+    titel: "Pomodoro Timer",
+    kurz: "Konzentriert arbeiten in Phasen – nach Dauer oder bis zu einer Zielzeit.",
+    beschreibung: "Arbeitsphasen und Pausen frei einstellen oder eine Zielzeit vorgeben: Der Timer plant die Phasen, zeigt den Ablauf und meldet sich mit Tönen. Läuft auch als App auf dem Handy.",
+    url: "apps/pomodoro/",
+    vorschau: "assets/img/apps/pomodoro.jpg",
+    status: "Live",
+    tags: ["Produktivität", "Timer", "Fokus"],
+    jahr: "2026"
+  },
+  {
     id: "farbwandler",
     titel: "Farbwandler",
     kurz: "CMYK, RGB und HEX umrechnen – mit Kontrastprüfung für Text auf Farbe.",

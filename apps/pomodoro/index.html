@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Pomodoro"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#c0392b"><title>Pomodoro Timer</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f4f1ec;color:#222;display:flex;justify-content:center;padding:24px}
+.app{max-width:460px;width:100%}h1{font-size:1.4rem;margin:0 0 16px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px #0001;margin-bottom:16px}
+.tabs{display:flex;gap:8px;margin-bottom:16px}.tabs button{flex:1;padding:10px;border:1px solid #ccc;background:#fff;border-radius:8px;cursor:pointer;font-size:.95rem}
+.tabs button.on{background:#c0392b;color:#fff;border-color:#c0392b}
+label{display:block;font-size:.85rem;color:#555;margin:10px 0 4px}input{width:100%;padding:9px;border:1px solid #ccc;border-radius:8px;font-size:1rem}
+.info{font-size:.85rem;color:#555;margin-top:10px;min-height:1.2em}.err{color:#c0392b}
+.phase{text-align:center;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.85rem}
+.time{text-align:center;font-size:4.5rem;font-variant-numeric:tabular-nums;font-weight:700;margin:6px 0}
+.bar{height:8px;background:#eee;border-radius:4px;overflow:hidden}.bar div{height:100%;background:#c0392b;width:0}
+.work .bar div{background:#c0392b}.brk .bar div{background:#27ae60}.brk .phase{color:#27ae60}.work .phase{color:#c0392b}
+.ctrl{display:flex;gap:8px;margin-top:16px}.ctrl button{flex:1;padding:12px;border:0;border-radius:8px;font-size:1rem;cursor:pointer;background:#333;color:#fff}
+.ctrl button:disabled{opacity:.4;cursor:default}.sub{text-align:center;font-size:.9rem;color:#555;margin-top:8px}
+ol{padding-left:20px;font-size:.85rem;margin:8px 0 0}li.done{color:#999;text-decoration:line-through}li.cur{font-weight:700}
+
+body.dark{background:#15161a;color:#e8e8e8}body.dark .card{background:#22242a;box-shadow:none}
+body.dark input,body.dark .tabs button{background:#2c2f36;color:#e8e8e8;border-color:#3a3d45}
+body.dark .tabs button.on{background:#c0392b;border-color:#c0392b;color:#fff}
+body.dark label,body.dark .info,body.dark .sub{color:#a8abb3}body.dark .bar{background:#33363e}
+body.dark .ctrl button{background:#3a3d45}body.dark li.done{color:#666}body.dark input::-webkit-calendar-picker-indicator{filter:invert(1)}
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.head h1{margin:0}
+#dm{border:1px solid #888;background:transparent;color:inherit;border-radius:8px;padding:6px 10px;cursor:pointer}
+
+@media (min-width:900px) and (orientation:landscape){
+body{padding:32px;align-items:center;min-height:100vh}
+.app{max-width:1200px;display:grid;grid-template-columns:380px 1fr;grid-template-rows:auto 1fr;gap:0 24px}
+.head{grid-column:1/-1}.app>.card{margin:0}
+#tc{display:flex;flex-direction:column;justify-content:center;padding:32px}
+.time{font-size:9rem}.phase{font-size:1.1rem}.sub{font-size:1.1rem}
+.ctrl button{padding:18px;font-size:1.15rem}
+#plan{columns:2;font-size:.95rem;margin-top:20px}
+}
+
+@media (orientation:landscape) and (max-height:520px){
+body{padding:10px 16px}
+.app{max-width:none;display:grid;grid-template-columns:260px 1fr;gap:0 14px;align-items:start}
+.head{grid-column:1/-1;margin-bottom:8px}.head h1{font-size:1.05rem}.app>.card{margin:0;padding:12px}
+.tabs{margin-bottom:6px}.tabs button{padding:6px;font-size:.8rem}label{margin:5px 0 2px;font-size:.75rem}input{padding:5px;font-size:.9rem}
+.time{font-size:min(5.5rem,24vh);margin:0}.ctrl{margin-top:8px}.ctrl button{padding:9px;font-size:.9rem}
+#plan{display:none}
+}
+
+.snd{margin-top:14px;border-top:1px solid #ddd;padding-top:10px;font-size:.9rem}.snd summary{cursor:pointer;font-weight:600}
+.srow{display:grid;grid-template-columns:1fr auto;gap:6px 8px;margin-top:10px;align-items:center}.srow span{grid-column:1/-1;font-size:.8rem;color:#555}
+.srow select{padding:7px;border:1px solid #ccc;border-radius:8px;font-size:.9rem;width:100%}.srow input[type=range]{padding:0;border:0;accent-color:#c0392b}
+.srow button{padding:6px 12px;border:1px solid #888;border-radius:8px;background:transparent;color:inherit;cursor:pointer;grid-row:2;grid-column:2}
+.srow select{grid-column:1}.srow input[type=range]{grid-column:1/-1}
+body.dark .snd{border-color:#3a3d45}body.dark .srow span{color:#a8abb3}body.dark .srow select{background:#2c2f36;color:#e8e8e8;border-color:#3a3d45}
+
+@media (max-width:600px) and (orientation:portrait){
+body{padding:14px}
+.snd summary{padding:12px 0;font-size:1rem;list-style-position:inside}
+.srow{gap:10px;margin-top:14px;padding:12px;border-radius:10px;background:#0000000a}
+body.dark .srow{background:#ffffff0a}
+.srow span{font-size:.9rem}
+.srow select{min-height:48px;font-size:16px;padding:10px}
+.srow button{min-height:48px;min-width:72px;font-size:1rem}
+.srow input[type=range]{height:40px}
+.srow input[type=range]::-webkit-slider-thumb{transform:scale(1.4)}
+.vol{grid-column:1/-1;display:flex;justify-content:space-between;font-size:.8rem;color:#777;margin-top:-6px}
+}
+.vol{display:none}@media (max-width:600px) and (orientation:portrait){.ctrl{display:grid;grid-template-columns:1fr 1fr}.ctrl button{min-height:52px;padding:12px 6px}}@media (max-width:600px) and (orientation:portrait){.vol{display:flex}}
+</style></head><body><div class="app">
+<div class="head"><h1>Pomodoro Timer</h1><button id="dm">Dunkel</button></div>
+<div class="card">
+<div class="tabs"><button id="t1" class="on">Nach Dauer</button><button id="t2">Nach Zielzeit</button></div>
+<div id="m1">
+<label>Arbeitsphase (Minuten)</label><input id="w1" type="number" min="1" value="25">
+<label>Pause (Minuten)</label><input id="b1" type="number" min="0" value="5">
+<label>Anzahl Arbeitsphasen</label><input id="n1" type="number" min="1" value="4">
+</div>
+<div id="m2" hidden>
+<label>Zielzeit (Ende)</label><input id="end" type="time">
+<label>Anzahl Arbeitsphasen</label><input id="n2" type="number" min="1" value="4">
+<label>Pause (Minuten)</label><input id="b2" type="number" min="0" value="5">
+</div>
+<div class="info" id="info"></div>
+<details class="snd"><summary>Töne</summary>
+<div class="srow"><span>Ende Arbeitsphase – Ton &amp; Lautstärke</span><select id="sw"><option value="beep">Piepen</option><option value="gong">Gong</option><option value="bell">Glocke</option><option value="up">Aufsteigend</option><option value="down">Absteigend</option><option value="chime">Klangspiel</option><option value="off">Aus</option></select><input id="vw" type="range" min="0" max="100" value="70"><div class="vol"><span>leise</span><b id="vwl">70 %</b><span>laut</span></div><button id="pw" type="button">Test</button></div>
+<div class="srow"><span>Ende Pause – Ton &amp; Lautstärke</span><select id="sb"><option value="beep">Piepen</option><option value="gong">Gong</option><option value="bell">Glocke</option><option value="up">Aufsteigend</option><option value="down">Absteigend</option><option value="chime">Klangspiel</option><option value="off">Aus</option></select><input id="vb" type="range" min="0" max="100" value="70"><div class="vol"><span>leise</span><b id="vbl">70 %</b><span>laut</span></div><button id="pbt" type="button">Test</button></div>
+</details>
+</div>
+<div class="card work" id="tc">
+<div class="phase" id="ph">Bereit</div><div class="time" id="tm">00:00</div>
+<div class="bar"><div id="pb"></div></div><div class="sub" id="sub"></div><div class="sub" id="wk" style="font-size:.75rem;opacity:.7"></div>
+<div class="ctrl"><button id="go">Start</button><button id="pa" disabled>Pause</button><button id="sk" disabled>Überspringen</button><button id="rs">Reset</button></div>
+<ol id="plan"></ol>
+</div></div>
+<script>
+(function(){const b=document.body,k='pomoDark';let v=null;try{v=localStorage.getItem(k)}catch(e){}let on=v===null?matchMedia('(prefers-color-scheme: dark)').matches:v==='1';
+const set=o=>{b.classList.toggle('dark',o);document.getElementById('dm').textContent=o?'Hell':'Dunkel';try{localStorage.setItem(k,o?'1':'0')}catch(e){}};set(on);
+document.getElementById('dm').onclick=()=>set(!b.classList.contains('dark'))})();
+
+const $=id=>document.getElementById(id);let mode=1,steps=[],idx=0,endAt=0,remain=0,tick=null,paused=false;
+$('t1').onclick=()=>setMode(1);$('t2').onclick=()=>setMode(2);
+function setMode(m){if(tick)return;mode=m;$('t1').classList.toggle('on',m==1);$('t2').classList.toggle('on',m==2);$('m1').hidden=m!=1;$('m2').hidden=m!=2;calc()}
+const d=new Date(Date.now()+2*3600e3);$('end').value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const fmt=s=>{s=Math.max(0,Math.ceil(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):String(m).padStart(2,'0'))+':'+String(x).padStart(2,'0')};
+const clock=t=>new Date(t).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+function build(){let w,b,n;const info=$('info');info.classList.remove('err');
+ if(mode==1){w=+$('w1').value*60;b=+$('b1').value*60;n=parseInt($('n1').value)}
+ else{n=parseInt($('n2').value);b=+$('b2').value*60;const [h,m]=$('end').value.split(':').map(Number);if(isNaN(h)){info.textContent='Bitte Zielzeit eingeben.';info.classList.add('err');return null}
+  const t=new Date();t.setHours(h,m,0,0);if(t<=Date.now())t.setDate(t.getDate()+1);const tot=(t-Date.now())/1000;w=(tot-(n-1)*b)/n;
+  if(w<60){info.textContent='Zielzeit zu knapp für diese Anzahl Phasen und Pausen.';info.classList.add('err');return null}w=Math.floor(w)}
+ if(!(n>=1)||!(w>0)||b<0){info.textContent='Bitte gültige Werte eingeben.';info.classList.add('err');return null}
+ const s=[];for(let i=0;i<n;i++){s.push({t:'Arbeit',d:w,i:i+1});if(i<n-1&&b>0)s.push({t:'Pause',d:b,i:i+1})}
+ const tot=s.reduce((a,x)=>a+x.d,0);info.textContent=(mode==2?'Arbeitsphase: '+fmt(w)+' · ':'')+'Gesamt: '+fmt(tot)+' · Ende ca. '+clock(Date.now()+tot*1000);
+ return {s,n}}
+function calc(){if(tick)return;const r=build();steps=r?r.s:[];idx=0;renderPlan();if(steps[0]){$('tm').textContent=fmt(steps[0].d)}}
+document.querySelectorAll('input:not([type=range])').forEach(i=>i.oninput=calc);
+function renderPlan(){$('plan').innerHTML=steps.map((s,i)=>`<li class="${i<idx?'done':i==idx&&tick?'cur':''}">${s.t}${s.t=='Arbeit'?' '+s.i:''} – ${fmt(s.d)}</li>`).join('')}
+let wl=null,wlOn=false,nsv=null;
+function nsVideo(){if(!nsv){nsv=document.createElement('video');nsv.src='keepawake.mp4';nsv.loop=true;nsv.muted=true;nsv.playsInline=true;nsv.setAttribute('playsinline','');nsv.setAttribute('muted','');
+ nsv.style.cssText='position:fixed;width:1px;height:1px;opacity:0.01;pointer-events:none;left:0;bottom:0';document.body.appendChild(nsv)}return nsv}
+async function wake(on){wlOn=on;
+ if(on){try{const v=nsVideo();const p=v.play();if(p&&p.then)p.then(updWake,()=>{})}catch(e){}
+  try{if('wakeLock' in navigator&&!wl){wl=await navigator.wakeLock.request('screen');wl.addEventListener('release',()=>{wl=null;updWake()})}}catch(e){wl=null}}
+ else{try{if(wl){await wl.release();wl=null}}catch(e){}try{if(nsv)nsv.pause()}catch(e){}}
+ updWake()}
+function updWake(){const el=$('wk');if(!el)return;if(!wlOn){el.textContent='';return}
+ el.textContent=wl?'Bildschirm bleibt an':(nsv&&!nsv.paused?'Bildschirm bleibt an (Ersatzmodus)':'Bildschirm-Sperre konnte nicht verhindert werden – tippe einmal auf den Bildschirm')}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible'&&tick){wake(true);audioResume()}});
+let AC=null,keep=null;
+function ac(){if(!AC||AC.state=='closed'){AC=new (window.AudioContext||window.webkitAudioContext)();keep=null}
+ if(!keep){try{const o=AC.createOscillator(),g=AC.createGain();g.gain.value=0.0001;o.frequency.value=40;o.connect(g);g.connect(AC.destination);o.start();keep=o}catch(e){}}
+ if(AC.state!=='running')AC.resume().catch(()=>{});return AC}
+function audioResume(){try{if(AC&&AC.state!=='running')AC.resume().catch(()=>{})}catch(e){}}
+try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+function unlock(){try{const c=ac();const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}if(tick)wake(true)}
+['pointerdown','touchend','click','keydown'].forEach(ev=>document.addEventListener(ev,unlock,{passive:true}));
+function tone(c,f,t,d,vol,type='sine',f2){const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f,c.currentTime+t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,c.currentTime+t+d);
+ g.gain.setValueAtTime(0,c.currentTime+t);g.gain.linearRampToValueAtTime(vol,c.currentTime+t+.01);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+t+d);o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+d+.05)}
+function play(kind,v){if(kind=='off'||v<=0)return;const c0=ac();if(c0.state!=='running'){c0.resume().then(()=>play2(kind,v)).catch(()=>play2(kind,v));return}play2(kind,v)}
+function play2(kind,v){try{const c=ac();v=Math.pow(v/100,1.5)*.8;
+ if(kind=='beep')[0,.3,.6].forEach(t=>tone(c,880,t,.18,v,'square'));
+ else if(kind=='gong'){tone(c,110,0,3.5,v);tone(c,220,0,2.5,v*.5);tone(c,330,0,1.8,v*.3);tone(c,554,0,1.2,v*.15)}
+ else if(kind=='bell'){[0,.9].forEach(t=>{tone(c,1320,t,1.4,v);tone(c,2640,t,.8,v*.35);tone(c,3960,t,.4,v*.15)})}
+ else if(kind=='up')[523,659,784,1047].forEach((f,i)=>tone(c,f,i*.18,.35,v,'triangle'));
+ else if(kind=='down')[1047,784,659,523].forEach((f,i)=>tone(c,f,i*.18,.35,v,'triangle'));
+ else if(kind=='chime')[1568,1319,1175,1568,1760].forEach((f,i)=>tone(c,f,i*.22,1.2,v*.7))}catch(e){}}
+const SK='pomoSound';function loadS(){try{const o=JSON.parse(localStorage.getItem(SK));if(o){$('sw').value=o.sw;$('vw').value=o.vw;$('sb').value=o.sb;$('vb').value=o.vb}}catch(e){}}
+function saveS(){try{localStorage.setItem(SK,JSON.stringify({sw:$('sw').value,vw:$('vw').value,sb:$('sb').value,vb:$('vb').value}))}catch(e){}}
+$('sb').value='gong';loadS();['sw','vw','sb','vb'].forEach(i=>$(i).onchange=saveS);
+const vl=()=>{$('vwl').textContent=$('vw').value+' %';$('vbl').textContent=$('vb').value+' %'};$('vw').oninput=$('vb').oninput=vl;vl();
+$('pw').onclick=()=>play($('sw').value,+$('vw').value);$('pbt').onclick=()=>play($('sb').value,+$('vb').value);
+function beep(endedType){if(endedType=='Arbeit')play($('sw').value,+$('vw').value);else play($('sb').value,+$('vb').value);
+ try{if(window.Notification&&Notification.permission=='granted')new Notification('Pomodoro',{body:steps[idx]?steps[idx].t+' beginnt':'Fertig'})}catch(e){}}
+function startStep(){const s=steps[idx];endAt=Date.now()+s.d*1000;$('tc').className='card '+(s.t=='Arbeit'?'work':'brk');
+ $('ph').textContent=s.t=='Arbeit'?'Arbeitsphase '+s.i+' / '+steps.filter(x=>x.t=='Arbeit').length:'Pause';renderPlan()}
+function loop(){if(paused)return;const s=steps[idx];const r=(endAt-Date.now())/1000;$('tm').textContent=fmt(r);$('pb').style.width=(100*(1-r/s.d))+'%';
+ const totalLeft=r+steps.slice(idx+1).reduce((a,x)=>a+x.d,0);$('sub').textContent='Ende um '+clock(Date.now()+totalLeft*1000);document.title=fmt(r)+' – '+s.t;
+ if(r<=0)next()}
+function next(){const ended=steps[idx]&&steps[idx].t;idx++;beep(ended);if(idx>=steps.length){finish();return}startStep()}
+function finish(){wake(false);clearInterval(tick);tick=null;$('ph').textContent='Geschafft';$('tm').textContent='00:00';$('pb').style.width='100%';$('sub').textContent='Alle Phasen abgeschlossen.';
+ $('go').disabled=false;$('pa').disabled=$('sk').disabled=true;document.title='Pomodoro Timer';renderPlan()}
+$('go').onclick=()=>{ac();calc();if(!steps.length)return;try{if(window.Notification&&Notification.permission=='default')Notification.requestPermission()}catch(e){}
+ wake(true);idx=0;paused=false;tick=setInterval(loop,250);startStep();loop();$('go').disabled=true;$('pa').disabled=$('sk').disabled=false;$('pa').textContent='Pause'};
+$('pa').onclick=()=>{if(!paused){paused=true;remain=endAt-Date.now();$('pa').textContent='Weiter'}else{paused=false;endAt=Date.now()+remain;$('pa').textContent='Pause'}};
+$('sk').onclick=()=>{if(paused){paused=false;$('pa').textContent='Pause'}next()};
+$('rs').onclick=()=>{wake(false);clearInterval(tick);tick=null;paused=false;$('go').disabled=false;$('pa').disabled=$('sk').disabled=true;$('pa').textContent='Pause';
+ $('ph').textContent='Bereit';$('pb').style.width='0';$('sub').textContent='';$('tc').className='card work';document.title='Pomodoro Timer';calc()};
+calc();
+</script></body></html>
