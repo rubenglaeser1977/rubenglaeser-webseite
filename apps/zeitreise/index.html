@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zeitreise – Was war an diesem Tag?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3e9d2;--card:#fffaf0;--ink:#2b2118;--mute:#7a6a58;--acc:#d9542b;--acc2:#1f6f6b;--sun:#f2b134;--line:#2b2118}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);line-height:1.5;
+background:var(--bg);background-image:radial-gradient(rgba(43,33,24,.07) 1px,transparent 1px);background-size:14px 14px}
+main{max-width:880px;margin:0 auto;padding:36px 18px 80px}
+.hero{background:var(--acc2);color:#fffaf0;border:3px solid var(--line);border-radius:22px;padding:28px 26px 22px;box-shadow:8px 8px 0 var(--line);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+background:repeating-radial-gradient(circle,#2b2118 0 3px,#3a2e22 3px 6px);border:3px solid var(--line);box-shadow:inset 0 0 0 70px #2b2118,inset 0 0 0 76px var(--sun),inset 0 0 0 84px #2b2118}
+.stripes{height:10px;margin:14px 0 0;background:linear-gradient(var(--sun) 0 33%,var(--acc) 33% 66%,#9b3b6e 66%);border-radius:4px;max-width:60%}
+h1{font-family:Righteous,sans-serif;font-size:clamp(2.2rem,6vw,3.4rem);margin:0;letter-spacing:.02em;text-shadow:3px 3px 0 var(--line)}
+p.sub{margin:6px 0 18px;max-width:60%;opacity:.92}
+form{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+input,select{font:inherit;font-family:"Space Mono",monospace;padding:11px 14px;border:3px solid var(--line);border-radius:12px;background:#fffaf0;color:var(--ink);font-size:1.05rem}
+button{font:inherit;font-weight:700;padding:11px 22px;border:3px solid var(--line);border-radius:12px;background:var(--sun);color:var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--line);transition:transform .1s,box-shadow .1s}
+button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--line)}
+.card{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:22px;margin-top:22px;box-shadow:6px 6px 0 var(--line)}
+.big{font-family:Righteous,sans-serif;font-size:clamp(2.6rem,9vw,4.2rem);color:var(--acc);line-height:1.05;font-variant-numeric:tabular-nums}
+h2{font-family:Righteous,sans-serif;font-weight:400;font-size:1.35rem;margin:0 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 .tag{font-family:"Space Mono",monospace;font-size:.7rem;background:var(--ink);color:var(--card);padding:3px 8px;border-radius:6px;letter-spacing:.08em}
+ul{list-style:none;padding:0;margin:0}li{padding:8px 0;border-top:1px dashed rgba(43,33,24,.3)}li:first-child{border-top:0}
+.yr{display:inline-block;min-width:56px;font-family:"Space Mono",monospace;font-weight:700;color:var(--acc2)}
+a{color:var(--acc);text-decoration-thickness:2px;text-underline-offset:2px}.mute{color:var(--mute);font-size:.9rem}
+.song{font-family:Righteous,sans-serif;font-size:1.3rem;line-height:1.2;margin-top:8px}.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.cbox{border:2px solid var(--line);border-radius:14px;padding:14px;background:#fff;display:flex;flex-direction:column}.tag2{align-self:flex-start;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;background:var(--ink);color:var(--card);padding:3px 9px;border-radius:6px;letter-spacing:.08em;text-transform:uppercase}.cbox .alt{margin-top:auto;padding-top:10px}.cbox .yt{align-self:flex-start;font-size:.9rem;padding:7px 12px}
+.yt{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--acc);color:#fffaf0;text-decoration:none;font-weight:700;padding:9px 16px;border:3px solid var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--line)}
+.yt:before{content:"▶"}
+.src{margin-top:12px;font-size:.85rem;color:var(--mute)}.src b{color:var(--ink)}
+.alt{margin-top:14px;padding-top:12px;border-top:2px dashed rgba(43,33,24,.3)}
+details{border-top:2px dashed rgba(43,33,24,.25);padding:10px 0}details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:700;font-size:1.05rem}summary .mute{font-weight:400}details ul{margin-top:6px}
+</style></head><body><main>
+<section class="hero"><h1>Zeitreise</h1><p class="sub">Datum eingeben: Tage seitdem, Nummer-eins-Hit der Woche, Ereignisse und Geburtstage. Grundlage: Wikipedia.</p>
+<form id="f"><input type="date" id="d" required min="1950-01-01"><button>Los</button></form><div class="stripes"></div></section>
+<div id="out"></div>
+</main><script>
+const W='https://de.wikipedia.org';
+const M=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const link=(t,title)=>`<a href="${W}/wiki/${encodeURIComponent(t.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(title||t)}</a>`;
+document.getElementById('d').max=new Date().toISOString().slice(0,10);
+
+document.getElementById('f').onsubmit=e=>{e.preventDefault();run(document.getElementById('d').value)};
+
+
+async function run(v){
+  const [y,m,d]=v.split('-').map(Number);
+  const then=Date.UTC(y,m-1,d),n=new Date(),now=Date.UTC(n.getFullYear(),n.getMonth(),n.getDate());
+  const days=Math.round((now-then)/864e5);
+  const dayPage=`${d}. ${M[m-1]}`;
+  out.innerHTML=`<div class="card"><div class="mute">Der ${link(dayPage)} ${link(String(y))} ist</div>
+  <div class="big">${days.toLocaleString('de-DE')} ${days===1?'Tag':'Tage'}</div><div class="mute">${days<0?'in der Zukunft':'her'} (≈ ${(days/365.2425).toLocaleString('de-DE',{maximumFractionDigits:1})} Jahre)</div></div>
+  <div class="card" id="chart"></div>
+  <div class="card" id="ev"><h2>Ereignisse am ${esc(dayPage)}</h2><span class="mute">Lade …</span></div>
+  <div class="card" id="bd"><h2>Geburtstage am ${esc(dayPage)}</h2><span class="mute">Lade …</span></div>`;
+  window._last=[y,m,d];chart(y,m,d);
+  otd(m,d).catch(()=>{ev.querySelector('.mute').textContent='Konnte nicht geladen werden.';bd.querySelector('.mute').textContent='Konnte nicht geladen werden.'});
+}
+const LAND={DE:'Deutschland',US:'USA',GB:'Großbritannien'};
+const MON={januar:1,jänner:1,january:1,februar:2,february:2,märz:3,march:3,april:4,mai:5,may:5,juni:6,june:6,juli:7,july:7,august:8,september:9,oktober:10,october:10,november:11,dezember:12,december:12};
+function sources(c,y){return src0(c,y).map(o=>({...o,y}))}
+function src0(c,y){const dec=Math.floor(y/10)*10;
+  if(c==='DE') return [{w:'de',p:`Liste der Nummer-eins-Hits in Deutschland (${y})`,n:'Wikipedia DE · Media Control / GfK'},{w:'en',p:`List of number-one hits of ${y} (Germany)`,n:'Wikipedia EN · German Singles Chart'}];
+  if(c==='US') return [{w:'en',p:y>1958||y==1958?`List of Billboard Hot 100 number ones of ${y}`:`List of Billboard number-one singles of ${y}`,n:'Wikipedia EN · Billboard Hot 100'},{w:'de',p:`Liste der Nummer-eins-Hits in den USA (${y})`,n:'Wikipedia DE · Billboard'}];
+  return [{w:'en',p:`List of UK Singles Chart number ones of the ${dec}s`,n:'Wikipedia EN · UK Singles Chart'},{w:'de',p:`Liste der Nummer-eins-Hits in den britischen Charts (${y})`,n:'Wikipedia DE · UK-Charts'}];}
+async function parseW(w,page){const r=await fetch(`https://${w}.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(page)}&prop=text&format=json&formatversion=2&redirects=1&origin=*`);
+  const j=await r.json();if(j.error)throw 0;return new DOMParser().parseFromString(j.parse.text,'text/html')}
+function grid(t){const out=[],pend=[];for(const tr of t.rows){const row=[];let c=0;
+  const fill=()=>{while(pend[c]&&pend[c].left>0){row[c]=pend[c].cell;pend[c].left--;c++}};
+  for(const cell of tr.cells){fill();const cs=cell.colSpan||1,rs=cell.rowSpan||1;for(let k=0;k<cs;k++){row[c]=cell;if(rs>1)pend[c]={cell,left:rs-1};c++}}
+  while(c<pend.length){if(pend[c]&&pend[c].left>0){row[c]=pend[c].cell;pend[c].left--}c++}out.push({tr,row})}return out}
+function txt(el){return (el.textContent||'').replace(/\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim()}
+function parseDate(cell,yDef){const sv=(cell.getAttribute('data-sort-value')||cell.querySelector('[data-sort-value]')?.getAttribute('data-sort-value')||'').match(/(\d{4})-(\d\d)-(\d\d)/);
+  if(sv) return sv[1]+'-'+sv[2]+'-'+sv[3];
+  const t=txt(cell).toLowerCase();let m=t.match(/(\d{1,2})\.?\s+([a-zäö]+)\.?(?:\s+(\d{4}))?/),d,mo,yr;
+  if(m&&MON[m[2]]){d=+m[1];mo=MON[m[2]];yr=m[3]}else{m=t.match(/([a-z]+)\s+(\d{1,2})(?:,?\s+(\d{4}))?/);if(!m||!MON[m[1]])return null;mo=MON[m[1]];d=+m[2];yr=m[3]}
+  return `${yr||yDef}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function part(cell,w){const c=cell.cloneNode(true);c.querySelectorAll('sup,style').forEach(e=>e.remove());const [first,...rest]=c.innerHTML.split(/<br\s*\/?>/i);
+  const d=new DOMParser().parseFromString(first,'text/html').body;const a=d.querySelector('a');const t=txt(d).replace(/[†‡*\s]+$/,'').replace(/^["“„”']+|["“”']+$/g,'').trim();
+  const restT=rest.length?txt(new DOMParser().parseFromString(rest.join(' '),'text/html').body):'';
+  return {t,href:a?`https://${w}.wikipedia.org${a.getAttribute('href')}`:null,rest:restT}}
+async function lookup(src,y,target){let doc;try{doc=await parseW(src.w,src.p)}catch{return null}let best=null;const all=[];
+  let done=false;doc.querySelectorAll('table.wikitable').forEach(tb=>{if(done)return;const g=grid(tb);let ti=-1,ai=-1,yr=y;
+    for(const {tr,row} of g){
+      if([...tr.cells].every(c=>c.tagName==='TH')){const hs=row.map(c=>txt(c).toLowerCase());
+        const t2=hs.findIndex(h=>/^(song|single|titel|title)/.test(h)),a2=hs.findIndex(h=>/^(artist|interpret|künstler)/.test(h));
+        if(t2>=0){ti=t2;ai=a2}const ym=hs.join(' ').match(/^\s*(\d{4})\s*$/);if(tr.cells.length===1&&/^\d{4}$/.test(hs[0]))yr=+hs[0];continue}
+      let di=-1,date=null;for(let i=0;i<row.length;i++){if(!row[i]||i===ti||i===ai)continue;const dd=parseDate(row[i],yr);if(dd){di=i;date=dd;break}}
+      if(!date)continue;
+      {const tI=ti>=0?ti:row.findIndex((c,i)=>i!==di&&c&&/["“„]/.test(c.textContent));if(tI>=0&&row[tI])all.push({date,t:part(row[tI],src.w).t})}
+      if(date>target)continue;
+      let tIdx=ti;if(tIdx<0)tIdx=row.findIndex((c,i)=>i!==di&&c&&/["“„]/.test(c.textContent));if(tIdx<0||!row[tIdx])continue;
+      if(!best||date>best.date){const T=part(row[tIdx],src.w);let A=ai>=0&&row[ai]?part(row[ai],src.w):{t:T.rest,href:null};
+        if(!T.t)continue;best={date,title:T,artist:A}}}if(ti>=0&&best)done=true});
+  if(best&&(Date.parse(target)-Date.parse(best.date))/864e5>120)return null;if(best){all.sort((a,b)=>a.date.localeCompare(b.date));best.all=all}return best}
+function fmt(iso){const [y,m,d]=iso.split('-');return `${+d}. ${M[m-1]} ${y}`}
+const L=(o)=>o.href?`<a href="${o.href}" target="_blank" rel="noopener">${esc(o.t)}</a>`:esc(o.t);
+async function chart(y,m,d){const box=document.getElementById('chart');box.innerHTML='<h2>Nummer 1 der Woche</h2><div class="cgrid">'+['DE','US','GB'].map(c=>`<div class="cbox" id="cb-${c}"></div>`).join('')+'</div>';
+  ['DE','US','GB'].forEach(c=>chartOne(y,m,d,c,document.getElementById('cb-'+c)))}
+async function chartOne(y,m,d,c,el){
+  const head=`<div class="tag2">${LAND[c]}</div>`;el.innerHTML=head+'<span class="mute">Durchsuche Chartlisten …</span>';
+  const target=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  const srcs=[...sources(c,y),...sources(c,y-1)].filter((s,i,a)=>a.findIndex(z=>z.p===s.p)===i);
+  const res=await Promise.all(srcs.map(s=>lookup(s,s.y,target).then(r=>r&&{...r,src:s})));
+  const hits=[];for(const r of res)if(r&&!hits.some(h=>h.src.n===r.src.n&&h.date>=r.date)){const i=hits.findIndex(h=>h.src.n===r.src.n);if(i>=0)hits.splice(i,1);hits.push(r)}
+  if(!hits.length){el.innerHTML=head+'<span class="mute">Für diese Woche wurde in den Chartlisten kein Eintrag gefunden.</span>';return}
+  el.dataset.debug=JSON.stringify(res.map(r=>r&&[r.src.p,r.date,r.title.t]));const ord=sources(c,y).map(s=>s.n);hits.sort((a,b)=>ord.indexOf(a.src.n)-ord.indexOf(b.src.n));
+  const nz=x=>x.toLowerCase().replace(/[^a-z0-9äöüß]/g,'').slice(0,8);
+  const T=Date.parse(target),D=864e5;
+  const runs=(o,title)=>{const a=o.all||[];for(let i=0;i<a.length;i++){if(nz(a[i].t)!==nz(title))continue;const s=Date.parse(a[i].date);let e=s+7*D;for(let k=i+1;k<a.length;k++){if(nz(a[k].t)!==nz(title)){e=Date.parse(a[k].date);break}}if(s<=T+8*D&&e>=T-8*D)return true}return false};
+  let h=null,conf=[];for(const x of hits){const m=hits.filter(o=>o.src.n!==x.src.n&&(nz(o.title.t)===nz(x.title.t)||runs(o,x.title.t)));if(m.length){h=x;conf=m;break}}
+  if(!h){el.innerHTML=head+'<span class="mute">Kein bestätigter Treffer: Die Chartlisten nennen für diese Woche keinen übereinstimmenden Titel.</span>';return}
+  const yt='https://www.youtube.com/results?search_query='+encodeURIComponent(`${h.artist.t} ${h.title.t}`);
+  const srcLink=s=>`<a href="https://${s.w}.wikipedia.org/wiki/${encodeURIComponent(s.p.replace(/ /g,'_'))}" target="_blank" rel="noopener">${esc(s.n)}</a>`;
+  const others=conf.map(o=>`<div>✓ bestätigt durch ${srcLink(o.src)} <span class="mute">(Platz 1 seit ${fmt(o.date)})</span></div>`).join('');
+  el.innerHTML=head+`<div class="song">„${L(h.title)}“</div><div style="font-size:1.1rem">${h.artist.t?'von '+L(h.artist):''}</div>
+   <a class="yt" href="${yt}" target="_blank" rel="noopener">Auf YouTube anhören</a>
+   <div class="src">Auf Platz 1 seit <b>${fmt(h.date)}</b> · Quelle: ${srcLink(h.src)}</div>${others?`<div class="alt mute">${others}</div>`:''}`}
+async function otd(m,d){
+  const r=await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/de/onthisday/all/${String(m).padStart(2,'0')}/${String(d).padStart(2,'0')}`);
+  const j=await r.json();
+  const ev=document.getElementById('ev'),bd=document.getElementById('bd');
+  const events=[...(j.selected||[]),...(j.events||[])].filter((x,i,a)=>a.findIndex(z=>z.text===x.text&&z.year===x.year)===i).sort((a,b)=>b.year-a.year);
+  const eras=[[-1e9,499,'Antike'],[500,1499,'Mittelalter'],[1500,1799,'Frühe Neuzeit (1500–1799)'],[1800,1899,'19. Jahrhundert'],[1900,1945,'1900–1945'],[1946,1989,'1946–1989'],[1990,1e9,'Seit 1990']];
+  groups(ev,eras.map(([f,t,n])=>[n,events.filter(x=>x.year>=f&&x.year<=t)]).reverse(),x=>`<span class="yr">${x.year}</span> ${esc(x.text)} ${pages(x)}`);
+  const bs=(j.births||[]).sort((a,b)=>b.year-a.year);
+  groups(bd,eras.map(([f,t,n])=>[n,bs.filter(x=>x.year>=f&&x.year<=t)]).reverse(),x=>{const p=x.pages?.[0];const i=x.text.indexOf(',');const nm=i>0?x.text.slice(0,i):x.text;
+    return `<span class="yr">${x.year}</span> ${p?`<a href="${p.content_urls?.desktop?.page}" target="_blank" rel="noopener">${esc(nm)}</a>`:esc(nm)}${i>0?esc(x.text.slice(i)):''}`});
+}
+function groups(el,gs,fn){
+  const h=el.querySelector('h2').outerHTML;gs=gs.filter(g=>g[1].length);
+  if(!gs.length){el.innerHTML=h+'<span class="mute">Keine Einträge.</span>';return}
+  el.innerHTML=h+gs.map(([n,a],i)=>`<details><summary><b>${esc(n)}</b> <span class="mute">(${a.length})</span></summary><ul>${a.map(x=>`<li>${fn(x)}</li>`).join('')}</ul></details>`).join('');
+}
+function pages(x){const p=(x.pages||[]).slice(0,3);return p.length?'<span class="mute">→ '+p.map(q=>`<a href="${q.content_urls?.desktop?.page}" target="_blank" rel="noopener">${esc(q.normalizedtitle||q.title.replace(/_/g,' '))}</a>`).join(', ')+'</span>':''}
+</script><script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body></html>
