@@ -2,7 +2,7 @@
 
 Website veröffentlichen, E-Mail einrichten, Web-Apps und Inhalte pflegen – Schritt für Schritt.
 
-Stand: Oktober 2026 · Domain: **rubenglaeser.de** (netcup) · Hosting: **GitHub + Netlify** · E-Mail: **Microsoft 365 / Outlook**
+Stand: Oktober 2026 · Domain: **rubenglaeser.de** (netcup) · Hosting: **GitHub + Netlify** · E-Mail: **iCloud+ / Outlook**
 
 ---
 
@@ -13,7 +13,7 @@ Stand: Oktober 2026 · Domain: **rubenglaeser.de** (netcup) · Hosting: **GitHub
 | **GitHub** | Speichert den Code deiner Website (Versionsverwaltung) | kostenlos |
 | **Netlify** | Veröffentlicht die Website aus GitHub, inkl. HTTPS-Zertifikat | Free-Plan reicht für ein Portfolio in der Regel aus |
 | **netcup** | Deine Domain und die DNS-Einträge („Wegweiser“ im Internet) | bereits bezahlt |
-| **Microsoft 365 Business Basic** | Postfach info@rubenglaeser.de, nutzbar in Outlook | 6,07 € / Monat bei jährlicher Zahlung bzw. 7,28 € bei monatlicher Zahlung, jeweils zzgl. MwSt.[^ms-preis] |
+| **iCloud+** | Postfach info@rubenglaeser.de, nutzbar in Apple Mail und Outlook | ab 0,99 € / Monat (50 GB), eigene Domain ohne Aufpreis[^icloud-preis] |
 
 So hängt alles zusammen:
 
@@ -21,7 +21,7 @@ So hängt alles zusammen:
 Du änderst Dateien  →  GitHub speichert sie  →  Netlify veröffentlicht automatisch
                                                        ↑
 Besucher tippt rubenglaeser.de  →  netcup-DNS zeigt auf Netlify
-E-Mail an info@rubenglaeser.de  →  netcup-DNS (MX) zeigt auf Microsoft 365  →  Outlook
+E-Mail an info@rubenglaeser.de  →  netcup-DNS (MX) zeigt auf iCloud  →  Mail / Outlook
 ```
 
 <div class="tip"><strong>Reihenfolge-Tipp:</strong> Erst Teil 1 komplett abschließen (Website online), dann Teil 2 (E-Mail). Beide Teile ändern DNS-Einträge bei netcup, stören sich aber nicht gegenseitig.</div>
@@ -137,98 +137,84 @@ Neue Netlify-Teams im Free-, Personal- oder Pro-Plan sind seit Juli 2026 standar
 
 ---
 
-## Teil 2 – E-Mail info@rubenglaeser.de mit Outlook
+## Teil 2 – E-Mail info@rubenglaeser.de mit iCloud+
 
 ### Welche Lösung?
 
-Outlook ist das **Programm** – das **Postfach** braucht einen Anbieter. Outlook.com Premium unterstützt seit dem 28.02.2021 keine eigenen Domains mehr.[^ms-premium] Die passende Microsoft-Lösung ist **Microsoft 365 Business Basic**: echtes Exchange-Postfach, Outlook im Web, auf Mac und iPhone, Kalender und Kontakte synchron.
+**Microsoft 365 Single reicht dafür leider nicht:** Seit dem 30.11.2023 können Abonnenten von Microsoft 365 Single/Personal und Family keine neuen Adressen mit eigener Domain mehr in Outlook.com anlegen.[^ms-personal] Eine Microsoft-Lösung ginge nur mit einem zusätzlichen Business-Abo.
 
-| Tarif | Preis (zzgl. MwSt.) |
+**Einfacher und günstiger ist iCloud+:** Du hast schon einen Apple Account. Mit iCloud+ kannst du deine eigene Domain kostenlos dazunehmen. iCloud+ gibt es ab 0,99 € im Monat für 50 GB.[^icloud-preis] Wenn du schon mehr iCloud-Speicher gebucht hast, ist iCloud+ bereits enthalten.
+
+| Was | Details |
 |---|---|
-| Business Basic – jährliche Zahlung | 6,07 € pro Benutzer / Monat |
-| Business Basic – monatliche Zahlung | 7,28 € pro Benutzer / Monat |
-| Business Basic EWR (ohne Teams) – jährlich | 4,67 € pro Benutzer / Monat |
+| Voraussetzungen | iCloud+-Abo, Zwei-Faktor-Authentifizierung, eine iCloud-Mail-Adresse (@icloud.com) als Hauptadresse[^icloud-add] |
+| Adressen | bis zu 3 aktive Adressen pro Person und Domain, z. B. `info@`, `ruben@` und `kontakt@`[^icloud-add] |
+| Nutzung | Mail auf Mac, iPhone und iCloud.com – **und weiter in Outlook**, das in deinem Microsoft 365 Single enthalten ist |
+| Kosten | keine Zusatzkosten zum iCloud+-Abo |
 
-Quelle: Microsoft, Stand Oktober 2026.[^ms-preis] Es gibt einen kostenlosen Testmonat; danach verlängert sich das Abo automatisch, falls du nicht kündigst.
+<div class="tip"><strong>Gut zu wissen:</strong> Dein Outlook bleibt dein Mailprogramm. Das Postfach liegt bei Apple, gelesen und geschrieben wird in Outlook (oder Apple Mail). Microsoft 365 Single brauchst du dafür nicht zu ändern.</div>
 
-<div class="tip"><strong>Spartipp:</strong> Du brauchst nur <strong>eine</strong> Lizenz. Weitere Adressen wie <code>ruben@rubenglaeser.de</code> oder <code>kontakt@rubenglaeser.de</code> legst du kostenlos als <strong>Alias</strong> an – sie landen im selben Postfach.</div>
+### Schritt 2.1 – iCloud+ prüfen oder buchen
 
-### Schritt 2.1 – Microsoft 365 Business Basic buchen
+1. iPhone: **Einstellungen → [dein Name] → iCloud**. Steht dort *iCloud+*, bist du fertig.
+2. Falls nicht: **iCloud-Speicher verwalten / Upgrade auf iCloud+** → 50 GB wählen.
+3. Prüfe unter **Einstellungen → [dein Name] → Anmelden und Sicherheit**, ob die **Zwei-Faktor-Authentifizierung** aktiv ist.
 
-1. Öffne [microsoft.com/de-de/microsoft-365/business/microsoft-365-business-basic](https://www.microsoft.com/de-de/microsoft-365/business/microsoft-365-business-basic) → **Kostenlos testen** oder **Jetzt kaufen**.
-2. Gib eine bestehende E-Mail-Adresse (z. B. deine iCloud-Adresse) für die Kontoerstellung an und folge dem Assistenten (Firmenname: z. B. „Ruben Gläser“, Adresse: Sickingenstraße 6, 01309 Dresden).
-3. Microsoft erzeugt eine Startdomain wie `rubenglaeser.onmicrosoft.com`.[^ms-preis] Wähle als Benutzernamen z. B. `ruben@rubenglaeser.onmicrosoft.com` und ein sicheres Passwort. Das ist dein **Administrator-Konto**.
-4. Zahlungsdaten eingeben und abschließen.
+### Schritt 2.2 – Domain bei iCloud hinzufügen
 
-### Schritt 2.2 – Domain bei Microsoft hinzufügen und bestätigen
+1. Am Mac im Browser [icloud.com/icloudplus](https://www.icloud.com/icloudplus) öffnen und anmelden.
+2. **Eigene E-Mail-Domain** → **Eine Domain hinzufügen, die du besitzt**.[^icloud-add]
+3. **Nur du** wählen → `rubenglaeser.de` eingeben → **Fortfahren**.
+4. Frage nach vorhandenen Adressen: **Keine E-Mail-Adressen** wählen (die Domain ist neu).
+5. Bei *Einträge deines Domain-Registrars aktualisieren* auf **Anzeigen** klicken. Apple zeigt dir jetzt alle Einträge, darunter deinen **persönlichen TXT-Eintrag** (`apple-domain=…`). Lass das Fenster offen.
 
-<div class="alt"><strong>Hinweis:</strong> Microsoft benennt Menüpunkte gelegentlich um. Die englischen Bezeichnungen stehen jeweils in Klammern – damit findest du den Punkt auch, wenn der deutsche Text leicht abweicht.</div>
+### Schritt 2.3 – E-Mail-DNS-Einträge bei netcup setzen
 
-1. Öffne das **Microsoft 365 Admin Center**: [admin.microsoft.com](https://admin.microsoft.com).
-2. Links **… Alle anzeigen → Einstellungen → Domänen → + Domäne hinzufügen** (engl. *Show all → Settings → Domains → + Add domain*).[^ms-adddomain]
-3. `rubenglaeser.de` eingeben → **Diese Domäne verwenden** (*Use this domain*).
-4. Bei *Bestätigen Sie, dass Sie Besitzer der Domäne sind* die Methode **TXT-Eintrag hinzufügen** wählen. Microsoft zeigt einen Wert wie `MS=ms12345678`.
-5. Bei netcup (CCP → Domains → Lupe → DNS/CloudDNS) neuen Eintrag anlegen:
-
-| Host | Typ | Ziel |
-|---|---|---|
-| `@` | **TXT** | `MS=ms12345678` *(deinen Wert aus dem Admin Center kopieren)* |
-
-6. Speichern, ca. 10 Minuten warten, dann im Admin Center **Überprüfen** (*Verify*) klicken. Die Bestätigung kann bis zu 10 Minuten, bei manchen Registraren bis zu 48 Stunden dauern.[^ms-adddomain]
-
-### Schritt 2.3 – Postfach info@rubenglaeser.de anlegen
-
-Mach `info@rubenglaeser.de` zur **Hauptadresse** deines Kontos – dann sendest und empfängst du automatisch mit dieser Adresse.
-
-1. Admin Center → **Benutzer → Aktive Benutzer** → dein Konto (Ruben Gläser) anklicken.
-2. Registerkarte **Konto** → **Benutzernamen und E-Mail verwalten**.
-3. Bei *Primäre E-Mail-Adresse und Benutzername* auf das Stift-Symbol: Benutzername `info`, Domäne `rubenglaeser.de` → **Fertig** → **Änderungen speichern**.
-4. Optional unter **Aliase**: `ruben` @ `rubenglaeser.de` hinzufügen.
-5. Melde dich danach neu an – ab jetzt mit **info@rubenglaeser.de**.
-
-<div class="alt"><strong>Lieber ruben@ als Hauptadresse?</strong> Dann setze <code>ruben@rubenglaeser.de</code> als primäre Adresse und <code>info@</code> als Alias. Beides landet im selben Postfach.</div>
-
-### Schritt 2.4 – E-Mail-DNS-Einträge bei netcup setzen
-
-1. Admin Center → **Einstellungen → Domänen** → `rubenglaeser.de` → **DNS-Einträge → DNS verwalten** → **Weiter**.[^ms-dns]
-2. Bei *DNS-Einträge hinzufügen* **Exchange und Exchange Online Protection** auswählen. Unter **Erweiterte Optionen** zusätzlich **DomainKeys Identified Mail (DKIM)** anhaken (empfohlen).
-3. Klappe **MX-Einträge**, **CNAME-Einträge** und **TXT-Einträge** auf. Microsoft zeigt dir die genauen Werte – **übernimm immer die Werte aus dem Admin Center**.
-4. Bei netcup **zuerst alte MX-Einträge löschen** (netcup legt oft eigene an) und einen eventuell vorhandenen alten SPF-Eintrag (`v=spf1 …`) entfernen bzw. ersetzen. Es darf nur **einen** SPF-Eintrag geben.[^ms-dns]
-5. Dann diese Einträge anlegen:
+1. netcup **CCP → Domains → Lupe bei rubenglaeser.de → DNS** bzw. **CloudDNS**.
+2. **Alle vorhandenen MX-Einträge löschen** (netcup legt oft eigene an) und einen eventuell vorhandenen alten SPF-Eintrag (`v=spf1 …`) entfernen. Es darf nur **einen** SPF-Eintrag geben.[^icloud-dns]
+3. Diese Einträge anlegen (Werte immer mit der Anzeige bei iCloud abgleichen):
 
 | Host | Typ | Priorität | Ziel |
 |---|---|---|---|
-| `@` | **MX** | `0` (oder `10`) | Wert aus dem Admin Center, meist im Format `rubenglaeser-de.mail.protection.outlook.com` |
-| `autodiscover` | **CNAME** | – | `autodiscover.outlook.com`[^ms-autodiscover] |
-| `@` | **TXT** | – | `v=spf1 include:spf.protection.outlook.com -all`[^ms-dns] |
-| `selector1._domainkey` | **CNAME** | – | erster DKIM-Wert aus dem Admin Center |
-| `selector2._domainkey` | **CNAME** | – | zweiter DKIM-Wert aus dem Admin Center |
+| `@` | **MX** | `10` | `mx01.mail.icloud.com.` |
+| `@` | **MX** | `10` | `mx02.mail.icloud.com.` |
+| `@` | **TXT** | – | `apple-domain=…` *(dein persönlicher Wert von iCloud)* |
+| `@` | **TXT** | – | `v=spf1 include:icloud.com ~all` |
+| `sig1._domainkey` | **CNAME** | – | `sig1.dkim.rubenglaeser.de.at.icloudmailadmin.com.` |
 | `_dmarc` | **TXT** | – | `v=DMARC1; p=none; rua=mailto:info@rubenglaeser.de` |
 
-6. Speichern, ca. 10–30 Minuten warten, im Admin Center **Weiter / Überprüfen** klicken. Bei Erfolg erscheint **Die Domäneneinrichtung ist abgeschlossen** → **Fertig**.
+4. **Änderungen anwenden** / speichern. Die MX- und CNAME-Werte stammen direkt von Apple.[^icloud-dns] Lehnt netcup den Punkt am Ende oder die Anführungszeichen ab, lass sie weg. Bei TTL `3600` eintragen, falls gefragt.[^icloud-dns]
 
-<div class="warn"><strong>Wichtig:</strong> Den A-Eintrag <code>@ → 75.2.60.5</code> und den CNAME <code>www</code> aus Teil 1 <strong>nicht löschen</strong> – sie gehören zur Website. Der TXT-Eintrag <code>MS=ms…</code> darf bestehen bleiben.</div>
+<div class="warn"><strong>Wichtig:</strong> Den A-Eintrag <code>@ → 75.2.60.5</code> und den CNAME <code>www</code> aus Teil 1 <strong>nicht löschen</strong> – sie gehören zur Website. E-Mail (MX) und Website (A/CNAME) laufen unabhängig voneinander.</div>
 
-**DKIM einschalten (empfohlen):** Nachdem die beiden `selector`-CNAMEs gesetzt sind, im Microsoft Defender Portal ([security.microsoft.com](https://security.microsoft.com)) unter **E-Mail & Zusammenarbeit → Richtlinien und Regeln → Bedrohungsrichtlinien → E-Mail-Authentifizierungseinstellungen → DKIM** die Domain `rubenglaeser.de` wählen und **Mit DKIM-Signaturen signieren** aktivieren. DKIM und DMARC verbessern die Zustellbarkeit deiner Mails deutlich (weniger Spam-Ordner).
+5. Ca. 10–30 Minuten warten, dann bei iCloud **Bestätigen** (*Verify*) klicken. Klappt es nicht sofort, später noch einmal versuchen. Den Status siehst du jederzeit unter icloud.com/icloudplus → **Eigene E-Mail-Domain → Verwalten**.[^icloud-dns]
 
-### Schritt 2.5 – Outlook auf Mac, iPhone und im Web
+### Schritt 2.4 – Adresse info@rubenglaeser.de anlegen
 
-**Outlook im Browser:** [outlook.office.com](https://outlook.office.com) → mit `info@rubenglaeser.de` anmelden.
+1. Bei iCloud **Einrichtung abschließen** und den Anweisungen folgen.
+2. Neue Adresse **info@rubenglaeser.de** anlegen. Optional bis zu zwei weitere, z. B. `ruben@rubenglaeser.de`.
+3. Als **Standardadresse zum Senden** `info@rubenglaeser.de` wählen. Das kannst du später in den Mail-Einstellungen auf iCloud.com ändern.[^icloud-add]
 
-**Outlook für Mac:**
+<div class="alt"><strong>Hinweis:</strong> Eine Adresse mit eigener Domain kann nicht als Anmeldename für einen Apple Account verwendet werden. Du meldest dich weiter mit deinem bisherigen Apple Account an.[^icloud-add]</div>
 
-1. Outlook öffnen → Menü **Outlook → Einstellungen → Konten** → **+** → **Neues Konto**.
-2. `info@rubenglaeser.de` eingeben → **Weiter** → mit dem Microsoft-Passwort anmelden.
-3. Outlook erkennt das Exchange-Konto automatisch (dank `autodiscover`).
+### Schritt 2.5 – Mail auf Mac, iPhone und im Web
 
-**iPhone – Outlook-App:** App „Microsoft Outlook“ aus dem App Store → **Konto hinzufügen** → `info@rubenglaeser.de` → anmelden.
+**Apple Mail (Mac und iPhone):** Funktioniert automatisch, sobald *Mail* in den iCloud-Einstellungen aktiv ist.[^icloud-use] Beim Schreiben im Feld **Von** `info@rubenglaeser.de` auswählen.
 
-**iPhone – Apple Mail (alternativ):** **Einstellungen → Apps → Mail → Mail-Accounts → Account hinzufügen → Microsoft Exchange** → `info@rubenglaeser.de` → **Anmelden**.
+**Im Browser:** [icloud.com/mail](https://www.icloud.com/mail).
+
+**Outlook (Mac und iPhone)** – Outlook braucht ein **app-spezifisches Passwort**:[^ms-icloud]
+
+1. [account.apple.com](https://account.apple.com) → **Anmelden und Sicherheit → App-spezifische Passwörter → App-spezifisches Passwort erstellen**, Name z. B. „Outlook“.[^apple-asp]
+2. Das Passwort (Format `xxxx-xxxx-xxxx-xxxx`) kopieren.
+3. Outlook für Mac: **Outlook → Einstellungen → Konten → + → Neues Konto**. Outlook-App auf dem iPhone: **Konto hinzufügen**.
+4. Deine **@icloud.com-Adresse** eingeben (nicht info@ – das Konto ist dein iCloud-Postfach) und das app-spezifische Passwort einfügen.
+5. Damit Outlook mit info@ sendet: in den Kontoeinstellungen bei **Absender / Von** bzw. **Alias** `info@rubenglaeser.de` hinzufügen und beim Schreiben auswählen.
 
 ### Schritt 2.6 – Testen
 
-1. Schicke von deiner iCloud-Adresse eine Mail an `info@rubenglaeser.de` und antworte darauf.
-2. Prüfe die Einträge auf [mxtoolbox.com](https://mxtoolbox.com) → *MX Lookup* `rubenglaeser.de` – dort sollte `…mail.protection.outlook.com` stehen.
+1. Schicke von einer anderen Adresse (z. B. Gmail oder dienstlich) eine Mail an `info@rubenglaeser.de` und antworte darauf.
+2. Prüfe die Einträge auf [mxtoolbox.com](https://mxtoolbox.com) → *MX Lookup* `rubenglaeser.de` – dort sollten `mx01.mail.icloud.com` und `mx02.mail.icloud.com` stehen.
 3. Die Website verlinkt bereits auf `info@rubenglaeser.de` (Kontakt, Impressum, Datenschutz).
 
 ---
@@ -316,10 +302,11 @@ Alle Inhalte stehen in einfachen Textdateien im Ordner **`content/`**. Bilder li
 | Datei | Steuert |
 |---|---|
 | `content/site.js` | E-Mail-Adresse, Social-Media-Links (Footer) |
-| `content/grafik.js` | Seite **Grafik** – Kacheln, Filter, Detailansicht |
+| `content/grafik.js` | Seite **Grafik** – Kacheln, Filter, Detailansicht. `freigestellt: true` für Motive ohne Hintergrund, `link` für einen Button (z. B. zu Videos) |
 | `content/fotografie.js` | Seite **Fotografie** – Galerie, Filter, Großansicht |
 | `content/web-apps.js` | Seite **Web-Apps** (siehe Teil 3) |
-| `index.html` | Texte der Startseite (Hero, Über mich, Kontakt) |
+| `index.html` | Texte der Startseite (Hero, Über mich kurz, Kontakt) |
+| `ueber-mich.html` | Seite **Über mich** – Intro, Schwerpunkte, Projekte, Werkzeuge |
 | `impressum.html`, `datenschutz.html` | Rechtstexte |
 
 ### Schritt 4.1 – Bilder vorbereiten (Lightroom)
@@ -415,18 +402,17 @@ Das Feld `format` ("hoch", "quer", "quadrat") brauchst du nur für Platzhalter o
 
 ---
 
-## Anhang A – Alle DNS-Einträge bei netcup auf einen Blick
+## Anhang A – Alle DNS-Einträge auf einen Blick
 
 | Host | Typ | Priorität | Ziel | Zweck |
 |---|---|---|---|---|
 | `@` | A | – | `75.2.60.5` | Website (Netlify) |
 | `www` | CNAME | – | `rubenglaeser.netlify.app` | Website (Netlify) |
-| `@` | TXT | – | `MS=ms…` (aus Admin Center) | Domain-Bestätigung Microsoft |
-| `@` | MX | 0 | `rubenglaeser-de.mail.protection.outlook.com` (aus Admin Center) | E-Mail-Empfang |
-| `autodiscover` | CNAME | – | `autodiscover.outlook.com` | Automatische Outlook-Einrichtung |
-| `@` | TXT | – | `v=spf1 include:spf.protection.outlook.com -all` | SPF – Absender-Schutz |
-| `selector1._domainkey` | CNAME | – | aus Admin Center | DKIM |
-| `selector2._domainkey` | CNAME | – | aus Admin Center | DKIM |
+| `@` | MX | 10 | `mx01.mail.icloud.com.` | E-Mail-Empfang |
+| `@` | MX | 10 | `mx02.mail.icloud.com.` | E-Mail-Empfang |
+| `@` | TXT | – | `apple-domain=…` (von iCloud) | Domain-Bestätigung Apple |
+| `@` | TXT | – | `v=spf1 include:icloud.com ~all` | SPF – Absender-Schutz |
+| `sig1._domainkey` | CNAME | – | `sig1.dkim.rubenglaeser.de.at.icloudmailadmin.com.` | DKIM |
 | `_dmarc` | TXT | – | `v=DMARC1; p=none; rua=mailto:info@rubenglaeser.de` | DMARC |
 
 **Zu löschen:** netcup-Standard-A/AAAA-Einträge für `@` und `www`, alte MX-Einträge, alte SPF-Einträge.
@@ -440,22 +426,24 @@ Das Feld `format` ("hoch", "quer", "quadrat") brauchst du nur für Platzhalter o
 - [ ] Domain `rubenglaeser.de` in Netlify hinzugefügt
 - [ ] netcup: A `@` und CNAME `www` gesetzt, Altes gelöscht
 - [ ] HTTPS aktiv, `rubenglaeser.de` ist Primary domain
-- [ ] Microsoft 365 Business Basic gebucht
-- [ ] Domain bei Microsoft bestätigt (TXT)
-- [ ] `info@rubenglaeser.de` als Hauptadresse gesetzt
-- [ ] MX, autodiscover, SPF, DKIM, DMARC bei netcup gesetzt
-- [ ] DKIM im Defender-Portal aktiviert
-- [ ] Outlook auf Mac und iPhone eingerichtet, Test-Mail OK
+- [ ] iCloud+ aktiv, Zwei-Faktor-Authentifizierung an
+- [ ] Domain bei icloud.com/icloudplus hinzugefügt
+- [ ] netcup: alte MX gelöscht, 2 × MX, TXT apple-domain, SPF, DKIM, DMARC gesetzt
+- [ ] Domain bei iCloud bestätigt, `info@rubenglaeser.de` als Standardadresse
+- [ ] App-spezifisches Passwort erstellt, Outlook auf Mac und iPhone eingerichtet
+- [ ] Test-Mail empfangen und beantwortet
 - [ ] Impressum und Datenschutz final geprüft
 - [ ] Platzhalter in `grafik.js` und `fotografie.js` durch echte Arbeiten ersetzt
 
 ## Quellen
 
-[^ms-preis]: Microsoft – Microsoft 365 Business Basic, Preise zzgl. MwSt.: <https://www.microsoft.com/de-de/microsoft-365/business/microsoft-365-business-basic>
-[^ms-premium]: Microsoft Support – Premium-Features in Outlook.com haben sich geändert: <https://support.microsoft.com/de-de/office/premium-features-in-outlook-com-haben-sich-ge%C3%A4ndert-f4a6107f-6e07-4020-afbb-639fbcf0466f>
-[^ms-adddomain]: Microsoft Learn – Add a domain to Microsoft 365: <https://learn.microsoft.com/en-us/microsoft-365/admin/setup/add-domain?view=o365-worldwide>
-[^ms-dns]: Microsoft Learn – Add DNS records to connect your domain: <https://learn.microsoft.com/en-us/microsoft-365/admin/get-help-with-domains/create-dns-records-at-any-dns-hosting-provider?view=o365-worldwide>
-[^ms-autodiscover]: Microsoft Support – Benutzerdefiniertes E-Mail-Domänenkonto in Outlook konfigurieren (autodiscover): <https://support.microsoft.com/de-de/outlook/configure-a-custom-email-domain-account-as-an-exchange-account-in-outlook>
+[^ms-personal]: Microsoft Support – Personalisierte E-Mail-Adresse in Microsoft 365 (seit 30.11.2023 keine neuen Adressen): <https://support.microsoft.com/en-gb/onedrive/changes-to-microsoft-365-email-features-and-storage>
+[^icloud-preis]: Apple – iCloud+ (Preise Deutschland): <https://www.apple.com/de/icloud/>
+[^icloud-add]: Apple Support – Eigene Domain bei iCloud Mail hinzufügen: <https://support.apple.com/de-de/guide/icloud/mma473945269/icloud>
+[^icloud-dns]: Apple Support – Set up an existing domain with iCloud Mail (DNS-Einträge): <https://support.apple.com/en-us/102374>
+[^icloud-use]: Apple Support – Eigene E-Mail-Domain in iCloud Mail verwenden: <https://support.apple.com/de-de/guide/icloud/mm772b937369/icloud>
+[^ms-icloud]: Microsoft Support – iCloud-E-Mail-Konto in Outlook hinzufügen: <https://support.microsoft.com/de-de/outlook/getstarted/add-or-manage-an-icloud-email-account-in-outlook>
+[^apple-asp]: Apple Support – App-spezifische Passwörter: <https://support.apple.com/de-de/102654>
 [^nl-import]: Netlify Docs – Deploy from a repository: <https://docs.netlify.com/start/quickstarts/deploy-from-repository/>
 [^nl-extdns]: Netlify Docs – Configure external DNS: <https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/>
 [^nl-privat]: Netlify Changelog – Start with private project URLs (28.07.2026): <https://www.netlify.com/changelog/2026-07-28-start-with-private-project-urls/>
