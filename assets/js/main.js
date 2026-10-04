@@ -100,7 +100,11 @@
   }
   function drawLightbox() {
     const item = lbList[lbIndex];
-    $(".lb-media", lb).innerHTML = (item.bild
+    $(".lb-media", lb).classList.toggle("is-cutout", !!item.freigestellt);
+    $(".lb-media", lb).classList.toggle("has-video", !!item.video);
+    $(".lb-media", lb).innerHTML = (item.video
+      ? `<video src="${esc(item.video)}" poster="${esc(item.bild || "")}" controls autoplay playsinline preload="metadata"></video>`
+      : item.bild
       ? `<img src="${esc(item.bild)}" alt="${esc(item.alt || item.titel)}">`
       : placeholder(item._i, "Bild folgt")) + `<div class="lb-nav">
         <button class="icon-btn" type="button" data-lb="prev" aria-label="Vorheriges"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -109,6 +113,7 @@
     $(".lb-body", lb).innerHTML = lbRender(item);
   }
   if (lb) {
+    lb.addEventListener("close", () => { const v = $(".lb-media video", lb); if (v) v.pause(); });
     lb.addEventListener("click", (e) => {
       const nav = e.target.closest("[data-lb]");
       if (nav) {
@@ -136,8 +141,8 @@
       if (!list.length) { grafikGrid.innerHTML = '<p class="empty">Hier erscheinen bald Arbeiten.</p>'; return; }
       grafikGrid.innerHTML = list.map((x, i) => `
         <button class="work-card reveal" type="button" data-i="${i}">
-          <div class="work-media">${x.bild ? `<img src="${esc(x.bild)}" alt="${esc(x.alt || x.titel)}" loading="lazy">` : placeholder(x._i, x.kategorie)}</div>
-          <div class="work-meta"><div><h3>${esc(x.titel)}</h3><p class="work-cat">${esc(x.kategorie)}</p></div><span>${esc(x.jahr)}</span></div>
+          <div class="work-media${x.freigestellt ? " is-cutout" : ""}">${x.bild ? `<img src="${esc(x.bild)}" alt="${esc(x.alt || x.titel)}" loading="lazy">` : placeholder(x._i, x.kategorie)}${x.video ? `<span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>` : ""}</div>
+          <div class="work-meta"><div><h3>${esc(x.titel)}</h3><p class="work-cat">${esc(x.kategorie)}</p></div>${x.jahr ? `<span>${esc(x.jahr)}</span>` : ""}</div>
         </button>`).join("");
       $$(".work-card", grafikGrid).forEach((card) => card.addEventListener("click", () =>
         openLightbox(list, +card.dataset.i, (it) => `
@@ -148,7 +153,8 @@
             ${it.kunde ? `<dt>Kunde</dt><dd>${esc(it.kunde)}</dd>` : ""}
             ${it.leistung ? `<dt>Leistung</dt><dd>${esc(it.leistung)}</dd>` : ""}
             ${it.jahr ? `<dt>Jahr</dt><dd>${esc(it.jahr)}</dd>` : ""}
-          </dl>`)));
+          </dl>
+          ${it.link ? `<a class="btn btn-primary lb-link" href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.linkText || "Mehr ansehen")}</a>` : ""}`)));
       observeReveals();
     };
     buildFilters($("#grafik-filters"), items, "kategorie", render);
