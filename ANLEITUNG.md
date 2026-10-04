@@ -304,6 +304,8 @@ Alle Inhalte stehen in einfachen Textdateien im Ordner **`content/`**. Bilder li
 | `content/site.js` | E-Mail-Adresse, Social-Media-Links (Footer) |
 | `content/grafik.js` | Seite **Grafik** – Kacheln, Filter, Detailansicht. `freigestellt: true` für Motive ohne Hintergrund, `link` für einen Button (z. B. zu Videos) |
 | `content/fotografie.js` | Seite **Fotografie** – Galerie, Filter, Großansicht |
+| `content/online-marketing.js` | Seite **Social Media & Online-Marketing** – Kampagnen und Anzeigen, Filter nach Kategorie (z. B. Social Media, Meta-Werbung, Google Display) |
+| `content/video.js` | Seite **Video & Animation** – Kacheln mit Filter Video/Animation. `video:` für eine eigene MP4-Datei aus `assets/video/` (spielt direkt ab), `link` für externe Videos |
 | `content/web-apps.js` | Seite **Web-Apps** (siehe Teil 3) |
 | `index.html` | Texte der Startseite (Hero, Über mich kurz, Kontakt) |
 | `ueber-mich.html` | Seite **Über mich** – Intro, Schwerpunkte, Projekte, Werkzeuge |

@@ -10,6 +10,8 @@ Statische Website (HTML, CSS, JavaScript) ohne Build-Schritt. Gehostet über Git
 index.html          Startseite (Hero, Bereiche, Über mich, Kontakt)
 grafik.html         Grafik-Arbeiten mit Filter und Detailansicht
 fotografie.html     Foto-Galerie mit Großansicht
+video.html          Video & Animation
+online-marketing.html  Social Media & Online-Marketing
 web-apps.html       Übersicht der Web-Apps
 app.html            App-Player: app.html?id=<id> bettet eine App ein
 impressum.html      Vorlage – bitte ausfüllen
@@ -20,10 +22,12 @@ content/            HIER pflegst du die Inhalte
   site.js           E-Mail, Social-Media-Links
   grafik.js         Grafik-Projekte
   fotografie.js     Fotos
+  video.js          Video & Animation
+  online-marketing.js  Social Media & Online-Marketing
   web-apps.js       Web-Apps
 
 apps/               Eigene Web-Apps (je ein Ordner mit index.html)
-assets/img/         Bilder (grafik/, fotografie/, apps/)
+assets/img/         Bilder (grafik/, fotografie/, video/, online-marketing/, apps/)
 assets/fonts/       Gemunu Libre, lokal gehostet (DSGVO)
 assets/img/logo.svg Logo als Vektor (auch logo-weiss.svg)
 netlify.toml        Netlify-Einstellungen
