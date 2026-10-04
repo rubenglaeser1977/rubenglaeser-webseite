@@ -11,46 +11,6 @@
    ========================================================= */
 window.GRAFIK = [
   {
-    titel: "Achtung Kinder!",
-    kategorie: "Plakat & Anzeige",
-    jahr: "",
-    bild: "assets/img/grafik/achtung-kinder.webp",
-    freigestellt: true,
-    kunde: "HITRADIO RTL Sachsen",
-    leistung: "Konzept, Gestaltung",
-    beschreibung: "Plakatmotiv zur Verkehrssicherheit: ein klares Signal, das Autofahrende sofort verstehen."
-  },
-  {
-    titel: "Meine Stadt. Meine Musik. Mein Radio.",
-    kategorie: "Kampagne",
-    jahr: "",
-    bild: "assets/img/grafik/radio-dresden-kampagne.webp",
-    freigestellt: true,
-    kunde: "Radio Dresden",
-    leistung: "Kampagnenidee, Plakat- und Anzeigenserie",
-    beschreibung: "Imagekampagne mit lokalem Bezug – in Varianten für Partner wie die Dresdner Eislöwen und Dynamo Dresden."
-  },
-  {
-    titel: "19:53 – Dresdner Fußball-Talk",
-    kategorie: "Digital",
-    jahr: "",
-    bild: "assets/img/grafik/screendesign-1953.webp",
-    freigestellt: true,
-    kunde: "Radio Dresden & Dynamo Dresden",
-    leistung: "Screendesign, Aufnahmeleitung",
-    beschreibung: "Online-TV-Format mit Moderator Jens Umbreit. Verantwortlich für das visuelle Erscheinungsbild der Sendung und die Aufnahmeleitung."
-  },
-  {
-    titel: "Tischkalender „Wir lieben Dresden.“",
-    kategorie: "Print",
-    jahr: "2021",
-    bild: "assets/img/grafik/tischkalender-wir-lieben-dresden.webp",
-    freigestellt: true,
-    kunde: "Radio Dresden",
-    leistung: "Gestaltung, Bildauswahl, Druckvorstufe",
-    beschreibung: ""
-  },
-  {
     titel: "Broschüre mit Sachsenkarte",
     kategorie: "Print",
     jahr: "",
@@ -79,16 +39,6 @@ window.GRAFIK = [
     kunde: "TAS Group Aschersleben",
     leistung: "Gestaltung „Tiefer. Breiter. Geiler.“",
     beschreibung: "Auffällige Beschriftung für Auflieger – Werbung, die jeden Tag auf der Straße unterwegs ist."
-  },
-  {
-    titel: "TAS Group – Premium für die Straße",
-    kategorie: "Messe & Werbetechnik",
-    jahr: "",
-    bild: "assets/img/grafik/tas-lkw-1.webp",
-    freigestellt: true,
-    kunde: "TAS Group Aschersleben",
-    leistung: "Gestaltung",
-    beschreibung: ""
   },
   {
     titel: "Einladung Fortbildungsreihe Kinderwunsch",
