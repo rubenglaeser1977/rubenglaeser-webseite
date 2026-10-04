@@ -14,6 +14,17 @@
    ========================================================= */
 window.WEBAPPS = [
   {
+    id: "zeitreise",
+    titel: "Zeitreise",
+    kurz: "Was war an diesem Tag? Nummer-eins-Hit, Ereignisse und Geburtstage zu jedem Datum.",
+    beschreibung: "Datum wählen und auf Zeitreise gehen: Die App zeigt, wie viele Tage seitdem vergangen sind, den Nummer-eins-Hit der Woche sowie Ereignisse und Geburtstage – live aus Wikipedia.",
+    url: "apps/zeitreise/",
+    vorschau: "assets/img/apps/zeitreise.jpg",
+    status: "Live",
+    tags: ["Geschichte", "Musik", "Wikipedia"],
+    jahr: "2026"
+  },
+  {
     id: "farbwandler",
     titel: "Farbwandler",
     kurz: "CMYK, RGB und HEX umrechnen – mit Kontrastprüfung für Text auf Farbe.",
