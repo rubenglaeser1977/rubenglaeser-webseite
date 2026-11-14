@@ -14,6 +14,17 @@
    ========================================================= */
 window.WEBAPPS = [
   {
+    id: "gruppenbildung",
+    titel: "Gruppenbildung",
+    kurz: "Namen eingeben, Gruppengröße wählen und per Zufall Gruppen einteilen.",
+    beschreibung: "Für Unterricht, Workshops und Teamtage: Namen einfügen, festlegen, wie viele Gruppen oder wie viele Personen pro Gruppe es geben soll, und die App teilt alle zufällig und gleichmäßig ein. Die Namen bleiben im eigenen Browser.",
+    url: "apps/gruppenbildung/",
+    vorschau: "assets/img/apps/gruppenbildung.jpg",
+    status: "Live",
+    tags: ["Unterricht", "Workshop", "Zufall"],
+    jahr: "2026"
+  },
+  {
     id: "zeitreise",
     titel: "Zeitreise",
     kurz: "Was war an diesem Tag? Nummer-eins-Hit, Ereignisse und Geburtstage zu jedem Datum.",

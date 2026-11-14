@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gruppenbildung</title>
+<style>
+  :root{
+    --rot:#E60005; --rot-dunkel:#B30004; --rot-hell:#FDE8E9;
+    --text:#1F1F1F; --grau:#6B6B6B; --linie:#DADADA; --flaeche:#F5F5F5; --weiss:#fff;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--text);background:var(--flaeche);line-height:1.45}
+  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 40px}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .logo{width:40px;height:40px;flex:none}
+  h1{font-size:clamp(1.3rem,4vw,1.7rem);margin:0}
+  .sub{color:var(--grau);margin:2px 0 0;font-size:.95rem}
+  .card{background:var(--weiss);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:16px}
+  h2{font-size:1.05rem;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .count{font-weight:normal;color:var(--grau);font-size:.9rem}
+  label{font-weight:600;display:block;margin-bottom:6px}
+  textarea{width:100%;min-height:170px;resize:vertical;font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--linie);border-radius:8px}
+  textarea:focus,input:focus{outline:none;border-color:var(--rot);box-shadow:0 0 0 3px var(--rot-hell)}
+  .hint{font-size:.85rem;color:var(--grau);margin:6px 0 0}
+  .seg{display:flex;border:1.5px solid var(--rot);border-radius:8px;overflow:hidden;margin-bottom:12px}
+  .seg button{flex:1;border:0;background:var(--weiss);color:var(--rot);font:inherit;font-weight:600;padding:10px 8px;cursor:pointer;min-height:44px}
+  .seg button[aria-pressed="true"]{background:var(--rot);color:var(--weiss)}
+  .stepper{display:flex;align-items:center;gap:8px}
+  .stepper button{width:44px;height:44px;border-radius:8px;border:1.5px solid var(--linie);background:var(--weiss);font-size:1.4rem;cursor:pointer;color:var(--text)}
+  .stepper input{width:80px;height:44px;text-align:center;font:inherit;font-size:18px;font-weight:600;border:1.5px solid var(--linie);border-radius:8px}
+  .preview{margin-top:10px;font-size:.92rem;color:var(--grau)}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .btn{font:inherit;font-weight:600;border-radius:8px;padding:11px 18px;min-height:44px;cursor:pointer;border:1.5px solid var(--rot);background:var(--weiss);color:var(--rot)}
+  .btn.primary{background:var(--rot);color:var(--weiss)}
+  .btn.primary:hover{background:var(--rot-dunkel);border-color:var(--rot-dunkel)}
+  .btn:hover{background:var(--rot-hell)}
+  .btn.ghost{border-color:var(--linie);color:var(--text)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .grid2{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:760px){.grid2{grid-template-columns:3fr 2fr}}
+  .msg{margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--rot-hell);color:var(--rot-dunkel);font-size:.92rem;display:none}
+  .msg.show{display:block}
+  .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .group{border:1.5px solid var(--linie);border-radius:var(--radius);overflow:hidden;background:var(--weiss);animation:pop .35s ease both}
+  .group h3{margin:0;background:var(--rot);color:var(--weiss);font-size:1rem;padding:8px 12px;display:flex;justify-content:space-between}
+  .group h3 span{font-weight:normal;opacity:.9;font-size:.85rem}
+  .group ul{list-style:none;margin:0;padding:8px 12px}
+  .group li{padding:5px 0;border-bottom:1px solid var(--flaeche)}
+  .group li:last-child{border-bottom:0}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.group{animation:none}}
+  .empty{color:var(--grau);text-align:center;padding:24px 8px}
+  .dialog-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+  .dialog-bg.show{display:flex}
+  .dialog{background:var(--weiss);border-radius:var(--radius);padding:20px;max-width:380px;width:100%}
+  .dialog p{margin:0 0 16px}
+  .dialog .actions{justify-content:flex-end;margin-top:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#fff"/><path d="M15 6h10v9h9v10h-9v9H15v-9H6V15h9z" fill="#E60005"/></svg>
+    <div>
+      <h1>Gruppenbildung</h1>
+      <p class="sub">Namen eingeben, Gruppengröße wählen, zufällig einteilen.</p>
+    </div>
+  </header>
+
+  <div class="grid2">
+    <section class="card">
+      <h2><span>1. Namen</span><span class="count" id="nameCount">0 Personen</span></h2>
+      <label for="names" class="sr" style="position:absolute;left:-9999px">Namen</label>
+      <textarea id="names" placeholder="Ein Name pro Zeile oder durch Komma getrennt&#10;z. B.&#10;Anna&#10;Ben&#10;Clara"></textarea>
+      <p class="hint">Leere Zeilen und doppelte Leerzeichen werden ignoriert.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Einteilung</h2>
+      <div class="seg" role="group" aria-label="Einteilungsart">
+        <button type="button" id="modeGroups" aria-pressed="true">Anzahl Gruppen</button>
+        <button type="button" id="modeSize" aria-pressed="false">Personen / Gruppe</button>
+      </div>
+      <label for="num" id="numLabel">Wie viele Gruppen?</label>
+      <div class="stepper">
+        <button type="button" id="minus" aria-label="Weniger">−</button>
+        <input type="number" id="num" min="1" value="2" inputmode="numeric">
+        <button type="button" id="plus" aria-label="Mehr">+</button>
+      </div>
+      <p class="preview" id="preview"></p>
+    </section>
+  </div>
+
+  <div class="actions" style="margin:0 0 16px">
+    <button class="btn primary" id="build">Gruppen bilden</button>
+    <button class="btn" id="resetGroups">Gruppen zurücksetzen</button>
+    <button class="btn ghost" id="resetAll">Alle Namen zurücksetzen</button>
+  </div>
+  <div class="msg" id="msg" role="alert"></div>
+
+  <section class="card" style="margin-top:16px">
+    <h2><span>3. Gruppen</span>
+      <span style="display:flex;gap:8px">
+        <button class="btn ghost" id="copy" style="padding:6px 12px;min-height:36px;font-size:.9rem" disabled>Kopieren</button>
+      </span>
+    </h2>
+    <div id="result"><p class="empty">Noch keine Gruppen gebildet.</p></div>
+  </section>
+</div>
+
+<div class="dialog-bg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgText">
+  <div class="dialog">
+    <p id="dlgText">Wirklich alle Namen und Gruppen löschen?</p>
+    <div class="actions">
+      <button class="btn ghost" id="dlgNo">Abbrechen</button>
+      <button class="btn primary" id="dlgYes">Ja, löschen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const namesEl=$('names'), numEl=$('num'), resultEl=$('result'), msgEl=$('msg');
+  let mode='groups', lastGroups=null;
+
+  const store = {
+    get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+    set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+    del(k){try{localStorage.removeItem(k)}catch(e){}}
+  };
+
+  function getNames(){
+    return namesEl.value.split(/[\n,;]+/).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean);
+  }
+  function randInt(max){
+    if (window.crypto && crypto.getRandomValues){
+      const a=new Uint32Array(1); crypto.getRandomValues(a); return a[0]%max;
+    }
+    return Math.floor(Math.random()*max);
+  }
+  function shuffle(arr){
+    const a=arr.slice();
+    for(let i=a.length-1;i>0;i--){const j=randInt(i+1);[a[i],a[j]]=[a[j],a[i]];}
+    return a;
+  }
+  function groupCount(n){
+    const v=Math.max(1,parseInt(numEl.value,10)||1);
+    return mode==='groups' ? Math.min(v,n) : Math.ceil(n/v);
+  }
+  function showMsg(t){msgEl.textContent=t;msgEl.classList.toggle('show',!!t);}
+
+  function updateInfo(){
+    const n=getNames().length;
+    $('nameCount').textContent = n + (n===1?' Person':' Personen');
+    const v=Math.max(1,parseInt(numEl.value,10)||1);
+    let txt='';
+    if(n>0){
+      const g=groupCount(n);
+      const small=Math.floor(n/g), big=Math.ceil(n/g);
+      txt = g + (g===1?' Gruppe':' Gruppen') + ' mit ' + (small===big? big : small+'–'+big) + ' Personen';
+      if(mode==='groups' && v>n) txt += ' (mehr Gruppen als Personen – auf '+n+' begrenzt)';
+    }
+    $('preview').textContent=txt;
+    store.set('gb_names',namesEl.value); store.set('gb_mode',mode); store.set('gb_num',numEl.value);
+  }
+
+  function setMode(m){
+    mode=m;
+    $('modeGroups').setAttribute('aria-pressed',m==='groups');
+    $('modeSize').setAttribute('aria-pressed',m==='size');
+    $('numLabel').textContent = m==='groups' ? 'Wie viele Gruppen?' : 'Wie viele Personen pro Gruppe?';
+    updateInfo();
+  }
+
+  function build(){
+    const names=getNames();
+    if(names.length<2){showMsg('Bitte mindestens 2 Namen eingeben.');return;}
+    showMsg('');
+    const g=groupCount(names.length);
+    const mixed=shuffle(names);
+    const groups=Array.from({length:g},()=>[]);
+    mixed.forEach((name,i)=>groups[i%g].push(name));
+    lastGroups=shuffle(groups.map(x=>x)).sort((a,b)=>b.length-a.length);
+    render();
+  }
+
+  function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+  function render(){
+    if(!lastGroups){
+      resultEl.innerHTML='<p class="empty">Noch keine Gruppen gebildet.</p>';
+      $('copy').disabled=true; $('build').textContent='Gruppen bilden'; return;
+    }
+    resultEl.innerHTML='<div class="groups">'+lastGroups.map((grp,i)=>
+      '<div class="group" style="animation-delay:'+(i*60)+'ms"><h3>Gruppe '+(i+1)+'<span>'+grp.length+' Pers.</span></h3><ul>'+
+      grp.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul></div>').join('')+'</div>';
+    $('copy').disabled=false; $('build').textContent='Neu mischen';
+  }
+
+  function resetGroups(){lastGroups=null;showMsg('');render();}
+
+  $('modeGroups').onclick=()=>setMode('groups');
+  $('modeSize').onclick=()=>setMode('size');
+  $('minus').onclick=()=>{numEl.value=Math.max(1,(parseInt(numEl.value,10)||1)-1);updateInfo();};
+  $('plus').onclick=()=>{numEl.value=(parseInt(numEl.value,10)||0)+1;updateInfo();};
+  numEl.oninput=updateInfo;
+  namesEl.oninput=updateInfo;
+  $('build').onclick=build;
+  $('resetGroups').onclick=resetGroups;
+  $('resetAll').onclick=()=>{$('dlg').classList.add('show');$('dlgNo').focus();};
+  $('dlgNo').onclick=()=>$('dlg').classList.remove('show');
+  $('dlg').onclick=e=>{if(e.target.id==='dlg')$('dlg').classList.remove('show');};
+  $('dlgYes').onclick=()=>{
+    namesEl.value=''; store.del('gb_names'); resetGroups(); updateInfo();
+    $('dlg').classList.remove('show'); namesEl.focus();
+  };
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')$('dlg').classList.remove('show');});
+
+  $('copy').onclick=async()=>{
+    if(!lastGroups)return;
+    const txt=lastGroups.map((g,i)=>'Gruppe '+(i+1)+': '+g.join(', ')).join('\n');
+    try{await navigator.clipboard.writeText(txt);$('copy').textContent='Kopiert ✓';}
+    catch(e){$('copy').textContent='Nicht möglich';}
+    setTimeout(()=>$('copy').textContent='Kopieren',1800);
+  };
+
+  // gespeicherten Stand laden
+  const sn=store.get('gb_names'), sm=store.get('gb_mode'), sv=store.get('gb_num');
+  if(sn) namesEl.value=sn;
+  if(sv) numEl.value=sv;
+  setMode(sm==='size'?'size':'groups');
+})();
+</script>
+</body>
+</html>
