@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rubens 50. Geburtstag</title>
+<meta name="theme-color" content="#FBF4EA">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ruben 50">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='13' rx='11' ry='12' fill='%23F2A7B4'/%3E%3Ctext x='16' y='18' font-family='Georgia' font-weight='700' font-size='12' fill='white' text-anchor='middle'%3E50%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fonts.css">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<style>
+:root{--cream:#FBF4EA;--paper:#FFFBF5;--navy:#26304F;--coral:#E8735A;--teal:#52A39A;--pink:#F2A7B4;--yellow:#F2BE4B;--muted:#6B6F80;--line:#E8DCCB;
+--script:'Great Vibes',cursive;--serif:'Playfair Display',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--navy);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
+body{min-height:100dvh}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:0}
+.frame{position:relative;z-index:1;max-width:560px;margin:14px auto;min-height:calc(100dvh - 28px);border:1.5px solid var(--navy);border-radius:22px;padding:6px}
+.frame-inner{border:1px solid var(--navy);border-radius:17px;min-height:calc(100dvh - 44px);padding:28px 20px 110px;position:relative}
+.eyebrow{font-family:var(--sans);letter-spacing:.45em;text-transform:uppercase;font-size:.82rem;text-align:center;font-weight:500}
+.eyebrow.teal{color:var(--teal);letter-spacing:.3em}
+.script{font-family:var(--script);color:var(--coral);font-weight:400;line-height:1;text-align:center}
+h1.script{font-size:clamp(3.4rem,15vw,4.8rem)}
+h2.script{font-size:2.9rem;margin:6px 0 4px}
+.divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto}
+.divider:before,.divider:after{content:"";height:1px;width:72px;background:var(--navy)}
+.divider svg{width:16px;height:16px;fill:var(--coral)}
+.date{font-family:var(--serif);font-weight:800;font-size:clamp(2.6rem,12vw,3.6rem);text-align:center;letter-spacing:.01em;line-height:1}
+.name{font-family:var(--script);font-size:3.4rem;text-align:center;line-height:1;margin-top:2px}
+.balloons{display:block;margin:6px auto 0;width:210px;height:auto}
+.balloons .b{transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}
+.balloons .b2{animation-delay:-2s}.balloons .b3{animation-delay:-4s}
+@keyframes sway{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.balloons .b{animation:none}}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+.card h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:10px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 6px}
+.countdown div{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center}
+.countdown b{display:block;font-family:var(--serif);font-weight:800;font-size:1.9rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.countdown span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.live{font-family:var(--script);color:var(--coral);font-size:2.6rem;text-align:center;margin:16px 0}
+.info-row{display:flex;gap:12px;align-items:flex-start;padding:8px 0}
+.info-row svg{flex:0 0 22px;width:22px;height:22px;stroke:var(--teal);fill:none;stroke-width:1.8;margin-top:2px}
+.info-row strong{display:block;font-weight:600}
+.btns{display:grid;gap:10px;margin-top:14px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--navy);background:transparent;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn svg{width:20px;height:20px;flex:0 0 20px}
+.btn.primary{background:var(--navy);color:var(--cream)}
+.btn.coral{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn.wa{background:#25D366;border-color:#25D366;color:#fff}
+.btn.small{min-height:38px;padding:7px 14px;font-size:.9rem}
+.btn.ghost{border-color:var(--line)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;font-size:.85rem;font-weight:600;margin:14px 0 6px;letter-spacing:.02em}
+input[type=text],input[type=password],input[type=tel],input[type=date],input[type=time],input[type=url],select{width:100%;min-height:48px;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-size:1rem}
+input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(82,163,154,.18)}
+.hint{font-size:.8rem;color:var(--muted);margin-top:5px}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--navy);background:#fff;font-size:1.5rem;cursor:pointer;line-height:1}
+.stepper output{font-family:var(--serif);font-weight:800;font-size:2rem;min-width:48px;text-align:center}
+.stepper small{color:var(--muted)}
+.tabs{display:flex;gap:6px;justify-content:center;margin:6px 0 18px}
+.tabs button{flex:1;padding:10px;border-radius:999px;border:1.5px solid var(--navy);background:transparent;font-weight:600;cursor:pointer}
+.tabs button.on{background:var(--navy);color:var(--cream)}
+.err{background:#FDE8E3;color:#9B3622;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:.92rem}
+.err:empty{display:none}
+nav.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;display:flex;gap:2px;background:var(--navy);border-radius:999px;padding:6px;box-shadow:0 10px 30px rgba(38,48,79,.25);width:min(520px,calc(100% - 28px))}
+nav.bar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;color:#C9CDDA;font-size:.68rem;padding:7px 2px;border-radius:999px;cursor:pointer;font-weight:500}
+nav.bar button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+nav.bar button.on{background:var(--cream);color:var(--navy)}
+.list{list-style:none}
+.list li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border-bottom:0}
+.av{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:#fff}
+.grow{flex:1;min-width:0}
+.grow strong{display:block;font-weight:600;overflow-wrap:anywhere}
+.pill{font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:999px;background:#E6F2F0;color:#2F756D;white-space:nowrap}
+.pill.no{background:#F1ECE4;color:var(--muted)}
+.pill.me{background:#FDEBD0;color:#946512}
+.total{display:flex;justify-content:space-around;text-align:center;margin:4px 0}
+.total b{display:block;font-family:var(--serif);font-weight:800;font-size:2.2rem}
+.total span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.item{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid var(--line);border-radius:14px;margin-bottom:10px;background:#fff}
+.item.taken{background:#F6F1E9;border-style:dashed}
+.item.mine{border-color:var(--teal);background:#EEF7F5}
+.item .check{flex:0 0 30px;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.item.mine .check{background:var(--teal);border-color:var(--teal)}
+.item.taken .check{background:var(--line)}
+.item .check svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:3}
+.item.taken .grow strong{text-decoration:line-through;text-decoration-color:rgba(38,48,79,.3)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.gallery button{aspect-ratio:1;border:0;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;background:var(--line)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.locked{text-align:center;padding:30px 10px}
+.locked svg{width:54px;height:54px;stroke:var(--coral);fill:none;stroke-width:1.6;margin-bottom:8px}
+.lightbox{position:fixed;inset:0;background:rgba(20,24,40,.94);z-index:20;display:none;flex-direction:column}
+.lightbox.on{display:flex}
+.lightbox img{flex:1;min-height:0;object-fit:contain;width:100%;padding:12px}
+.lb-bar{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:12px 16px calc(14px + env(safe-area-inset-bottom));color:#fff}
+.lb-bar .btn{border-color:rgba(255,255,255,.5);color:#fff}
+.lb-top{display:flex;justify-content:space-between;align-items:center;padding:calc(12px + env(safe-area-inset-top)) 16px 0;color:#fff}
+.lb-top button{background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;width:44px;height:44px}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;width:44px;height:64px;border-radius:12px;font-size:1.6rem;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:var(--cream);padding:12px 18px;border-radius:12px;z-index:30;opacity:0;transition:.25s;pointer-events:none;max-width:90%;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer-link{display:block;margin:30px auto 0;background:none;border:0;color:var(--muted);font-size:.85rem;text-decoration:underline;cursor:pointer}
+.row{display:flex;gap:8px;align-items:center}
+.row > *{min-width:0}
+.icon-btn{width:38px;height:38px;flex:0 0 38px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer}
+.icon-btn svg{width:17px;height:17px;stroke:var(--navy);fill:none;stroke-width:2}
+.icon-btn.danger svg{stroke:#C0472E}
+.adm-sec{margin-top:8px}
+.adm-user{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#fff}
+.adm-user .row{flex-wrap:wrap}
+.hidden{display:none!important}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:10px}
+.progress div{height:100%;background:var(--teal);width:0;transition:width .2s}
+.view{animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.modal{position:fixed;inset:0;background:rgba(20,24,40,.55);z-index:40;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.on{display:flex}.modal .card{max-width:380px;width:100%;margin:0}
+.gear{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;z-index:2}
+.gear svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:1.8}
+.ds{max-height:80dvh;overflow:auto;max-width:520px!important}
+.ds h4{font-family:var(--serif);font-size:1.02rem;margin:14px 0 4px}.ds p,.ds li{font-size:.92rem;line-height:1.5}.ds ul{padding-left:18px}
+.ds-link{display:block;margin:22px auto 0;background:none;border:1px solid var(--line);border-radius:999px;padding:6px 14px;color:var(--muted);font-size:.8rem;cursor:pointer}
+</style>
+</head>
+<body>
+<svg id="confetti" aria-hidden="true"></svg>
+<div class="frame"><div class="frame-inner" id="app"></div></div>
+<nav class="bar hidden" id="nav"></nav>
+<div class="lightbox" id="lb">
+  <div class="lb-top"><span id="lb-name"></span><button aria-label="Schließen" onclick="closeLb()">×</button></div>
+  <img id="lb-img" alt="Partyfoto">
+  <button class="lb-nav" style="left:8px" aria-label="Vorheriges Foto" onclick="lbStep(-1)">‹</button>
+  <button class="lb-nav" style="right:8px" aria-label="Nächstes Foto" onclick="lbStep(1)">›</button>
+  <div class="lb-bar"><a class="btn small" id="lb-dl">Herunterladen</a><button class="btn small" id="lb-del">Löschen</button></div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="navm" onclick="if(event.target===this)this.classList.remove('on')"><div class="card"><h3>Route planen mit …</h3><div class="btns" id="nav-btns"></div>
+<div class="btns"><button class="btn ghost" onclick="$('#navm').classList.remove('on')">Abbrechen</button></div></div></div>
+<div class="modal" id="ds" onclick="if(event.target===this)this.classList.remove('on')"><div class="card ds">
+<h3>Datenschutz</h3>
+<p>Diese App dient nur der Planung von Rubens 50. Geburtstag. Hier steht, welche Daten gespeichert werden und was damit passiert.</p>
+<h4>Verantwortlich</h4><p>Ruben Gläser, ruben.glaeser@icloud.com</p>
+<h4>Welche Daten gespeichert werden</h4><ul>
+<li>Nutzername, Anzeigename und Personenanzahl</li>
+<li>Deine PIN, nur verschlüsselt als Prüfwert. Niemand kann sie im Klartext lesen, auch Ruben nicht.</li>
+<li>Deine Einträge in der Mitbringliste</li>
+<li>Hochgeladene Partyfotos mit Name und Uhrzeit. Die Fotos werden verkleinert, und eingebettete Metadaten wie GPS-Standort und Kameradaten werden beim Hochladen entfernt.</li></ul>
+<h4>Wo die Daten liegen</h4><p>Die Seite selbst wird über GitHub Pages ausgeliefert. GitHub verarbeitet dabei technisch notwendige Zugriffsdaten wie die IP-Adresse. Die Daten der App liegen auf einem Server von Perplexity AI. Die Daten liegen in einer Datenbank der App auf diesem Server. Die Server von Perplexity können auch außerhalb der EU stehen, zum Beispiel in den USA.</p>
+<h4>Wer die Daten sieht</h4><ul>
+<li>Angemeldete Gäste sehen Anzeigenamen, Personenanzahl, die Mitbringliste und die Partyfotos.</li>
+<li>Ruben sieht im Admin-Bereich zusätzlich die Nutzernamen.</li>
+<li>Es gibt keine Weitergabe an Dritte, keine Werbung, kein Tracking und keine Analyse-Tools.</li></ul>
+<h4>Auf deinem Gerät</h4><p>Damit du angemeldet bleibst, speichert dein Browser einen Anmeldeschlüssel. Er wird beim Abmelden gelöscht. Es gibt keine Werbe- oder Tracking-Cookies. Die Schriften werden direkt von dieser App geladen und nicht von Google.</p>
+<h4>Kalenderexport</h4><p>Die Kalenderdatei enthält die Gäste- und Mitbringliste zum Zeitpunkt des Downloads. Sie liegt danach nur in deinem eigenen Kalender.</p>
+<h4>Suchmaschinen</h4><p>Die App ist für Suchmaschinen gesperrt und nur über den direkten Link erreichbar.</p>
+<h4>Löschen</h4><p>Eigene Fotos und Mitbring-Einträge kannst du jederzeit selbst löschen. Wenn du dein Konto komplett löschen lassen möchtest, wende dich an Ruben.</p>
+<div class="btns"><button class="btn primary" onclick="$('#ds').classList.remove('on')">Schließen</button></div></div></div>
+<div class="modal" id="modal"><div class="card"><p id="m-msg" style="font-weight:500"></p><input type="password" inputmode="numeric" maxlength="8" id="m-in" class="hidden" style="margin-top:12px">
+<div class="btns" style="grid-template-columns:1fr 1fr"><button class="btn ghost" id="m-no">Abbrechen</button><button class="btn primary" id="m-yes">OK</button></div></div></div>
+<script>
+const API = 'https://ruben-50.pplx.app/port/8000';
+const C = {navy:'#26304F',coral:'#E8735A',teal:'#52A39A',pink:'#F2A7B4',yellow:'#F2BE4B'};
+const AVC = [C.teal,C.coral,C.pink,C.yellow,C.navy];
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }, del(k){ try { localStorage.removeItem(k); } catch(e){} } };
+let token = store.get('r50_token');
+let adminPin = null;
+let S = null, view = 'start', photos = [], lbIdx = 0, timer = null;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const STAR = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></svg>';
+const CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const I = {
+  home:'<svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+  guests:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.6.1 4.4 1.8 5 4.4"/></svg>',
+  gift:'<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v7h14v-7M12 8v12M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z"/></svg>',
+  camera:'<svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.8"/></svg>',
+  user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.4 4.2-6.5 8-6.5s7 2.1 8 6.5"/></svg>',
+  pin:'<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>',
+  route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z"/></svg>',
+  lock:'<svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>',
+  dl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16"/></svg>',
+  up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19V8m0 0l-4.5 4.5M12 8l4.5 4.5M4 4h16"/></svg>',
+  trash:'<svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
+  edit:'<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+  upArrow:'<svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
+  downArrow:'<svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg>',
+};
+const BALLOONS = `<svg class="balloons" viewBox="0 0 220 220" aria-label="Drei Luftballons mit der Zahl 50" role="img">
+ <path d="M58 118 C60 160 80 175 110 200" stroke="${C.navy}" stroke-width="1.3" fill="none"/>
+ <path d="M110 103 C104 140 108 170 110 200" stroke="${C.navy}" stroke-width="1.3" fill="none"/>
+ <path d="M160 112 C158 160 140 178 110 200" stroke="${C.navy}" stroke-width="1.3" fill="none"/>
+ <g class="b b1"><ellipse cx="58" cy="78" rx="40" ry="42" fill="${C.teal}"/><ellipse cx="45" cy="56" rx="7" ry="10" fill="#fff" opacity=".35"/><path d="M54 120h8l-4-6z" fill="${C.teal}"/></g>
+ <g class="b b3"><ellipse cx="162" cy="72" rx="40" ry="42" fill="${C.yellow}"/><ellipse cx="149" cy="50" rx="7" ry="10" fill="#fff" opacity=".35"/><path d="M158 114h8l-4-6z" fill="${C.yellow}"/></g>
+ <g class="b b2"><ellipse cx="110" cy="54" rx="46" ry="48" fill="${C.pink}"/><ellipse cx="94" cy="30" rx="8" ry="11" fill="#fff" opacity=".35"/><path d="M106 102h8l-4-6z" fill="${C.pink}"/>
+ <text x="110" y="70" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="800" font-size="40" fill="#fff">50</text></g>
+ <path d="M110 192l2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z" fill="${C.coral}"/>
+</svg>`;
+
+// Konfetti
+(function confetti(){
+  const svg = $('#confetti'), w = innerWidth, h = innerHeight, cols = Object.values(C).filter(c=>c!==C.navy);
+  let out = '';
+  const edge = () => Math.random() < .5 ? Math.random()*Math.min(70, w*.12) : w - Math.random()*Math.min(70, w*.12);
+  for (let i=0;i<46;i++){
+    const x = i%3===0 ? Math.random()*w : edge(), y = Math.random()*h, c = cols[i%cols.length], r = Math.random()*360, t = i%3;
+    if (t===0) out += `<circle cx="${x}" cy="${y}" r="${3+Math.random()*3}" fill="${c}"/>`;
+    else if (t===1) out += `<rect x="${x}" y="${y}" width="12" height="4" rx="2" fill="${c}" transform="rotate(${r} ${x} ${y})"/>`;
+    else out += `<path d="M${x} ${y} q4 -6 8 0 t8 0" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" transform="rotate(${r} ${x} ${y})"/>`;
+  }
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`); svg.innerHTML = out;
+})();
+
+function ask(msg, input){ return new Promise(res => { const m=$('#modal'), i=$('#m-in');
+  $('#m-msg').textContent=msg; i.value=''; i.classList.toggle('hidden',!input); m.classList.add('on'); if(input) setTimeout(()=>i.focus(),50);
+  const done = v => { m.classList.remove('on'); res(v); };
+  $('#m-yes').onclick = () => done(input ? i.value : true); $('#m-no').onclick = () => done(input ? null : false); }); }
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600)}
+async function api(path, opt={}){
+  const headers = Object.assign({}, opt.headers||{});
+  if (token) headers['X-Token'] = token;
+  if (opt.admin) headers['X-Admin'] = adminPin;
+  let body = opt.body;
+  if (body && !(body instanceof FormData)) { headers['Content-Type']='application/json'; body = JSON.stringify(body); }
+  const r = await fetch(API + path, {method: opt.method || (body ? 'POST':'GET'), headers, body});
+  let d = null; try { d = await r.json(); } catch(e){}
+  if (!r.ok) {
+    if (r.status === 401 && !opt.admin && token && !path.includes('login')) { logoutLocal(); }
+    throw new Error((d && d.detail) || 'Es ist ein Fehler aufgetreten.');
+  }
+  return d;
+}
+function logoutLocal(){ token=null; store.del('r50_token'); S=null; render(); }
+
+function fmtDate(iso){ const [y,m,d]=iso.split('-'); return `${d}.${m}.${y}`; }
+function weekday(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('de-DE',{weekday:'long'}); }
+function partyStart(){ const s=S?S.settings:{date:'2027-09-25',start:'15:00'}; return berlinDate(s.date, s.start); }
+function partyEnd(){ const s=S?S.settings:{date:'2027-09-25',end:'23:59'}; return berlinDate(s.date, s.end); }
+function berlinDate(d, t){
+  // Zeit in Europe/Berlin -> Date
+  const guess = new Date(`${d}T${t}:00Z`);
+  const tz = new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Berlin',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(guess);
+  const g = Object.fromEntries(tz.map(p=>[p.type,p.value]));
+  const asBerlin = Date.UTC(+g.year, +g.month-1, +g.day, +g.hour%24, +g.minute);
+  return new Date(guess.getTime() - (asBerlin - guess.getTime()));
+}
+function avatar(name, id){ const c = AVC[(id||0)%AVC.length]; return `<div class="av" style="background:${c}">${esc((name||'?').trim()[0]||'?').toUpperCase()}</div>`; }
+
+function hero(compact){
+  const s = S ? S.settings : {date:'2027-09-25'};
+  return `<p class="eyebrow" style="margin-bottom:14px">Save</p><h1 class="script">the Date</h1>
+  <div class="divider">${STAR}</div>${BALLOONS}
+  <p class="date" style="margin-top:14px">${fmtDate(s.date)}</p>
+  <p class="eyebrow teal" style="margin-top:8px">50. Geburtstag</p>
+  <p class="name">Ruben</p>`;
+}
+
+// ---------- Auth ----------
+function renderAuth(mode='login'){
+  $('#nav').classList.add('hidden');
+  $('#app').innerHTML = `<div class="view">${hero()}
+  <div class="card" style="margin-top:22px">
+    <div class="tabs"><button id="t-log" class="${mode==='login'?'on':''}">Anmelden</button><button id="t-reg" class="${mode==='register'?'on':''}">Registrieren</button></div>
+    <form id="authform" autocomplete="on">
+      ${mode==='register'?`<p class="hint" style="background:#FDEBD0;color:#7A5410;border-radius:10px;padding:10px 12px;font-size:.88rem">Bitte nur eine Anmeldung pro Familie, Paar oder Gruppe. Die Anzahl der Personen gebt ihr unten an.</p>`:''}
+      <label for="f-user">Nutzername</label>
+      <input type="text" id="f-user" autocomplete="username" autocapitalize="none" required minlength="3" maxlength="30" placeholder="z. B. anna.m">
+      <label for="f-pin">PIN</label>
+      <input type="password" id="f-pin" inputmode="numeric" pattern="[0-9]*" autocomplete="${mode==='register'?'new-password':'current-password'}" required minlength="4" maxlength="8" placeholder="4 bis 8 Ziffern">
+      ${mode==='register' ? `
+      <label for="f-name">Anzeigename</label>
+      <input type="text" id="f-name" required maxlength="40" placeholder="So sehen dich die anderen Gäste">
+      <label>Mit wie vielen Personen kommst du?</label>
+      <div class="stepper"><button type="button" data-d="-1" aria-label="Weniger">−</button><output id="f-pers">1</output><button type="button" data-d="1" aria-label="Mehr">+</button><small>inkl. dir selbst</small></div>
+      <p class="hint">Du kannst alles später im Profil ändern. 0 Personen bedeutet Absage.</p>` : ''}
+      <div class="err" id="f-err"></div>
+      <div class="btns"><button class="btn primary" type="submit">${mode==='register'?'Registrieren':'Anmelden'}</button></div>
+    </form>
+    ${mode==='login'?`<p class="center" style="margin-top:16px">Das erste Mal hier? Dann bitte einmalig <a href="#" id="to-reg" style="color:var(--coral);font-weight:600">registrieren</a>.</p>`:`<p class="center" style="margin-top:16px">Schon registriert? <a href="#" id="to-log" style="color:var(--coral);font-weight:600">Zur Anmeldung</a></p>`}
+  </div>
+  <button class="footer-link" onclick="go('admin')">Admin-Bereich</button></div>`;
+  addDs();
+  $('#t-reg').onclick = () => renderAuth('register');
+  const tr=$('#to-reg'), tl=$('#to-log'); if(tr) tr.onclick=e=>{e.preventDefault();renderAuth('register')}; if(tl) tl.onclick=e=>{e.preventDefault();renderAuth('login')};
+  $('#t-log').onclick = () => renderAuth('login');
+  document.querySelectorAll('.stepper button').forEach(b => b.onclick = () => { const o=$('#f-pers'); o.value = o.textContent = Math.max(0, Math.min(20, +o.textContent + +b.dataset.d)); });
+  $('#authform').onsubmit = async e => {
+    e.preventDefault(); $('#f-err').textContent='';
+    try {
+      const body = {username: $('#f-user').value, pin: $('#f-pin').value};
+      if (mode==='register'){ body.display_name = $('#f-name').value; body.persons = +$('#f-pers').textContent; }
+      const d = await api(mode==='register'?'/api/register':'/api/login', {body});
+      token = d.token; store.set('r50_token', token); view='start'; await load();
+      toast(mode==='register' ? 'Willkommen! Schön, dass du dabei bist.' : 'Schön, dass du wieder da bist.');
+    } catch(err){ $('#f-err').textContent = err.message; }
+  };
+}
+
+// ---------- Main ----------
+const TABS = [['start','Start',I.home],['gaeste','Gäste',I.guests],['mitbringen','Mitbringen',I.gift],['fotos','Partyfotos',I.camera],['profil','Profil',I.user]];
+function renderNav(){
+  const n = $('#nav'); n.classList.remove('hidden');
+  n.innerHTML = TABS.map(([k,l,ic]) => `<button class="${view===k?'on':''}" onclick="go('${k}')" aria-label="${l}">${ic}<span>${l}</span></button>`).join('');
+}
+function go(v){ view = v; render(); scrollTo({top:0}); }
+async function load(){ S = await api('/api/state'); render(); }
+
+function render(){
+  clearInterval(timer);
+  if (view === 'admin') return renderAdmin();
+  if (!token) return renderAuth();
+  if (!S) { $('#app').innerHTML = '<p class="center muted" style="padding:80px 0">Lädt …</p>'; load().catch(()=>{}); return; }
+  renderNav();
+  ({start:renderStart, gaeste:renderGuests, mitbringen:renderItems, fotos:renderPhotos, profil:renderProfile}[view] || renderStart)();
+  addGear(); addDs();
+}
+
+function addDs(){ const v=$('#app .view')||$('#app'); const b=document.createElement('button'); b.className='ds-link'; b.textContent='Datenschutz'; b.onclick=()=>$('#ds').classList.add('on'); v.appendChild(b); }
+function addGear(){ const b=document.createElement('button'); b.className='gear'; b.title='Admin-Bereich'; b.setAttribute('aria-label','Admin-Bereich');
+  b.innerHTML='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>';
+  b.onclick=()=>go('admin'); $('#app').prepend(b); }
+function countdownHTML(){ return `<div id="cd"></div>`; }
+function tickCountdown(){
+  const el = $('#cd'); if (!el) return;
+  const now = Date.now(), st = partyStart().getTime(), en = partyEnd().getTime();
+  if (now >= en) { el.innerHTML = `<p class="live">Danke fürs Mitfeiern!</p><p class="center muted">Schaut euch die <a href="#" onclick="go('fotos');return false">Partyfotos</a> an.</p>`; return; }
+  if (now >= st) { if (!el.dataset.live){ el.dataset.live=1; el.innerHTML = `<p class="live">Die Party läuft!</p>`; burst(); } return; }
+  let t = Math.floor((st-now)/1000);
+  const d = Math.floor(t/86400); t%=86400; const h=Math.floor(t/3600); t%=3600; const m=Math.floor(t/60), s=t%60;
+  el.innerHTML = `<div class="countdown" role="timer" aria-label="Countdown bis zur Party">
+   <div><b>${d}</b><span>Tage</span></div><div><b>${String(h).padStart(2,'0')}</b><span>Std</span></div>
+   <div><b>${String(m).padStart(2,'0')}</b><span>Min</span></div><div><b>${String(s).padStart(2,'0')}</b><span>Sek</span></div></div>`;
+}
+function burst(){
+  const svg = $('#confetti'); const w=innerWidth;
+  for (let i=0;i<40;i++){ const c=AVC[i%4], x=Math.random()*w; const el=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    el.setAttribute('x',x);el.setAttribute('y',-20);el.setAttribute('width',8);el.setAttribute('height',4);el.setAttribute('fill',c);
+    el.animate([{transform:'translateY(0) rotate(0)'},{transform:`translateY(${innerHeight+40}px) rotate(${720*Math.random()}deg)`}],{duration:2500+Math.random()*2000,easing:'ease-in',fill:'forwards'});
+    svg.appendChild(el); setTimeout(()=>el.remove(),5000); }
+}
+
+function renderStart(){
+  const s = S.settings, me = S.me;
+  const yes = S.guests.filter(g=>g.persons>0), total = yes.reduce((a,g)=>a+g.persons,0);
+  $('#app').innerHTML = `<div class="view">${hero()}${countdownHTML()}
+  <p class="center" style="margin-top:6px">Hallo <strong>${esc(me.display_name)}</strong> · ${me.persons>0?`du kommst mit ${me.persons} ${me.persons===1?'Person':'Personen'}`:'du hast abgesagt'}</p>
+  <div class="card">
+    <h3>Wann &amp; wo</h3>
+    <div class="info-row">${I.clock}<div><strong>${weekday(s.date)}, ${fmtDate(s.date)}</strong>ab ${esc(s.start)} Uhr</div></div>
+    <div class="info-row">${I.pin}<div><strong>${esc(s.place_name)}</strong>${esc(s.place_address)}</div></div>
+    ${s.note ? `<p style="margin-top:8px">${esc(s.note)}</p>` : ''}
+    <div class="btns">
+      <button class="btn primary" onclick="openNav()">${I.route} Route planen</button>
+      <a class="btn" href="${API}/api/calendar.ics?token=${encodeURIComponent(token)}" download>${I.cal} In Kalender eintragen</a>
+      ${s.whatsapp_url ? `<a class="btn wa" href="${esc(s.whatsapp_url)}" target="_blank" rel="noopener">${I.wa} WhatsApp Gruppe zur Party</a>` : ''}
+    </div>
+    <p class="hint center" style="margin-top:10px">Der Kalendereintrag enthält die aktuelle Gäste- und Mitbringliste.</p>
+  </div>
+  <div class="card center"><h3 style="margin-bottom:2px">Spende statt Geschenke</h3><p class="muted" style="margin-bottom:10px">(und was fürs Buffet)</p><p>Ich wünsche mir keine Geschenke. Ich freue mich, wenn ihr etwas aus der Mitbringliste mitbringt.</p>
+  <p style="margin-top:8px">Wer trotzdem etwas geben möchte, kann gern für die Kinderarche Sachsen spenden.</p>
+  <p class="hint" style="margin-top:8px">Die <a href="https://www.kinderarche-sachsen.de/" target="_blank" rel="noopener">Kinderarche Sachsen</a> unterstützt Kinder, Jugendliche und Familien, zum Beispiel mit Kitas, Wohngruppen, Familienhilfe und Beratung.</p>
+  <div class="btns"><a class="btn coral" href="https://secure.spendenbank.de/form/2130?langid=1&verwendungszweck=17664&vz_solo=1" target="_blank" rel="noopener">Für die Kinderarche Sachsen spenden</a></div></div>
+  <div class="card"><p class="center" style="font-family:var(--serif);font-size:1.3rem;font-weight:700">Es ${total===1?'hat':'haben'} sich ${total} ${total===1?'Gast':'Gäste'} angemeldet.</p>
+   <div class="btns" style="grid-template-columns:1fr 1fr"><button class="btn small" onclick="go('gaeste')">Gästeliste</button><button class="btn small" onclick="go('mitbringen')">Mitbringliste</button></div></div>
+  <details class="card"><summary style="cursor:pointer;font-family:var(--serif);font-weight:700;font-size:1.1rem">App auf den Startbildschirm legen</summary>
+  <p style="margin-top:10px">So hast du die App wie eine normale App mit Icon auf deinem Handy:</p>
+  <p style="margin-top:10px"><strong>iPhone (Safari)</strong></p><ol style="padding-left:20px;line-height:1.6"><li>Seite in Safari öffnen</li><li>Unten auf das Teilen-Symbol tippen (Quadrat mit Pfeil nach oben)</li><li>„Zum Home-Bildschirm“ wählen</li><li>Oben rechts auf „Hinzufügen“ tippen</li></ol>
+  <p style="margin-top:10px"><strong>Android (Chrome)</strong></p><ol style="padding-left:20px;line-height:1.6"><li>Seite in Chrome öffnen</li><li>Oben rechts auf die drei Punkte tippen</li><li>„Zum Startbildschirm hinzufügen“ oder „App installieren“ wählen</li><li>Mit „Hinzufügen“ bestätigen</li></ol></details>
+  </div>`;
+  tickCountdown(); timer = setInterval(tickCountdown, 1000);
+}
+
+function renderGuests(){
+  const yes = S.guests.filter(g=>g.persons>0), no = S.guests.filter(g=>g.persons===0);
+  const total = yes.reduce((a,g)=>a+g.persons,0);
+  const li = g => `<li>${avatar(g.display_name,g.id)}<div class="grow"><strong>${esc(g.display_name)}${g.id===S.me.id?' <span class="pill me">du</span>':''}</strong></div>
+    <span class="pill ${g.persons?'':'no'}">${g.persons ? g.persons+' '+(g.persons===1?'Person':'Personen') : 'abgesagt'}</span></li>`;
+  $('#app').innerHTML = `<div class="view"><p class="eyebrow teal">Wer kommt?</p><h2 class="script">Gästeliste</h2><div class="divider">${STAR}</div>
+  <div class="card"><div class="total"><div><b>${yes.length}</b><span>Zusagen</span></div><div><b>${total}</b><span>Personen</span></div></div></div>
+  <div class="card"><h3>Zusagen</h3>${yes.length?`<ul class="list">${yes.map(li).join('')}</ul>`:'<p class="muted">Noch keine Zusagen.</p>'}</div>
+</div>`;
+}
+
+function renderItems(){
+  const mine = S.items.filter(i=>i.user_id===S.me.id).length;
+  $('#app').innerHTML = `<div class="view"><p class="eyebrow teal">Wer bringt was?</p><h2 class="script">Mitbringliste</h2><div class="divider">${STAR}</div>
+  <p class="center muted" style="margin-bottom:16px">Tippe auf „Ich bringe das mit“. Vergebene Einträge sind für andere gesperrt.</p>
+  <div class="card center"><h3 style="margin-bottom:2px">Spende statt Geschenke</h3><p class="muted" style="margin-bottom:10px">(und was fürs Buffet)</p><p>Ich wünsche mir keine Geschenke. Ich freue mich, wenn ihr etwas aus der Mitbringliste mitbringt.</p>
+  <p style="margin-top:8px">Wer trotzdem etwas geben möchte, kann gern für die Kinderarche Sachsen spenden.</p>
+  <p class="hint" style="margin-top:8px">Die <a href="https://www.kinderarche-sachsen.de/" target="_blank" rel="noopener">Kinderarche Sachsen</a> unterstützt Kinder, Jugendliche und Familien, zum Beispiel mit Kitas, Wohngruppen, Familienhilfe und Beratung.</p>
+  <div class="btns"><a class="btn coral" href="https://secure.spendenbank.de/form/2130?langid=1&verwendungszweck=17664&vz_solo=1" target="_blank" rel="noopener">Für die Kinderarche Sachsen spenden</a></div></div>
+  <div id="items">${S.items.length ? S.items.map(i => {
+    const isMine = i.user_id===S.me.id, taken = i.user_id && !isMine;
+    return `<div class="item ${isMine?'mine':taken?'taken':''}"><div class="check">${i.user_id?CHECK:''}</div>
+      <div class="grow"><strong>${esc(i.title)}</strong><span class="muted" style="font-size:.88rem">${isMine?'Bringst du mit':taken?'Bringt '+esc(i.user_name):'Noch offen'}</span></div>
+      ${i.own?`<button class="icon-btn danger" title="Eintrag löschen" aria-label="Eintrag löschen" onclick="delOwn(${i.id})">${I.trash}</button>`:isMine?`<button class="btn small ghost" onclick="release(${i.id})">Austragen</button>`:taken?'':`<button class="btn small coral" onclick="claim(${i.id})">Ich bringe das mit</button>`}</div>`;
+  }).join('') : '<p class="center muted">Die Mitbringliste ist noch leer.</p>'}</div>
+  <div class="card"><h3>Etwas anderes mitbringen?</h3><form id="own" class="row"><input type="text" id="own-t" maxlength="80" placeholder="z. B. Bowle ohne Alkohol" required><button class="btn small primary">Eintragen</button></form>
+  <p class="hint">Eigene Einträge kannst du jederzeit wieder löschen.</p></div>
+  ${mine?`<p class="center hint">Du bringst ${mine} ${mine===1?'Sache':'Sachen'} mit. Danke!</p>`:''}</div>`;
+}
+async function delOwn(id){ if(!await ask('Diesen Eintrag löschen?')) return; try{ await api(`/api/items/${id}`,{method:'DELETE'}); toast('Eintrag gelöscht.'); }catch(e){ toast(e.message); } await load(); }
+function openNav(){ const s=S.settings, q=encodeURIComponent(s.place_address), isA=/Android/i.test(navigator.userAgent);
+  const L=[['Apple Karten',`https://maps.apple.com/?daddr=${q}`],['Google Maps',`https://www.google.com/maps/dir/?api=1&destination=${q}`],['Waze',`https://waze.com/ul?q=${q}&navigate=yes`]];
+  if(isA) L.unshift(['Andere Navi-App wählen',`geo:0,0?q=${q}`]);
+  $('#nav-btns').innerHTML = L.map(([n,u],i)=>`<a class="btn ${i===0?'primary':''}" href="${u}" target="_blank" rel="noopener">${n}</a>`).join('');
+  $('#navm').classList.add('on'); }
+async function claim(id){ try{ await api(`/api/items/${id}/claim`,{method:'POST'}); toast('Eingetragen. Danke!'); }catch(e){ toast(e.message); } await load(); }
+document.addEventListener('submit', async e => { if (e.target.id !== 'own') return; e.preventDefault();
+  try { await api('/api/items',{body:{title:$('#own-t').value}}); toast('Eingetragen. Danke!'); } catch(err){ toast(err.message); } await load(); });
+async function release(id){ try{ await api(`/api/items/${id}/release`,{method:'POST'}); toast('Ausgetragen.'); }catch(e){ toast(e.message); } await load(); }
+
+async function renderPhotos(){
+  const head = `<p class="eyebrow teal">Erinnerungen</p><h2 class="script">Partyfotos</h2><div class="divider">${STAR}</div>`;
+  if (!S.photos_open) {
+    $('#app').innerHTML = `<div class="view">${head}<div class="card locked">${I.lock}<h3>Öffnet am ${fmtDate(S.settings.date)}</h3>
+      <p class="muted">Am Tag der Party kannst du hier Fotos hochladen, ansehen und herunterladen.</p></div></div>`; return;
+  }
+  $('#app').innerHTML = `<div class="view">${head}
+   <div class="card"><div class="btns">
+     <label class="btn coral" style="margin:0">${I.up} Fotos hochladen<input type="file" id="up" accept="image/*" multiple hidden></label>
+     <a class="btn" id="zip" href="${API}/api/photos.zip?token=${encodeURIComponent(token)}">${I.dl} Alle Fotos herunterladen</a></div>
+     <div class="progress hidden" id="prog"><div></div></div><p class="hint center" id="progtxt"></p></div>
+   <div id="gal"><p class="center muted">Lädt …</p></div></div>`;
+  $('#up').onchange = e => uploadFiles([...e.target.files]);
+  await loadPhotos();
+}
+async function loadPhotos(){
+  photos = await api('/api/photos');
+  const g = $('#gal'); if (!g) return;
+  g.innerHTML = photos.length ? `<p class="center muted">${photos.length} ${photos.length===1?'Foto':'Fotos'}</p><div class="gallery">${photos.map((p,i)=>
+    `<button onclick="openLb(${i})" aria-label="Foto von ${esc(p.name)}"><img loading="lazy" src="${API}/api/photos/${p.id}/img?thumb=1&token=${encodeURIComponent(token)}" alt=""></button>`).join('')}</div>`
+    : '<div class="card center muted">Noch keine Fotos. Mach den Anfang!</div>';
+}
+async function uploadFiles(files){
+  if (!files.length) return;
+  const pr = $('#prog'), bar = pr.firstElementChild, txt = $('#progtxt'); pr.classList.remove('hidden');
+  let ok = 0;
+  for (let i=0;i<files.length;i++){
+    txt.textContent = `Lade Foto ${i+1} von ${files.length} hoch …`; bar.style.width = (i/files.length*100)+'%';
+    try { const f = await shrink(files[i]); const fd = new FormData(); fd.append('file', f, 'foto.jpg'); await api('/api/photos',{body:fd}); ok++; }
+    catch(e){ toast(e.message); }
+  }
+  bar.style.width='100%'; txt.textContent = `${ok} ${ok===1?'Foto':'Fotos'} hochgeladen.`;
+  setTimeout(()=>{ pr.classList.add('hidden'); txt.textContent=''; }, 2000);
+  await loadPhotos();
+}
+function shrink(file){ // im Browser verkleinern -> schnellerer Upload
+  return new Promise(res => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => { const m = 2500, sc = Math.min(1, m/Math.max(img.width,img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width*sc); c.height = Math.round(img.height*sc);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url);
+      c.toBlob(b => res(b || file), 'image/jpeg', .88); };
+    img.onerror = () => { URL.revokeObjectURL(url); res(file); };
+    img.src = url;
+  });
+}
+function openLb(i){ lbIdx = i; showLb(); $('#lb').classList.add('on'); }
+function closeLb(){ $('#lb').classList.remove('on'); }
+function lbStep(d){ lbIdx = (lbIdx + d + photos.length) % photos.length; showLb(); }
+function showLb(){
+  const p = photos[lbIdx], q = `token=${encodeURIComponent(token)}`;
+  $('#lb-img').src = `${API}/api/photos/${p.id}/img?${q}`;
+  $('#lb-name').textContent = `${p.name} · ${new Date(p.created_at*1000).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})} Uhr`;
+  $('#lb-dl').href = `${API}/api/photos/${p.id}/img?dl=1&${q}`;
+  const del = $('#lb-del'); del.classList.toggle('hidden', p.user_id !== S.me.id);
+  del.onclick = async () => { if (!await ask('Dieses Foto wirklich löschen?')) return;
+    try { await api(`/api/photos/${p.id}`,{method:'DELETE'}); toast('Foto gelöscht.'); closeLb(); await loadPhotos(); } catch(e){ toast(e.message); } };
+}
+document.addEventListener('keydown', e => { if (!$('#lb').classList.contains('on')) return;
+  if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') lbStep(-1); if (e.key==='ArrowRight') lbStep(1); });
+
+function renderProfile(){
+  const me = S.me;
+  $('#app').innerHTML = `<div class="view"><p class="eyebrow teal">Deine Angaben</p><h2 class="script">Profil</h2><div class="divider">${STAR}</div>
+  <div class="card"><form id="pf">
+    <label>Nutzername</label><input type="text" value="${esc(me.username)}" disabled>
+    <label for="p-name">Anzeigename</label><input type="text" id="p-name" maxlength="40" value="${esc(me.display_name)}" required>
+    <label>Personenanzahl</label>
+    <div class="stepper"><button type="button" data-d="-1" aria-label="Weniger">−</button><output id="p-pers">${me.persons}</output><button type="button" data-d="1" aria-label="Mehr">+</button><small id="p-hint"></small></div>
+    <p class="hint">0 Personen bedeutet Absage.</p>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:600">PIN ändern</summary>
+      <label for="p-old">Aktuelle PIN</label><input type="password" id="p-old" inputmode="numeric" maxlength="8" autocomplete="current-password">
+      <label for="p-new">Neue PIN</label><input type="password" id="p-new" inputmode="numeric" maxlength="8" autocomplete="new-password" placeholder="4 bis 8 Ziffern"></details>
+    <div class="err" id="p-err"></div>
+    <div class="btns"><button class="btn primary" type="submit">Speichern</button></div>
+  </form></div>
+  <div class="btns"><button class="btn ghost" id="logout">Abmelden</button></div>
+  <button class="footer-link" onclick="go('admin')">Admin-Bereich</button></div>`;
+  const hint = () => { const v=+$('#p-pers').textContent; $('#p-hint').textContent = v===0 ? 'Absage' : 'inkl. dir selbst'; };
+  hint();
+  document.querySelectorAll('.stepper button').forEach(b => b.onclick = () => { const o=$('#p-pers'); o.textContent = Math.max(0, Math.min(20, +o.textContent + +b.dataset.d)); hint(); });
+  $('#pf').onsubmit = async e => { e.preventDefault(); $('#p-err').textContent='';
+    try { await api('/api/me',{method:'PUT', body:{display_name:$('#p-name').value, persons:+$('#p-pers').textContent, old_pin:$('#p-old').value, new_pin:$('#p-new').value}});
+      toast('Gespeichert.'); await load(); } catch(err){ $('#p-err').textContent = err.message; } };
+  $('#logout').onclick = async () => { try{ await api('/api/logout',{method:'POST'}); }catch(e){} logoutLocal(); };
+}
+
+// ---------- Admin ----------
+async function renderAdmin(){
+  $('#nav').classList.add('hidden');
+  const back = `<button class="btn small ghost" onclick="go(token?'start':'start')" style="margin-bottom:10px">‹ Zurück zur App</button>`;
+  if (!adminPin) {
+    $('#app').innerHTML = `<div class="view">${back}<p class="eyebrow teal">Nur für Ruben</p><h2 class="script">Admin-Bereich</h2><div class="divider">${STAR}</div>
+     <div class="card"><form id="af"><label for="a-pin">Admin-PIN</label><input type="password" id="a-pin" inputmode="numeric" maxlength="8" autocomplete="off" required>
+     <div class="err" id="a-err"></div><div class="btns"><button class="btn primary">Öffnen</button></div></form></div></div>`;
+    $('#af').onsubmit = async e => { e.preventDefault(); adminPin = $('#a-pin').value;
+      try { await api('/api/admin/check',{method:'POST',admin:true}); renderAdmin(); }
+      catch(err){ adminPin=null; $('#a-err').textContent = err.message; } };
+    return;
+  }
+  let A; try { A = await api('/api/admin/data',{admin:true}); } catch(e){ adminPin=null; return renderAdmin(); }
+  const s = A.settings, yes = A.users.filter(u=>u.persons>0), total = yes.reduce((a,u)=>a+u.persons,0);
+  const userOpts = sel => `<option value="">– noch offen –</option>` + A.users.map(u=>`<option value="${u.id}" ${u.id===sel?'selected':''}>${esc(u.display_name)}</option>`).join('');
+  $('#app').innerHTML = `<div class="view">${back}<p class="eyebrow teal">Nur für Ruben</p><h2 class="script">Admin-Bereich</h2><div class="divider">${STAR}</div>
+  <div class="card"><div class="total"><div><b>${yes.length}</b><span>Zusagen</span></div><div><b>${total}</b><span>Personen</span></div><div><b>${A.photo_count}</b><span>Fotos</span></div></div></div>
+
+  <div class="card adm-sec"><h3>Mitbringliste</h3>
+    ${A.items.map((i,n)=>`<div class="adm-user"><div class="row"><input type="text" value="${esc(i.title)}" data-item="${i.id}" class="it-title" aria-label="Eintrag">
+      <button class="icon-btn" title="Nach oben" onclick="admItem(${i.id},{move:-1})" ${n===0?'disabled':''}>${I.upArrow}</button>
+      <button class="icon-btn" title="Nach unten" onclick="admItem(${i.id},{move:1})" ${n===A.items.length-1?'disabled':''}>${I.downArrow}</button>
+      <button class="icon-btn danger" title="Löschen" onclick="admDelItem(${i.id})">${I.trash}</button></div>
+      <div class="row" style="margin-top:8px"><span class="muted" style="font-size:.85rem;white-space:nowrap">Bringt:</span><select data-assign="${i.id}" aria-label="Zuweisung">${userOpts(i.user_id)}</select></div></div>`).join('') || '<p class="muted">Noch keine Einträge.</p>'}
+    <form id="newitem" class="row" style="margin-top:6px"><input type="text" id="ni" placeholder="Neuer Eintrag, z. B. Kuchen" required><button class="btn small primary">Hinzufügen</button></form>
+  </div>
+
+  <div class="card adm-sec"><h3>Mitglieder (${A.users.length})</h3>
+    ${A.users.map(u=>`<div class="adm-user"><div class="row">${avatar(u.display_name,u.id)}<div class="grow"><input type="text" value="${esc(u.display_name)}" data-uname="${u.id}" aria-label="Anzeigename"><span class="hint">Nutzername: ${esc(u.username)}</span></div></div>
+      <div class="row" style="margin-top:8px"><span class="muted" style="font-size:.85rem">Personen</span><input type="tel" inputmode="numeric" value="${u.persons}" data-upers="${u.id}" style="width:70px" aria-label="Personen">
+      <button class="btn small ghost" onclick="admPin(${u.id})">PIN neu</button><button class="icon-btn danger" title="Mitglied löschen" onclick="admDelUser(${u.id},'${esc(u.display_name).replace(/'/g,"")}')">${I.trash}</button></div></div>`).join('') || '<p class="muted">Noch niemand registriert.</p>'}
+  </div>
+
+  <div class="card adm-sec"><h3>Party-Infos</h3><form id="sf">
+    <label>Datum</label><input type="date" name="date" value="${esc(s.date)}">
+    <div class="row"><div style="flex:1"><label>Beginn</label><input type="time" name="start" value="${esc(s.start)}"></div><div style="flex:1"><label>Ende</label><input type="time" name="end" value="${esc(s.end)}"></div></div>
+    <label>Ort (Name)</label><input type="text" name="place_name" value="${esc(s.place_name)}">
+    <label>Adresse</label><input type="text" name="place_address" value="${esc(s.place_address)}">
+    <label>Google-Maps-Link</label><input type="url" name="maps_url" value="${esc(s.maps_url)}">
+    <label>WhatsApp-Link</label><input type="url" name="whatsapp_url" value="${esc(s.whatsapp_url)}">
+    <label>Zusätzlicher Hinweis (optional)</label><input type="text" name="note" value="${esc(s.note)}" placeholder="z. B. Parkplätze hinter dem Haus">
+    <label>Partyfotos</label><select name="photos_mode">
+      <option value="auto" ${s.photos_mode==='auto'?'selected':''}>Automatisch ab Partytag öffnen</option>
+      <option value="open" ${s.photos_mode==='open'?'selected':''}>Jetzt geöffnet (z. B. zum Testen)</option>
+      <option value="closed" ${s.photos_mode==='closed'?'selected':''}>Geschlossen</option></select>
+    <p class="hint">Aktuell: ${A.photos_open?'geöffnet':'geschlossen'}</p>
+    <div class="btns"><button class="btn primary">Infos speichern</button></div></form></div>
+
+  <div class="card adm-sec"><h3>Partyfotos verwalten</h3><p class="muted" style="margin-bottom:8px">Tippe auf ein Foto, um es zu löschen.</p><div class="gallery" id="agal"></div></div>
+  <div class="btns"><button class="btn ghost" onclick="adminPin=null;renderAdmin()">Admin-Bereich sperren</button></div></div>`;
+
+  document.querySelectorAll('.it-title').forEach(el => el.onchange = () => admItem(+el.dataset.item, {title: el.value}, true));
+  document.querySelectorAll('[data-assign]').forEach(el => el.onchange = () => admItem(+el.dataset.assign, {user_id: el.value ? +el.value : null}));
+  document.querySelectorAll('[data-uname]').forEach(el => el.onchange = () => admUser(+el.dataset.uname, {display_name: el.value}));
+  document.querySelectorAll('[data-upers]').forEach(el => el.onchange = () => admUser(+el.dataset.upers, {persons: +el.value}));
+  $('#newitem').onsubmit = async e => { e.preventDefault(); try { await api('/api/admin/items',{admin:true, body:{title:$('#ni').value}}); toast('Eintrag hinzugefügt.'); renderAdmin(); } catch(err){ toast(err.message); } };
+  $('#sf').onsubmit = async e => { e.preventDefault(); const body = Object.fromEntries(new FormData(e.target));
+    try { await api('/api/admin/settings',{method:'PUT',admin:true,body}); toast('Infos gespeichert.'); S=null; renderAdmin(); } catch(err){ toast(err.message); } };
+  if (token) { try { const ph = await api('/api/photos'); $('#agal').innerHTML = ph.map(p=>`<button onclick="admDelPhoto(${p.id})" aria-label="Foto löschen"><img loading="lazy" src="${API}/api/photos/${p.id}/img?thumb=1&token=${encodeURIComponent(token)}" alt=""></button>`).join('') || '<p class="muted">Keine Fotos.</p>'; } catch(e){} }
+  else $('#agal').innerHTML = '<p class="muted">Zum Anzeigen der Fotos bitte zusätzlich in der App anmelden.</p>';
+}
+async function admItem(id, body, quiet){ try { await api(`/api/admin/items/${id}`,{method:'PUT',admin:true,body}); toast('Gespeichert.'); S=null; if(!quiet) renderAdmin(); } catch(e){ toast(e.message); } }
+async function admDelItem(id){ if(!await ask('Eintrag löschen?')) return; await api(`/api/admin/items/${id}`,{method:'DELETE',admin:true}); S=null; renderAdmin(); }
+async function admUser(id, body){ try { await api(`/api/admin/users/${id}`,{method:'PUT',admin:true,body}); toast('Gespeichert.'); S=null; } catch(e){ toast(e.message); } }
+async function admPin(id){ const p = await ask('Neue PIN für dieses Mitglied (4 bis 8 Ziffern):', true); if(!p) return; try { await api(`/api/admin/users/${id}`,{method:'PUT',admin:true,body:{pin:p}}); toast('PIN geändert.'); } catch(e){ toast(e.message); } }
+async function admDelUser(id, n){ if(!await ask(`${n} wirklich löschen? Seine Mitbring-Einträge werden wieder frei.`)) return; await api(`/api/admin/users/${id}`,{method:'DELETE',admin:true}); S=null; renderAdmin(); }
+async function admDelPhoto(id){ if(!await ask('Dieses Foto löschen?')) return; await api(`/api/admin/photos/${id}`,{method:'DELETE',admin:true}); toast('Foto gelöscht.'); renderAdmin(); }
+
+render();
+</script>
+</body>
+</html>

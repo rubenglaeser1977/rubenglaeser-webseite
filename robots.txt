@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /50/
 
 Sitemap: https://rubenglaeser.de/sitemap.xml
+
