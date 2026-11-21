@@ -14,6 +14,17 @@
    ========================================================= */
 window.WEBAPPS = [
   {
+    id: "erklaer-mal",
+    titel: "Erklär mal!",
+    kurz: "Begriff eingeben, Alter des Kindes wählen – und die Erklärung kommt kurz und kindgerecht.",
+    beschreibung: "Für Eltern, Großeltern und Lehrkräfte: Die App sucht den Begriff in den Kinderlexika MiniKlexikon und Klexikon sowie in Wikipedia und Wiktionary und zeigt je nach Alter (4 bis 16+) eine passend kurze Erklärung – mit Vorlesefunktion, Bild sowie Quellen- und Lizenzangaben.",
+    url: "apps/erklaer-mal/",
+    vorschau: "assets/img/apps/erklaer-mal.jpg",
+    status: "Live",
+    tags: ["Kinder", "Lernen", "Wikipedia"],
+    jahr: "2026"
+  },
+  {
     id: "gruppenbildung",
     titel: "Gruppenbildung",
     kurz: "Namen eingeben, Gruppengröße wählen und per Zufall Gruppen einteilen.",

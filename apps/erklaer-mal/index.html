@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Erklär mal! – Begriffe kindgerecht erklärt</title>
+<meta name="description" content="Begriff eingeben, Alter des Kindes wählen: Die App erklärt den Begriff kurz und passend – aus Klexikon, MiniKlexikon, Wikipedia und Wiktionary.">
+<style>
+@font-face{font-family:"Gemunu Libre";src:url("../../assets/fonts/gemunu-libre-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
+:root{
+  --indigo:#312783;--magenta:#E6007E;--sky:#ACDDF9;
+  --bg:#f6f4fb;--card:#ffffff;--ink:#1d1840;--mute:#5d587a;--line:#e3dff0;
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;font-size:1.0625rem}
+main{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+h1,h2,.display{font-family:"Gemunu Libre",system-ui,sans-serif;letter-spacing:.01em}
+.hero{background:var(--indigo);color:#fff;border-radius:var(--radius);padding:26px 22px 22px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.hero:before{width:180px;height:180px;right:-50px;top:-60px;background:var(--magenta);opacity:.9}
+.hero:after{width:90px;height:90px;right:70px;top:40px;background:var(--sky);opacity:.85}
+.hero > *{position:relative;z-index:1}
+h1{font-size:clamp(2.3rem,7vw,3.2rem);line-height:1;margin:0 0 6px;font-weight:700}
+.sub{margin:0 0 20px;max-width:30em;opacity:.92}
+label.l{display:block;font-weight:600;font-size:.9rem;margin:0 0 6px;opacity:.95}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+input[type=text]{flex:1 1 240px;min-width:0;font:inherit;font-size:1.15rem;padding:13px 16px;border-radius:14px;border:2px solid transparent;background:#fff;color:var(--ink)}
+input[type=text]:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px rgba(172,221,249,.45)}
+button{font:inherit;cursor:pointer}
+.go{font-family:"Gemunu Libre",system-ui,sans-serif;font-size:1.35rem;font-weight:700;padding:10px 26px;border:0;border-radius:14px;background:var(--magenta);color:#fff;transition:transform .12s ease,filter .12s ease}
+.go:hover{filter:brightness(1.08)}.go:active{transform:scale(.97)}
+.go:focus-visible,.chip:focus-visible,.btn:focus-visible,.age:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.ages{margin-top:16px}
+.agewrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+input[type=range]{flex:1 1 220px;accent-color:var(--magenta);height:28px}
+.agebadge{min-width:118px;text-align:center;background:rgba(255,255,255,.14);border-radius:12px;padding:6px 12px;font-weight:700}
+.agebadge b{font-family:"Gemunu Libre",sans-serif;font-size:1.6rem;line-height:1;margin-right:4px}
+.level{font-size:.85rem;opacity:.85;margin-top:6px}
+.examples{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.88rem}
+.examples span{opacity:.8}
+.chip{border:1.5px solid rgba(255,255,255,.45);background:transparent;color:#fff;border-radius:999px;padding:4px 12px;font-size:.88rem}
+.chip:hover{background:rgba(255,255,255,.14)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-top:18px}
+.card h2{font-size:2rem;line-height:1.05;margin:0;color:var(--indigo)}
+.short{color:var(--mute);margin:4px 0 0;font-size:.95rem}
+.text{margin:16px 0 0;font-size:1.12rem}
+.text.young{font-size:1.28rem;line-height:1.65}
+.text p{margin:0 0 .7em}
+.media{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.media.has-img{grid-template-columns:1fr 230px;align-items:start}}
+figure{margin:16px 0 0}
+figure img{width:100%;height:auto;max-height:280px;object-fit:contain;border-radius:14px;display:block;background:var(--bg)}
+figcaption{font-size:.75rem;color:var(--mute);margin-top:6px;line-height:1.4;word-break:break-word}
+figcaption a{color:var(--mute)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{border:1.5px solid var(--line);background:#fff;color:var(--indigo);border-radius:12px;padding:8px 14px;font-weight:600;font-size:.95rem;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--indigo)}
+.btn.on{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.btn svg{width:18px;height:18px}
+.srcline{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--mute)}
+.srcline a{color:var(--indigo)}
+.alts{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.85rem;color:var(--mute)}
+.alt{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:4px 12px;font-size:.85rem}
+.alt.on{background:var(--sky);border-color:var(--sky);font-weight:700}
+.hint{background:#fff7d6;border:1px solid #f0dc8a;border-radius:12px;padding:10px 14px;font-size:.9rem;margin-top:14px}
+.empty{color:var(--mute)}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sugg button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;color:var(--indigo);font-size:.92rem}
+.sugg button:hover{border-color:var(--indigo)}
+.skel{height:14px;border-radius:7px;background:linear-gradient(90deg,var(--line),#f1eef8,var(--line));background-size:200% 100%;animation:sh 1.2s infinite linear;margin:10px 0}
+@keyframes sh{to{background-position:-200% 0}}
+.foot{margin-top:26px;font-size:.8rem;color:var(--mute)}
+.foot a{color:var(--mute)}
+@media(max-width:560px){.hero:before{width:110px;height:110px;right:-45px;top:-45px}.hero:after{display:none}h1{padding-right:56px}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}.go{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="t">
+    <h1 id="t">Erklär mal!</h1>
+    <p class="sub">Begriff eingeben, Alter wählen – und die Erklärung kommt in passender Länge und Sprache. Aus offenen Kinderlexika, Wikipedia und Wiktionary.</p>
+    <form id="f" autocomplete="off">
+      <label class="l" for="q">Was möchtest du wissen?</label>
+      <div class="row">
+        <input type="text" id="q" name="q" placeholder="z. B. Vulkan, Demokratie, Photosynthese" required enterkeyhint="search">
+        <button class="go" type="submit">Erklär mal!</button>
+      </div>
+      <div class="ages">
+        <label class="l" for="age">Alter des Kindes</label>
+        <div class="agewrap">
+          <input type="range" id="age" min="4" max="16" step="1" value="8" aria-describedby="lvl">
+          <div class="agebadge" aria-live="polite"><b id="ageval">8</b>Jahre</div>
+        </div>
+        <div class="level" id="lvl"></div>
+      </div>
+    </form>
+    <div class="examples"><span>Ausprobieren:</span>
+      <button class="chip" data-q="Vulkan">Vulkan</button>
+      <button class="chip" data-q="Regenbogen">Regenbogen</button>
+      <button class="chip" data-q="Demokratie">Demokratie</button>
+      <button class="chip" data-q="Dinosaurier">Dinosaurier</button>
+      <button class="chip" data-q="Photosynthese">Photosynthese</button>
+    </div>
+  </section>
+
+  <div id="out" aria-live="polite"></div>
+
+  <p class="foot">Die Texte kommen live und ungeprüft aus offenen Lexika und stehen unter freien Lizenzen (meist CC BY-SA 4.0). Für jüngere Kinder am besten gemeinsam lesen. Die Suchanfrage wird direkt an die Server der jeweiligen Lexika (ZUM e.&nbsp;V., Wikimedia) geschickt – nicht an mich.</p>
+</main>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- Quellen ---------- */
+const SRC = {
+  mini: {name:'MiniKlexikon', im:'im MiniKlexikon', api:'https://miniklexikon.zum.de/api.php', wiki:'https://miniklexikon.zum.de/wiki/', lic:'CC BY-SA 4.0', licUrl:'https://creativecommons.org/licenses/by-sa/4.0/deed.de', info:'Kinderlexikon in einfacher Sprache für Leseanfänger'},
+  klex: {name:'Klexikon', im:'im Klexikon', api:'https://klexikon.zum.de/api.php', wiki:'https://klexikon.zum.de/wiki/', lic:'CC BY-SA 4.0', licUrl:'https://creativecommons.org/licenses/by-sa/4.0/deed.de', info:'Kinderlexikon für Kinder von 8 bis 13 Jahren'},
+  wp:   {name:'Wikipedia', im:'in der Wikipedia', api:'https://de.wikipedia.org/w/api.php', wiki:'https://de.wikipedia.org/wiki/', lic:'CC BY-SA 4.0', licUrl:'https://creativecommons.org/licenses/by-sa/4.0/deed.de', info:'Freie Enzyklopädie'},
+  wikt: {name:'Wiktionary', im:'im Wiktionary', api:'https://de.wiktionary.org/w/api.php', wiki:'https://de.wiktionary.org/wiki/', lic:'CC BY-SA 4.0', licUrl:'https://creativecommons.org/licenses/by-sa/4.0/deed.de', info:'Freies Wörterbuch'}
+};
+
+/* Altersstufen: Reihenfolge der Quellen + Anzahl Sätze */
+function profile(age){
+  if (age <= 6)  return {order:['mini','klex','wp','wikt'], n:3, young:true,  label:'Ganz einfach – zum Vorlesen, kurze Sätze.'};
+  if (age <= 8)  return {order:['mini','klex','wp','wikt'], n:5, young:true,  label:'Einfache Sprache für Leseanfänger.'};
+  if (age <= 10) return {order:['klex','mini','wp','wikt'], n:4, young:false, label:'Kinderlexikon – kurz und verständlich.'};
+  if (age <= 12) return {order:['klex','wp','mini','wikt'], n:6, young:false, label:'Kinderlexikon – etwas ausführlicher.'};
+  return               {order:['wp','klex','mini','wikt'], n:4, young:false, label:'Lexikon-Niveau – kurz zusammengefasst.'};
+}
+
+/* ---------- Hilfen ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ucfirst = s => s ? s.charAt(0).toLocaleUpperCase('de-DE') + s.slice(1) : s;
+const stripHtml = h => { const d = document.createElement('div'); d.innerHTML = h || ''; return (d.textContent || '').replace(/\s+/g,' ').trim(); };
+const lev = (a,b) => { const m=[...Array(b.length+1).keys()]; for (let i=1;i<=a.length;i++){ let p=m[0]; m[0]=i; for (let j=1;j<=b.length;j++){ const t=m[j]; m[j]=Math.min(m[j]+1, m[j-1]+1, p+(a[i-1]===b[j-1]?0:1)); p=t; } } return m[b.length]; };
+const norm = s => s.toLocaleLowerCase('de-DE').replace(/[^a-zäöüß0-9]/g,'');
+
+async function api(base, params){
+  const u = new URL(base);
+  Object.entries({format:'json', formatversion:'2', origin:'*', ...params}).forEach(([k,v]) => u.searchParams.set(k, v));
+  const r = await fetch(u, {headers:{'Accept':'application/json'}});
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+/* Sätze trennen – ohne bei z. B., 1. Januar, Dr. usw. zu teilen */
+const ABBR = new Set(['z','b','d','h','u','a','v','n','chr','bzw','ca','nr','st','dr','prof','etc','usw','vgl','evtl','bspw','inkl','jh','jhd','mio','mrd','sog','ggf','engl','lat','griech','franz','ital','span','geb','gest','km','m','s','o','ä','ff']);
+function sentences(text){
+  const out = []; let cur = '';
+  const parts = text.split(/(\s+)/);
+  for (let i = 0; i < parts.length; i++){
+    cur += parts[i];
+    const w = parts[i];
+    if (!/[.!?…]["“”»)]?$/.test(w)) continue;
+    const next = (parts[i+2] || '');
+    if (!next) continue;
+    const bare = w.replace(/["“”»)]+$/,'').replace(/[.!?…]+$/,'');
+    const low = bare.toLocaleLowerCase('de-DE').replace(/^[(„"]/,'');
+    if (w.endsWith('.')){
+      if (/^\d+$/.test(bare)) continue;                 // 1. Januar, 19. Jahrhundert
+      if (ABBR.has(low) || /^[a-zäöü]$/i.test(low)) continue;
+      if (/\.[a-zäöü]/i.test(bare)) continue;           // z.B.
+    }
+    if (!/^[„"»(]?[A-ZÄÖÜ0-9]/.test(next)) continue;
+    out.push(cur.trim()); cur = '';
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out.filter(s => s.length > 1);
+}
+
+/* Lexikontext bereinigen: Überschriften, Klammern, Lautschrift */
+function clean(extract, src, young){
+  let lines = extract.split(/\n+/).map(l => l.trim()).filter(Boolean);
+  // Überschriften (kurze Zeilen ohne Satzzeichen am Ende) entfernen
+  lines = lines.filter(l => /[.!?…:"“”)]$/.test(l) || l.length > 80);
+  let t = lines.join(src === 'mini' ? '\n' : ' ');
+  t = t.replace(/\[[^\]]*\]/g, '').replace(/,?\s*siehe [^.,;]*/g, '');
+  if (src === 'wp'){
+    // Klammern mit Aussprache, Lebensdaten, Fremdsprache entfernen (bis zu 2 Ebenen)
+    for (let k = 0; k < 2; k++) t = t.replace(/\s*\([^()]*\)/g, '');
+  }
+  t = t.replace(/\s+([,.;:!?])/g, '$1').replace(/[ \t]{2,}/g,' ');
+  if (src === 'mini'){
+    return t.split('\n').map(s => s.trim()).filter(Boolean).flatMap(s => sentences(s));
+  }
+  return sentences(t);
+}
+
+/* ---------- Artikel suchen ---------- */
+async function fetchPage(key, title){
+  const s = SRC[key];
+  const p = {action:'query', prop:'extracts|pageimages|pageprops|info', explaintext:'1', exsectionformat:'plain', piprop:'name', ppprop:'disambiguation|wikibase-shortdesc', redirects:'1', titles:title};
+  if (key === 'wp') p.exintro = '1';
+  const d = await api(s.api, p);
+  const pg = d.query && d.query.pages && d.query.pages[0];
+  if (!pg || pg.missing || pg.invalid || !pg.extract || pg.extract.trim().length < 20) return null;
+  return {key, title:pg.title, extract:pg.extract, image:pg.pageimage || null,
+          disamb: !!(pg.pageprops && 'disambiguation' in pg.pageprops),
+          short: pg.pageprops && pg.pageprops['wikibase-shortdesc'] || ''};
+}
+
+async function searchTitle(key, q){
+  const s = SRC[key];
+  try{
+    const d = await api(s.api, {action:'query', list:'search', srsearch:q, srlimit:'5', srprop:''});
+    const hits = (d.query && d.query.search || []).map(h => h.title);
+    const nq = norm(q);
+    // nur nehmen, wenn der Titel wirklich zum Begriff passt
+    return hits.find(t => { const nt = norm(t); return nt === nq || (nq.length >= 4 && (nt.startsWith(nq) || nq.startsWith(nt) && nt.length >= nq.length - 3)); }) || null;
+  }catch(e){ return null; }
+}
+
+async function wikiArticle(key, q, canonical){
+  const tries = [ucfirst(q)];
+  if (canonical && canonical !== ucfirst(q)) tries.push(canonical);
+  for (const t of tries){
+    try{ const r = await fetchPage(key, t); if (r) return r; }catch(e){}
+  }
+  const hit = await searchTitle(key, q);
+  if (hit && !tries.includes(hit)){ try{ return await fetchPage(key, hit); }catch(e){} }
+  return null;
+}
+
+/* Wiktionary: Bedeutungen aus dem Wikitext */
+async function wiktionary(q){
+  const variants = [...new Set([q, ucfirst(q), q.toLocaleLowerCase('de-DE')])];
+  for (const v of variants){
+    try{
+      const d = await api(SRC.wikt.api, {action:'parse', page:v, prop:'wikitext', redirects:'1'});
+      if (!d.parse) continue;
+      const wt = d.parse.wikitext;
+      const de = wt.indexOf('({{Sprache|Deutsch}})');
+      if (de < 0) continue;
+      const sec = wt.slice(de);
+      const b = sec.indexOf('{{Bedeutungen}}');
+      if (b < 0) continue;
+      const lines = sec.slice(b + 15).split('\n');
+      const means = [];
+      for (const l of lines){
+        if (/^\{\{/.test(l.trim()) && means.length) break;
+        const m = l.match(/^:\s*\[(\d+[a-z]?)\]\s*(.+)$/);
+        if (!m) continue;
+        if (/\{\{(K\|[^}]*)?(va\.|veraltet|veraltend|vatd\.|historisch)/.test(m[2])) continue;
+        let txt = m[2]
+          .replace(/\{\{K\|[^}]*\}\}/g, '')
+          .replace(/<ref[^>]*>[\s\S]*?<\/ref>|<ref[^>]*\/>/g,'')
+          .replace(/\[\[(?:[^|\]]*\|)?([^\]]+)\]\]/g, '$1')
+          .replace(/\{\{[^}]*\}\}/g, '')
+          .replace(/''+/g,'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+        if (txt.length > 3) means.push(ucfirst(txt.replace(/[;,]\s*$/,'')) + (/[.!?]$/.test(txt) ? '' : '.'));
+      }
+      if (means.length) return {key:'wikt', title:d.parse.title, sentences:means, image:null, short:''};
+    }catch(e){}
+  }
+  return null;
+}
+
+/* Bild mit Urheber und Lizenz */
+async function imageInfo(key, file){
+  try{
+    const d = await api(SRC[key].api, {action:'query', titles:'Datei:' + file, prop:'imageinfo', iiprop:'url|extmetadata|mime', iiurlwidth:'520', iiextmetadatafilter:'Artist|LicenseShortName|LicenseUrl|Credit'});
+    const pg = d.query.pages[0]; const ii = pg && pg.imageinfo && pg.imageinfo[0];
+    if (!ii || !ii.thumburl || !/^image\/(jpeg|png|webp|gif|svg)/.test(ii.mime || 'image/jpeg')) return null;
+    const md = ii.extmetadata || {};
+    return {url:ii.thumburl, page:ii.descriptionurl,
+            artist: stripHtml(md.Artist && md.Artist.value) || 'unbekannt',
+            lic: stripHtml(md.LicenseShortName && md.LicenseShortName.value) || 'siehe Dateiseite',
+            licUrl: md.LicenseUrl && md.LicenseUrl.value || ''};
+  }catch(e){ return null; }
+}
+
+/* Wikipedia-Titel auflösen (für Tippfehler/Groß-Klein) */
+async function resolveWp(q){
+  try{
+    const d = await api(SRC.wp.api, {action:'query', list:'search', srsearch:q, srlimit:'6', srprop:'', srinfo:'suggestion'});
+    return {
+      hits: (d.query.search || []).map(h => h.title),
+      suggestion: d.query.searchinfo && d.query.searchinfo.suggestion || ''
+    };
+  }catch(e){ return {hits:[], suggestion:''}; }
+}
+
+/* ---------- Ablauf ---------- */
+const state = {q:'', age:8, results:{}, active:null, extra:0};
+const ageEl = $('#age'), ageVal = $('#ageval'), lvl = $('#lvl'), out = $('#out');
+
+function setAgeUi(){
+  const a = +ageEl.value; state.age = a;
+  ageVal.textContent = a === 16 ? '16+' : a;
+  lvl.textContent = profile(a).label;
+}
+try{ const s = localStorage.getItem('erklaermal.age'); if (s) ageEl.value = s; }catch(e){}
+setAgeUi();
+ageEl.addEventListener('input', () => {
+  setAgeUi();
+  try{ localStorage.setItem('erklaermal.age', ageEl.value); }catch(e){}
+});
+ageEl.addEventListener('change', () => { if (state.q) pickAndRender(); });
+
+$('#f').addEventListener('submit', e => { e.preventDefault(); run($('#q').value); });
+document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { $('#q').value = b.dataset.q; run(b.dataset.q); }));
+
+let token = 0;
+async function run(raw){
+  const q = raw.trim().replace(/\s+/g,' ');
+  if (!q) return;
+  const my = ++token;
+  state.q = q; state.results = {}; state.extra = 0;
+  stopSpeak();
+  try{ const u = new URL(location.href); u.searchParams.set('q', q); u.searchParams.set('alter', ageEl.value); history.replaceState(null,'',u); }catch(e){}
+  out.innerHTML = `<div class="card" aria-busy="true"><div class="skel" style="width:40%;height:26px"></div><div class="skel"></div><div class="skel"></div><div class="skel" style="width:70%"></div></div>`;
+
+  const wpInfo = await resolveWp(q);
+  if (my !== token) return;
+  const nq = norm(q);
+  let canonical = wpInfo.hits.find(t => norm(t) === nq) || null;
+  if (!canonical){
+    const cand = [wpInfo.suggestion, ...wpInfo.hits].filter(Boolean)
+      .find(t => lev(norm(t), nq) <= Math.max(1, Math.floor(nq.length / 5)));
+    if (cand){ canonical = ucfirst(cand); }
+  }
+  state.canonical = canonical;
+
+  const [mini, klex, wp] = await Promise.all([
+    wikiArticle('mini', q, canonical),
+    wikiArticle('klex', q, canonical),
+    wikiArticle('wp', q, canonical)
+  ]);
+  if (my !== token) return;
+  if (mini) state.results.mini = mini;
+  if (klex) state.results.klex = klex;
+  if (wp && !wp.disamb) state.results.wp = wp;
+  state.disamb = wp && wp.disamb ? wp : null;
+  state.wpInfo = wpInfo;
+
+  if (!mini && !klex && (state.age <= 10 || !(wp && !wp.disamb))){
+    const wk = await wiktionary(canonical || q);
+    if (my !== token) return;
+    if (wk) state.results.wikt = wk;
+  }
+  pickAndRender();
+}
+
+function pickAndRender(forceKey){
+  const p = profile(state.age);
+  let order = p.order;
+  // ohne Kinderlexikon-Artikel: für Jüngere zuerst die einfache Wortbedeutung
+  if (state.age <= 10 && !state.results.mini && !state.results.klex) order = ['wikt','wp'];
+  const avail = order.filter(k => state.results[k]);
+  if (!avail.length){ renderEmpty(); return; }
+  state.active = forceKey && state.results[forceKey] ? forceKey : avail[0];
+  state.extra = 0;
+  render();
+}
+
+async function render(){
+  const p = profile(state.age);
+  const r = state.results[state.active];
+  const s = SRC[r.key];
+  if (!r.sentences) r.sentences = clean(r.extract, r.key, p.young);
+  const base = (r.key === 'wp' && state.age <= 10) ? 2 : p.n;
+  const n = Math.min(r.sentences.length, base + state.extra);
+  const shown = r.sentences.slice(0, n);
+  const more = r.sentences.length > n;
+  const young = p.young && r.key !== 'wp';
+
+  // Absätze: Mini/young je 1–2 Sätze, sonst in Blöcken zu 3
+  const per = young ? 2 : 3; const paras = [];
+  for (let i = 0; i < shown.length; i += per) paras.push(shown.slice(i, i+per).join(' '));
+
+  const showImg = r.image && (r.key !== 'wp' || state.age >= 12);
+  const others = Object.keys(state.results).filter(k => k !== state.active);
+  const order = ['mini','klex','wp','wikt'];
+
+  let hint = '';
+  if (state.age <= 10 && r.key === 'wp') hint = `<div class="hint">Zu diesem Begriff gibt es keinen Artikel im Kinderlexikon. Der Text stammt aus Wikipedia und kann für dieses Alter schwierig sein – am besten gemeinsam lesen und mit eigenen Worten erklären.</div>`;
+  if (r.key === 'wikt') hint = state.results.wp
+    ? `<div class="hint">Zu diesem Begriff gibt es keinen Artikel im Kinderlexikon. Hier steht deshalb die kurze Wortbedeutung aus dem Wörterbuch Wiktionary. Ausführlicher, aber schwieriger: Wikipedia (siehe unten).</div>`
+    : `<div class="hint">Kein Lexikonartikel gefunden – hier stehen die Wortbedeutungen aus dem Wörterbuch Wiktionary.</div>`;
+
+  out.innerHTML = `
+  <article class="card">
+    <div class="media${showImg ? ' has-img' : ''}">
+      <div>
+        <h2>${esc(r.title)}</h2>
+        ${r.short && state.age >= 11 ? `<p class="short">${esc(r.short)}</p>` : ''}
+        <div class="text${young ? ' young' : ''}" id="txt">${paras.map(x => `<p>${esc(x)}</p>`).join('')}</div>
+      </div>
+      ${showImg ? `<figure id="fig" hidden></figure>` : ''}
+    </div>
+    ${hint}
+    <div class="tools">
+      ${'speechSynthesis' in window ? `<button class="btn" id="speak" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>Vorlesen</button>` : ''}
+      ${more ? `<button class="btn" id="more" type="button">Mehr erfahren</button>` : ''}
+      ${state.extra > 0 ? `<button class="btn" id="less" type="button">Kürzer</button>` : ''}
+    </div>
+    ${others.length ? `<div class="alts">Auch erklärt in:
+      ${order.filter(k => state.results[k]).map(k => `<button class="alt${k === state.active ? ' on' : ''}" data-k="${k}" type="button" aria-pressed="${k === state.active}">${SRC[k].name}</button>`).join('')}</div>` : ''}
+    <div class="srcline">Quelle: <a href="${s.wiki}${encodeURIComponent(r.title.replace(/ /g,'_'))}" target="_blank" rel="noopener">„${esc(r.title)}“ ${s.im}</a> (${esc(s.info)}) ·
+      Autorinnen und Autoren: <a href="${s.wiki}${encodeURIComponent(r.title.replace(/ /g,'_'))}?action=history" target="_blank" rel="noopener">Versionsgeschichte</a> ·
+      Lizenz: <a href="${s.licUrl}" target="_blank" rel="noopener">${s.lic}</a>. Text gekürzt${r.key === 'wp' ? ', Klammerzusätze entfernt' : ''}.</div>
+  </article>`;
+
+  $('#more') && $('#more').addEventListener('click', () => { state.extra += base; stopSpeak(); render(); });
+  $('#less') && $('#less').addEventListener('click', () => { state.extra = 0; stopSpeak(); render(); });
+  $('#speak') && $('#speak').addEventListener('click', toggleSpeak);
+  out.querySelectorAll('.alt').forEach(b => b.addEventListener('click', () => { stopSpeak(); state.active = b.dataset.k; state.extra = 0; render(); }));
+
+  if (showImg){
+    const key = state.active;
+    const info = await imageInfo(r.key, r.image);
+    const fig = $('#fig');
+    if (info && fig && state.active === key){
+      fig.innerHTML = `<img src="${esc(info.url)}" alt="Bild zu ${esc(r.title)}" decoding="async">
+        <figcaption>Bild: <a href="${esc(info.page)}" target="_blank" rel="noopener">${esc(info.artist)}</a>, ${info.licUrl ? `<a href="${esc(info.licUrl)}" target="_blank" rel="noopener">${esc(info.lic)}</a>` : esc(info.lic)}</figcaption>`;
+      fig.querySelector('img').addEventListener('error', () => { fig.hidden = true; });
+      fig.hidden = false;
+    }
+  }
+}
+
+function renderEmpty(){
+  const d = state.disamb, w = state.wpInfo || {hits:[], suggestion:''};
+  const nq = norm(state.q);
+  let sugg = w.hits.filter(t => norm(t) !== nq).slice(0, 6);
+  let head = `Zu „${esc(state.q)}“ habe ich leider nichts gefunden.`;
+  let body = 'Vielleicht hilft eine andere Schreibweise oder ein einfacheres Wort.';
+  if (d){ head = `„${esc(d.title)}“ hat mehrere Bedeutungen.`; body = 'Welche ist gemeint?'; }
+  else if (w.suggestion){ sugg = [w.suggestion, ...sugg]; body = 'Meintest du vielleicht:'; }
+  out.innerHTML = `<div class="card"><h2 style="font-size:1.6rem">${head}</h2><p class="empty">${body}</p>
+    ${sugg.length ? `<div class="sugg">${[...new Set(sugg)].map(t => `<button type="button" data-q="${esc(t)}">${esc(t)}</button>`).join('')}</div>` : ''}</div>`;
+  out.querySelectorAll('.sugg button').forEach(b => b.addEventListener('click', () => { $('#q').value = b.dataset.q; run(b.dataset.q); }));
+}
+
+/* ---------- Vorlesen ---------- */
+function stopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} const b = $('#speak'); if (b){ b.classList.remove('on'); b.setAttribute('aria-pressed','false'); } }
+function toggleSpeak(){
+  const b = $('#speak');
+  if (speechSynthesis.speaking){ stopSpeak(); return; }
+  const r = state.results[state.active];
+  const txt = r.title + '. ' + [...document.querySelectorAll('#txt p')].map(p => p.textContent.replace(/(\p{L})-(\p{Ll})/gu, '$1$2')).join(' ');
+  const u = new SpeechSynthesisUtterance(txt);
+  u.lang = 'de-DE'; u.rate = state.age <= 8 ? 0.85 : 0.95;
+  const v = speechSynthesis.getVoices().find(v => /^de(-|_)/i.test(v.lang));
+  if (v) u.voice = v;
+  u.onend = u.onerror = () => { b.classList.remove('on'); b.setAttribute('aria-pressed','false'); };
+  b.classList.add('on'); b.setAttribute('aria-pressed','true');
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Direktlink ?q=…&alter=… ---------- */
+try{
+  const sp = new URLSearchParams(location.search);
+  const a = parseInt(sp.get('alter'), 10);
+  if (a >= 4 && a <= 16){ ageEl.value = a; setAgeUi(); }
+  if (sp.get('q')){ $('#q').value = sp.get('q'); run(sp.get('q')); }
+}catch(e){}
+})();
+</script>
+</body>
+</html>
