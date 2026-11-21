@@ -5,56 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gruppenbildung</title>
 <style>
+  @font-face{font-family:"Gemunu Libre";src:url("../../assets/fonts/gemunu-libre-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
   :root{
-    --rot:#E60005; --rot-dunkel:#B30004; --rot-hell:#FDE8E9;
-    --text:#1F1F1F; --grau:#6B6B6B; --linie:#DADADA; --flaeche:#F5F5F5; --weiss:#fff;
-    --radius:10px;
+    --indigo:#312783; --indigo-dunkel:#231c63; --magenta:#E6007E; --magenta-dunkel:#B80065; --sky:#ACDDF9; --sky-hell:#EAF6FE;
+    --text:#17153f; --grau:#57557a; --linie:#dddbeb; --flaeche:#f7f6fb; --weiss:#fff;
+    --radius:14px;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--text);background:var(--flaeche);line-height:1.45}
-  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 40px}
-  header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-  .logo{width:40px;height:40px;flex:none}
-  h1{font-size:clamp(1.3rem,4vw,1.7rem);margin:0}
-  .sub{color:var(--grau);margin:2px 0 0;font-size:.95rem}
-  .card{background:var(--weiss);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:16px}
-  h2{font-size:1.05rem;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-  .count{font-weight:normal;color:var(--grau);font-size:.9rem}
-  label{font-weight:600;display:block;margin-bottom:6px}
-  textarea{width:100%;min-height:170px;resize:vertical;font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--linie);border-radius:8px}
-  textarea:focus,input:focus{outline:none;border-color:var(--rot);box-shadow:0 0 0 3px var(--rot-hell)}
-  .hint{font-size:.85rem;color:var(--grau);margin:6px 0 0}
-  .seg{display:flex;border:1.5px solid var(--rot);border-radius:8px;overflow:hidden;margin-bottom:12px}
-  .seg button{flex:1;border:0;background:var(--weiss);color:var(--rot);font:inherit;font-weight:600;padding:10px 8px;cursor:pointer;min-height:44px}
-  .seg button[aria-pressed="true"]{background:var(--rot);color:var(--weiss)}
+  body{margin:0;font-family:"Gemunu Libre",system-ui,sans-serif;font-size:17px;color:var(--text);background:var(--flaeche);line-height:1.5}
+  .wrap{max-width:980px;margin:0 auto;padding:clamp(20px,4vw,48px)}
+  header{margin-bottom:24px}
+  h1{font-weight:800;font-size:clamp(2.2rem,1.6rem + 3vw,3.5rem);line-height:.9;margin:0;color:var(--indigo)}
+  h1 em{font-style:normal;color:var(--magenta)}
+  .sub{color:var(--grau);margin:12px 0 0;font-size:1.1rem}
+  .card{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--radius);padding:clamp(16px,3vw,26px);margin-bottom:16px}
+  h2{font-size:1.35rem;font-weight:700;color:var(--indigo);margin:0 0 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .count{font-weight:600;color:var(--magenta);font-size:1rem}
+  label{display:block;font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--grau);margin-bottom:8px}
+  textarea{width:100%;min-height:170px;resize:vertical;font:inherit;font-size:17px;padding:10px 12px;border:1.5px solid var(--linie);border-radius:10px;color:var(--text)}
+  textarea:focus,input:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px var(--sky)}
+  .hint{font-size:.92rem;color:var(--grau);margin:6px 0 0}
+  .seg{display:flex;border:1.5px solid var(--indigo);border-radius:999px;overflow:hidden;margin-bottom:14px}
+  .seg button{flex:1;border:0;background:var(--weiss);color:var(--indigo);font:inherit;font-weight:600;padding:10px 8px;cursor:pointer;min-height:44px}
+  .seg button[aria-pressed="true"]{background:var(--indigo);color:var(--weiss)}
   .stepper{display:flex;align-items:center;gap:8px}
-  .stepper button{width:44px;height:44px;border-radius:8px;border:1.5px solid var(--linie);background:var(--weiss);font-size:1.4rem;cursor:pointer;color:var(--text)}
-  .stepper input{width:80px;height:44px;text-align:center;font:inherit;font-size:18px;font-weight:600;border:1.5px solid var(--linie);border-radius:8px}
-  .preview{margin-top:10px;font-size:.92rem;color:var(--grau)}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--linie);background:var(--weiss);font-size:1.4rem;cursor:pointer;color:var(--indigo)}
+  .stepper button:hover{border-color:var(--indigo)}
+  .stepper input{width:80px;height:44px;text-align:center;font:inherit;font-size:20px;font-weight:700;color:var(--indigo);border:1.5px solid var(--linie);border-radius:10px}
+  .preview{margin-top:10px;font-size:1rem;color:var(--grau)}
   .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-  .btn{font:inherit;font-weight:600;border-radius:8px;padding:11px 18px;min-height:44px;cursor:pointer;border:1.5px solid var(--rot);background:var(--weiss);color:var(--rot)}
-  .btn.primary{background:var(--rot);color:var(--weiss)}
-  .btn.primary:hover{background:var(--rot-dunkel);border-color:var(--rot-dunkel)}
-  .btn:hover{background:var(--rot-hell)}
+  .btn{font:inherit;font-size:1.05rem;font-weight:600;border-radius:999px;padding:10px 22px;min-height:46px;cursor:pointer;border:1.5px solid var(--indigo);background:var(--weiss);color:var(--indigo)}
+  .btn.primary{background:var(--magenta);border-color:var(--magenta);color:var(--weiss)}
+  .btn.primary:hover{background:var(--magenta-dunkel);border-color:var(--magenta-dunkel)}
+  .btn:hover{background:var(--sky-hell)}
   .btn.ghost{border-color:var(--linie);color:var(--text)}
   .btn:disabled{opacity:.45;cursor:not-allowed}
   .grid2{display:grid;grid-template-columns:1fr;gap:16px}
   @media(min-width:760px){.grid2{grid-template-columns:3fr 2fr}}
-  .msg{margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--rot-hell);color:var(--rot-dunkel);font-size:.92rem;display:none}
+  .msg{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--sky-hell);border-left:4px solid var(--magenta);color:var(--indigo);font-size:1rem;display:none}
   .msg.show{display:block}
   .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-  .group{border:1.5px solid var(--linie);border-radius:var(--radius);overflow:hidden;background:var(--weiss);animation:pop .35s ease both}
-  .group h3{margin:0;background:var(--rot);color:var(--weiss);font-size:1rem;padding:8px 12px;display:flex;justify-content:space-between}
-  .group h3 span{font-weight:normal;opacity:.9;font-size:.85rem}
-  .group ul{list-style:none;margin:0;padding:8px 12px}
+  .group{border:1px solid var(--linie);border-radius:12px;overflow:hidden;background:var(--weiss);animation:pop .35s ease both}
+  .group h3{margin:0;background:var(--indigo);color:var(--weiss);font-size:1.15rem;font-weight:700;padding:8px 14px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid var(--magenta)}
+  .group h3 span{font-weight:500;color:var(--sky);font-size:.95rem}
+  .group ul{list-style:none;margin:0;padding:8px 14px}
   .group li{padding:5px 0;border-bottom:1px solid var(--flaeche)}
   .group li:last-child{border-bottom:0}
   @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.group{animation:none}}
   .empty{color:var(--grau);text-align:center;padding:24px 8px}
-  .dialog-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+  .dialog-bg{position:fixed;inset:0;background:rgba(23,21,63,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
   .dialog-bg.show{display:flex}
-  .dialog{background:var(--weiss);border-radius:var(--radius);padding:20px;max-width:380px;width:100%}
+  .dialog{background:var(--weiss);border-radius:var(--radius);padding:22px;max-width:380px;width:100%}
   .dialog p{margin:0 0 16px}
   .dialog .actions{justify-content:flex-end;margin-top:0}
 </style>
@@ -62,9 +64,8 @@
 <body>
 <div class="wrap">
   <header>
-    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#fff"/><path d="M15 6h10v9h9v10h-9v9H15v-9H6V15h9z" fill="#E60005"/></svg>
     <div>
-      <h1>Gruppenbildung</h1>
+      <h1>Gruppenbildung<em>/</em></h1>
       <p class="sub">Namen eingeben, Gruppengröße wählen, zufällig einteilen.</p>
     </div>
   </header>
