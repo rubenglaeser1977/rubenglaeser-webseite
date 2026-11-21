@@ -4,7 +4,7 @@
   // Lokale Speicherung im Browser (für statisches Hosting wie Netlify)
   const STORE_KEY = 'zeitwerk-data-v1';
   const API = '';
-  const COLORS = ['#E5484D', '#F76B15', '#E2A336', '#46A758', '#12A594', '#3E86E0', '#6E56CF', '#D6409F', '#8D6E63', '#5B6B7A'];
+  const COLORS = ['#E6007E', '#312783', '#2F8FD0', '#7A3FB0', '#0F8A8A', '#E07A00', '#B80065', '#4A43B8', '#2E7D4F', '#5B6B7A'];
   const RING_LEN = 2 * Math.PI * 88;
 
   const $ = (id) => document.getElementById(id);
@@ -34,8 +34,12 @@
   };
 
   // ---------- Helfer ----------
+  // Alte Palette auf Corporate-Design-Palette umstellen (einmalig, gleiche Position)
+  const OLD_COLORS = ['#E5484D', '#F76B15', '#E2A336', '#46A758', '#12A594', '#3E86E0', '#6E56CF', '#D6409F', '#8D6E63', '#5B6B7A'];
   function loadDb() {
-    try { const d = JSON.parse(localStorage.getItem(STORE_KEY)); if (d && d.projects && d.entries) return d; } catch (_) {}
+    try { const d = JSON.parse(localStorage.getItem(STORE_KEY)); if (d && d.projects && d.entries) {
+      if (!d.cd) { d.projects.forEach((p) => { const i = OLD_COLORS.indexOf(String(p.color).toUpperCase()); if (i >= 0) p.color = COLORS[i]; }); d.cd = 1; saveDb(d); }
+      return d; } } catch (_) {}
     return { projects: [], entries: [], seq: 1 };
   }
   function saveDb(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
@@ -57,7 +61,7 @@
     }
     if (method === 'POST' && path === '/api/projects') {
       const name = (body.name || '').trim(); if (!name) fail('Name fehlt');
-      const p = { id: d.seq++, name, color: body.color || '#E5484D', created: t };
+      const p = { id: d.seq++, name, color: body.color || COLORS[0], created: t };
       d.projects.push(p); saveDb(d); return clone(p);
     }
     if ((m = path.match(/^\/api\/projects\/(\d+)\/entries$/))) {
@@ -163,7 +167,7 @@
   let dark = mq.matches;
   function applyTheme() {
     el.root.classList.toggle('dark', dark);
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#17110F' : '#FBF6F2');
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#110f2b' : '#f7f6fb');
   }
   el.themeBtn.addEventListener('click', () => { dark = !dark; applyTheme(); });
   mq.addEventListener?.('change', (e) => { dark = e.matches; applyTheme(); });

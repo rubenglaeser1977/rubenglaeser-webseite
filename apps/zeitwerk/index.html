@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Zeitwerk</title>
-  <meta name="theme-color" content="#E5484D" />
+  <meta name="theme-color" content="#f7f6fb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Zeitwerk" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -12,23 +12,20 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="preconnect" href="https://api.fontshare.com" />
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app" id="app">
     <header class="topbar">
       <div class="brand">
-        <svg class="logo" viewBox="0 0 64 64" aria-label="Zeitwerk Logo" role="img">
-          <rect width="64" height="64" rx="15" fill="var(--accent)" />
-          <circle cx="32" cy="35.5" r="17" fill="none" stroke="#FFF6F0" stroke-opacity=".3" stroke-width="4.5" />
-          <path d="M32 18.5 A17 17 0 1 1 15 35.5" fill="none" stroke="#FFF6F0" stroke-width="4.5" stroke-linecap="round" />
-          <path d="M32 35.5 V26 M32 35.5 L38.5 39.5" stroke="#FFF6F0" stroke-width="4" stroke-linecap="round" />
-          <path d="M32 16 C29 11.5 24.5 10.5 21.3 11.5 C23.8 14.8 27.8 16.5 32 16 Z" fill="#7BC47F" />
-          <path d="M32 16 C35 11.5 39.5 10.5 42.7 11.5 C40.2 14.8 36.2 16.5 32 16 Z" fill="#5FAE67" />
+        <svg class="logo" viewBox="0 0 512 512" aria-label="Zeitwerk Logo" role="img">
+          <rect width="512" height="512" rx="116" fill="#312783" />
+          <circle cx="256" cy="268" r="148" fill="none" stroke="#ACDDF9" stroke-opacity=".35" stroke-width="34" />
+          <path d="M256 120 A148 148 0 1 1 108 268" fill="none" stroke="#FFF" stroke-width="34" stroke-linecap="round" />
+          <path d="M256 268 V186 M256 268 L314 304" stroke="#E6007E" stroke-width="30" stroke-linecap="round" />
+          <circle cx="256" cy="268" r="20" fill="#FFF" />
         </svg>
-        <span class="brand-name">Zeitwerk</span>
+        <span class="brand-name">Zeitwerk<em>/</em></span>
       </div>
       <div class="top-actions">
         <button class="icon-btn" id="themeBtn" aria-label="Hell/Dunkel umschalten" data-testid="button-theme">

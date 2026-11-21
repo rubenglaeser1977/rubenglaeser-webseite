@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Pomodoro"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#c0392b"><title>Pomodoro Timer</title>
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Pomodoro"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#312783"><title>Pomodoro Timer</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f4f1ec;color:#222;display:flex;justify-content:center;padding:24px}
 .app{max-width:460px;width:100%}h1{font-size:1.4rem;margin:0 0 16px}
@@ -64,8 +64,44 @@ body.dark .srow{background:#ffffff0a}
 .vol{grid-column:1/-1;display:flex;justify-content:space-between;font-size:.8rem;color:#777;margin-top:-6px}
 }
 .vol{display:none}@media (max-width:600px) and (orientation:portrait){.ctrl{display:grid;grid-template-columns:1fr 1fr}.ctrl button{min-height:52px;padding:12px 6px}}@media (max-width:600px) and (orientation:portrait){.vol{display:flex}}
+</style><style>
+/* Corporate Design ruben gläser/ */
+@font-face{font-family:"Gemunu Libre";src:url("../../assets/fonts/gemunu-libre-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
+:root{--indigo:#312783;--indigo-dunkel:#231c63;--magenta:#E6007E;--magenta-dunkel:#B80065;--sky:#ACDDF9;--sky-hell:#EAF6FE;--text:#17153f;--grau:#57557a;--linie:#dddbeb;--flaeche:#f7f6fb}
+body{font-family:"Gemunu Libre",system-ui,sans-serif;font-size:17px;background:var(--flaeche);color:var(--text)}
+h1{font-weight:800;font-size:clamp(2rem,1.5rem + 2.5vw,3rem);line-height:.9;color:var(--indigo)}h1 em{font-style:normal;color:var(--magenta)}
+.card{border:1px solid var(--linie);box-shadow:none}
+.tabs button{border:1.5px solid var(--indigo);color:var(--indigo);background:#fff;border-radius:999px;font:inherit;font-weight:600}
+.tabs button.on,body.dark .tabs button.on{background:var(--indigo);border-color:var(--indigo);color:#fff}
+label{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--grau)}
+input,.srow select{font:inherit;border:1.5px solid var(--linie);border-radius:10px;color:var(--text)}
+input:focus,.srow select:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px var(--sky)}
+.info,.sub{color:var(--grau)}.err{color:var(--magenta)}
+.phase{font-weight:700;letter-spacing:.08em}
+.time{font-weight:800;color:var(--indigo)}
+.bar{background:var(--sky-hell);height:10px;border-radius:5px}
+.bar div,.work .bar div{background:var(--magenta)}.work .phase{color:var(--magenta)}
+.brk .bar div{background:var(--sky)}.brk .phase{color:var(--indigo)}.brk .time{color:var(--indigo)}
+.ctrl button{font:inherit;font-weight:700;border-radius:999px;background:#fff;color:var(--indigo);border:1.5px solid var(--indigo)}
+.ctrl button#go{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.ctrl button#go:hover:not(:disabled){background:var(--magenta-dunkel)}.ctrl button:hover:not(:disabled){background:var(--sky-hell)}
+li.done{color:#9b99b8}li.cur{color:var(--magenta)}
+#dm{font:inherit;font-weight:600;border:1.5px solid var(--linie);border-radius:999px;color:var(--indigo);padding:6px 14px}
+.snd{border-color:var(--linie)}.snd summary{color:var(--indigo)}.snd summary::marker{color:var(--magenta)}
+.srow span{color:var(--grau)}.srow input[type=range]{accent-color:var(--magenta)}
+.srow button{font:inherit;font-weight:600;border:1.5px solid var(--indigo);border-radius:999px;color:var(--indigo)}
+body.dark{background:#110f2b;color:#ecebf8}body.dark .card{background:#1a1840;border-color:#322f66}
+body.dark h1,body.dark .time,body.dark .brk .phase{color:#fff}
+body.dark input,body.dark .srow select{background:#232050;color:#ecebf8;border-color:#322f66}
+body.dark .tabs button{background:transparent;color:var(--sky);border-color:#4a4690}
+body.dark label,body.dark .info,body.dark .sub,body.dark .srow span{color:#b3b1d3}
+body.dark .bar{background:#232050}
+body.dark .ctrl button{background:transparent;color:var(--sky);border-color:#4a4690}
+body.dark .ctrl button#go{background:var(--magenta);border-color:var(--magenta);color:#fff}
+body.dark #dm,body.dark .srow button,body.dark .snd summary{color:var(--sky);border-color:#4a4690}
+body.dark .snd{border-color:#322f66}body.dark li.done{color:#6f6c99}
 </style></head><body><div class="app">
-<div class="head"><h1>Pomodoro Timer</h1><button id="dm">Dunkel</button></div>
+<div class="head"><h1>Pomodoro<em>/</em></h1><button id="dm">Dunkel</button></div>
 <div class="card">
 <div class="tabs"><button id="t1" class="on">Nach Dauer</button><button id="t2">Nach Zielzeit</button></div>
 <div id="m1">

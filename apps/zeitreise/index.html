@@ -1,39 +1,48 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zeitreise – Was war an diesem Tag?</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="../../favicon.svg">
+<meta name="theme-color" content="#312783">
 <style>
-:root{--bg:#f3e9d2;--card:#fffaf0;--ink:#2b2118;--mute:#7a6a58;--acc:#d9542b;--acc2:#1f6f6b;--sun:#f2b134;--line:#2b2118}
+@font-face{font-family:"Gemunu Libre";src:url("../../assets/fonts/gemunu-libre-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
+:root{--indigo:#312783;--indigo-dunkel:#231c63;--magenta:#E6007E;--magenta-dunkel:#B80065;--sky:#ACDDF9;--sky-hell:#EAF6FE;
+--bg:#f7f6fb;--card:#fff;--ink:#17153f;--mute:#57557a;--acc:#E6007E;--acc2:#312783;--line:#dddbeb}
 *{box-sizing:border-box}
-body{margin:0;font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);line-height:1.5;
-background:var(--bg);background-image:radial-gradient(rgba(43,33,24,.07) 1px,transparent 1px);background-size:14px 14px}
-main{max-width:880px;margin:0 auto;padding:36px 18px 80px}
-.hero{background:var(--acc2);color:#fffaf0;border:3px solid var(--line);border-radius:22px;padding:28px 26px 22px;box-shadow:8px 8px 0 var(--line);position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
-background:repeating-radial-gradient(circle,#2b2118 0 3px,#3a2e22 3px 6px);border:3px solid var(--line);box-shadow:inset 0 0 0 70px #2b2118,inset 0 0 0 76px var(--sun),inset 0 0 0 84px #2b2118}
-.stripes{height:10px;margin:14px 0 0;background:linear-gradient(var(--sun) 0 33%,var(--acc) 33% 66%,#9b3b6e 66%);border-radius:4px;max-width:60%}
-h1{font-family:Righteous,sans-serif;font-size:clamp(2.2rem,6vw,3.4rem);margin:0;letter-spacing:.02em;text-shadow:3px 3px 0 var(--line)}
-p.sub{margin:6px 0 18px;max-width:60%;opacity:.92}
-form{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
-input,select{font:inherit;font-family:"Space Mono",monospace;padding:11px 14px;border:3px solid var(--line);border-radius:12px;background:#fffaf0;color:var(--ink);font-size:1.05rem}
-button{font:inherit;font-weight:700;padding:11px 22px;border:3px solid var(--line);border-radius:12px;background:var(--sun);color:var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--line);transition:transform .1s,box-shadow .1s}
-button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--line)}
-.card{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:22px;margin-top:22px;box-shadow:6px 6px 0 var(--line)}
-.big{font-family:Righteous,sans-serif;font-size:clamp(2.6rem,9vw,4.2rem);color:var(--acc);line-height:1.05;font-variant-numeric:tabular-nums}
-h2{font-family:Righteous,sans-serif;font-weight:400;font-size:1.35rem;margin:0 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-h2 .tag{font-family:"Space Mono",monospace;font-size:.7rem;background:var(--ink);color:var(--card);padding:3px 8px;border-radius:6px;letter-spacing:.08em}
-ul{list-style:none;padding:0;margin:0}li{padding:8px 0;border-top:1px dashed rgba(43,33,24,.3)}li:first-child{border-top:0}
-.yr{display:inline-block;min-width:56px;font-family:"Space Mono",monospace;font-weight:700;color:var(--acc2)}
-a{color:var(--acc);text-decoration-thickness:2px;text-underline-offset:2px}.mute{color:var(--mute);font-size:.9rem}
-.song{font-family:Righteous,sans-serif;font-size:1.3rem;line-height:1.2;margin-top:8px}.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.cbox{border:2px solid var(--line);border-radius:14px;padding:14px;background:#fff;display:flex;flex-direction:column}.tag2{align-self:flex-start;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;background:var(--ink);color:var(--card);padding:3px 9px;border-radius:6px;letter-spacing:.08em;text-transform:uppercase}.cbox .alt{margin-top:auto;padding-top:10px}.cbox .yt{align-self:flex-start;font-size:.9rem;padding:7px 12px}
-.yt{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--acc);color:#fffaf0;text-decoration:none;font-weight:700;padding:9px 16px;border:3px solid var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--line)}
-.yt:before{content:"▶"}
-.src{margin-top:12px;font-size:.85rem;color:var(--mute)}.src b{color:var(--ink)}
-.alt{margin-top:14px;padding-top:12px;border-top:2px dashed rgba(43,33,24,.3)}
-details{border-top:2px dashed rgba(43,33,24,.25);padding:10px 0}details:first-of-type{border-top:0}
-summary{cursor:pointer;font-weight:700;font-size:1.05rem}summary .mute{font-weight:400}details ul{margin-top:6px}
+body{margin:0;font-family:"Gemunu Libre",system-ui,sans-serif;font-size:17px;color:var(--ink);line-height:1.5;background:var(--bg)}
+main{max-width:880px;margin:0 auto;padding:clamp(20px,4vw,48px) 18px 80px}
+.hero{background:var(--indigo);color:#fff;border-radius:18px;padding:30px 28px 24px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;
+background:repeating-radial-gradient(circle,#1d1752 0 2px,#262062 2px 5px);box-shadow:inset 0 0 0 78px transparent;
+-webkit-mask:radial-gradient(circle,transparent 0 12px,#000 13px);mask:radial-gradient(circle,transparent 0 12px,#000 13px)}
+.hero:before{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;z-index:1;pointer-events:none;
+background:radial-gradient(circle,transparent 0 12px,var(--magenta) 13px 40px,transparent 41px)}
+.stripes{height:6px;margin:18px 0 0;background:linear-gradient(90deg,var(--magenta) 0 50%,var(--sky) 50%);border-radius:3px;max-width:60%}
+h1{font-weight:800;font-size:clamp(2.6rem,7vw,4rem);line-height:.9;margin:0;color:#fff;position:relative;z-index:2}
+h1 em{font-style:normal;color:var(--magenta)}
+p.sub{margin:12px 0 20px;max-width:60%;color:var(--sky);font-size:1.1rem;position:relative;z-index:2}
+form{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:2}
+input,select{font:inherit;padding:10px 14px;border:1.5px solid transparent;border-radius:10px;background:#fff;color:var(--ink);font-size:1.1rem;min-height:46px}
+input:focus{outline:none;box-shadow:0 0 0 3px var(--sky)}
+button{font:inherit;font-size:1.1rem;font-weight:700;padding:10px 26px;min-height:46px;border:0;border-radius:999px;background:var(--magenta);color:#fff;cursor:pointer;transition:background .15s}
+button:hover{background:var(--magenta-dunkel)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(16px,3vw,26px);margin-top:18px}
+.big{font-weight:800;font-size:clamp(2.8rem,9vw,4.4rem);color:var(--magenta);line-height:1;font-variant-numeric:tabular-nums;margin:4px 0}
+h2{font-weight:700;font-size:1.45rem;color:var(--indigo);margin:0 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2 .tag{font-size:.8rem;background:var(--indigo);color:#fff;padding:2px 10px;border-radius:999px;letter-spacing:.06em}
+ul{list-style:none;padding:0;margin:0}li{padding:8px 0;border-top:1px solid var(--line)}li:first-child{border-top:0}
+.yr{display:inline-block;min-width:52px;font-weight:700;color:var(--magenta);font-variant-numeric:tabular-nums}
+a{color:var(--indigo);text-decoration-color:var(--magenta);text-decoration-thickness:2px;text-underline-offset:3px}a:hover{color:var(--magenta)}.mute{color:var(--mute);font-size:.95rem}
+.song{font-weight:700;font-size:1.4rem;line-height:1.15;margin-top:10px;color:var(--indigo)}.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.cbox{border:1px solid var(--line);border-top:4px solid var(--magenta);border-radius:12px;padding:14px 16px;background:#fff;display:flex;flex-direction:column}.tag2{align-self:flex-start;font-size:.8rem;font-weight:700;background:var(--indigo);color:#fff;padding:2px 10px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase}.cbox .alt{margin-top:auto;padding-top:10px}.cbox .yt{align-self:flex-start;font-size:.95rem;padding:6px 14px}
+.yt{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--magenta);color:#fff;text-decoration:none;font-weight:700;padding:8px 18px;border-radius:999px}
+.yt:hover{background:var(--magenta-dunkel);color:#fff}
+.yt:before{content:"▶";font-size:.8em}
+.src{margin-top:12px;font-size:.9rem;color:var(--mute)}.src b{color:var(--ink)}
+.alt{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+details{border-top:1px solid var(--line);padding:10px 0}details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:700;font-size:1.15rem;color:var(--indigo)}summary::marker{color:var(--magenta)}summary .mute{font-weight:400}details ul{margin-top:6px}
+@media(max-width:600px){p.sub{max-width:100%}.hero:before,.hero:after{width:170px;height:170px;right:-70px;top:-70px}}
 </style></head><body><main>
-<section class="hero"><h1>Zeitreise</h1><p class="sub">Datum eingeben: Tage seitdem, Nummer-eins-Hit der Woche, Ereignisse und Geburtstage. Grundlage: Wikipedia.</p>
+<section class="hero"><h1>Zeitreise<em>/</em></h1><p class="sub">Datum eingeben: Tage seitdem, Nummer-eins-Hit der Woche, Ereignisse und Geburtstage. Grundlage: Wikipedia.</p>
 <form id="f"><input type="date" id="d" required min="1950-01-01"><button>Los</button></form><div class="stripes"></div></section>
 <div id="out"></div>
 </main><script>

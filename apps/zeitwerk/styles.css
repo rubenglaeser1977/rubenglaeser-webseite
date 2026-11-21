@@ -1,32 +1,36 @@
+@font-face { font-family: "Gemunu Libre"; src: url("../../assets/fonts/gemunu-libre-latin.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
 :root {
-  --proj: #E5484D;
-  --accent: #E5484D;
-  --font: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --proj: #E6007E;
+  --accent: #312783;
+  --indigo: #312783;
+  --magenta: #E6007E;
+  --sky: #ACDDF9;
+  --font: 'Gemunu Libre', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --bg-base: #FBF6F2;
-  --bg: color-mix(in oklab, var(--proj) 9%, var(--bg-base));
+  --bg-base: #f7f6fb;
+  --bg: color-mix(in oklab, var(--proj) 5%, var(--bg-base));
   --surface: color-mix(in oklab, var(--proj) 4%, #FFFFFF);
   --surface-2: color-mix(in oklab, var(--proj) 10%, #FFFFFF);
-  --text: #2A1F1C;
-  --muted: #7A6A65;
+  --text: #17153f;
+  --muted: #57557a;
   --faint: color-mix(in oklab, var(--text) 12%, transparent);
   --line: color-mix(in oklab, var(--text) 9%, transparent);
   --track: color-mix(in oklab, var(--proj) 16%, var(--bg-base));
   --on-proj: #FFFFFF;
-  --shadow: 0 1px 2px rgb(60 30 20 / .06), 0 8px 24px -12px rgb(60 30 20 / .18);
+  --shadow: 0 0 0 1px #dddbeb, 0 8px 24px -14px rgb(49 39 131 / .22);
   --radius: 22px;
   --ring: min(70vw, 40vh, 330px);
   color-scheme: light;
 }
 
 :root.dark {
-  --bg-base: #17110F;
+  --bg-base: #110f2b;
   --bg: color-mix(in oklab, var(--proj) 10%, var(--bg-base));
-  --surface: color-mix(in oklab, var(--proj) 6%, #211917);
-  --surface-2: color-mix(in oklab, var(--proj) 14%, #241C1A);
-  --text: #F5ECE8;
-  --muted: #B09F99;
-  --track: color-mix(in oklab, var(--proj) 18%, #2A2220);
+  --surface: color-mix(in oklab, var(--proj) 6%, #1a1840);
+  --surface-2: color-mix(in oklab, var(--proj) 14%, #232050);
+  --text: #ecebf8;
+  --muted: #b3b1d3;
+  --track: color-mix(in oklab, var(--proj) 18%, #232050);
   --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 10px 30px -14px rgb(0 0 0 / .6);
   color-scheme: dark;
 }
@@ -60,7 +64,7 @@ svg { display: block; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .logo { width: 32px; height: 32px; --accent: var(--proj); transition: filter .3s; }
 .logo rect { transition: fill .5s ease; }
-.brand-name { font-weight: 900; font-size: 1.15rem; letter-spacing: -.01em; }
+.brand-name { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
 
 .icon-btn {
   width: 40px; height: 40px; border-radius: 12px; border: 0;
@@ -138,7 +142,7 @@ svg { display: block; }
   text-transform: uppercase; letter-spacing: .08em;
 }
 .time {
-  font-size: calc(var(--ring) * .2); font-weight: 900; letter-spacing: -.03em;
+  font-size: calc(var(--ring) * .2); font-weight: 800; letter-spacing: -.03em;
   font-variant-numeric: tabular-nums; line-height: 1.05;
 }
 .time.long { font-size: calc(var(--ring) * .165); }
@@ -159,7 +163,7 @@ svg { display: block; }
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   width: min(100%, 260px); height: 62px; border: 0; border-radius: 20px;
   background: var(--proj); color: var(--on-proj);
-  font-size: 1.15rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;
+  font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
   box-shadow: 0 6px 0 color-mix(in oklab, var(--proj) 70%, #000), 0 14px 26px -12px color-mix(in oklab, var(--proj) 70%, transparent);
   transition: transform .1s ease, box-shadow .1s ease, background .4s ease, opacity .2s;
 }
@@ -176,7 +180,7 @@ svg { display: block; }
 .log-panel { padding: 18px 16px 12px; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 .log-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .log-title { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 200px; }
-.log-title h2 { margin: 0; font-size: 1.15rem; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.log-title h2 { margin: 0; font-size: 1.15rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .swatch { width: 12px; height: 12px; border-radius: 4px; background: var(--proj); flex: none; }
 .log-actions { display: flex; gap: 8px; }
 .chip-btn {
@@ -191,7 +195,7 @@ svg { display: block; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0 6px; }
 .stat { background: var(--bg); border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .stat-label { font-size: .75rem; color: var(--muted); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.stat-val { font-size: 1.2rem; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.stat-val { font-size: 1.2rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 
 .log-list { flex: 1; overflow-y: auto; margin: 0 -6px; padding: 0 6px; }
 .day { padding-top: 14px; }
@@ -211,7 +215,7 @@ svg { display: block; }
 .entry-task { font-weight: 700; font-size: .98rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .entry-task.none { color: var(--muted); font-weight: 500; font-style: normal; }
 .entry-time { grid-column: 1; font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.entry-dur { grid-row: 1 / span 2; grid-column: 2; font-weight: 900; font-variant-numeric: tabular-nums; font-size: 1rem; }
+.entry-dur { grid-row: 1 / span 2; grid-column: 2; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 1rem; }
 .entry.live .entry-dur { color: var(--proj); }
 .entry.live .entry-time::after { content: ' · läuft'; color: var(--proj); font-weight: 700; }
 
@@ -221,7 +225,7 @@ svg { display: block; }
 
 /* Welcome (keine Projekte) */
 .welcome { text-align: center; padding: 8px 8px 0; max-width: 360px; }
-.welcome h1 { font-size: 1.25rem; font-weight: 900; margin: 0 0 6px; }
+.welcome h1 { font-size: 1.25rem; font-weight: 800; margin: 0 0 6px; }
 .welcome p { margin: 0; color: var(--muted); line-height: 1.5; }
 
 /* Dialogs */
@@ -232,7 +236,7 @@ dialog.sheet {
 dialog.sheet.small { width: min(360px, calc(100vw - 24px)); }
 dialog::backdrop { background: rgb(20 10 8 / .45); backdrop-filter: blur(3px); }
 dialog form { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
-dialog h3 { margin: 0 0 2px; font-size: 1.15rem; font-weight: 900; }
+dialog h3 { margin: 0 0 2px; font-size: 1.15rem; font-weight: 800; }
 .muted { color: var(--muted); margin: 0; line-height: 1.5; }
 .field { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
 .field > span { font-size: .8rem; font-weight: 700; color: var(--muted); }
@@ -254,13 +258,13 @@ dialog h3 { margin: 0 0 2px; font-size: 1.15rem; font-weight: 900; }
 .ghost, .primary { height: 42px; padding: 0 14px; border-radius: 12px; border: 0; font-weight: 700; }
 .ghost { background: transparent; }
 .ghost:hover { background: var(--surface-2); }
-.ghost.danger { color: #D93A35; padding: 0; width: 42px; display: grid; place-items: center; }
+.ghost.danger { color: #B80065; padding: 0; width: 42px; display: grid; place-items: center; }
 .ghost.danger svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-:root.dark .ghost.danger { color: #FF7B74; }
+:root.dark .ghost.danger { color: #FF5CB0; }
 .primary { background: var(--proj); color: #fff; }
-.danger-fill { background: #D93A35; }
-.form-error { margin: 0; color: #D93A35; font-size: .88rem; font-weight: 500; }
-:root.dark .form-error { color: #FF7B74; }
+.danger-fill { background: #B80065; }
+.form-error { margin: 0; color: #B80065; font-size: .88rem; font-weight: 500; }
+:root.dark .form-error { color: #FF5CB0; }
 
 .toast {
   position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translate(-50%, 20px);
@@ -312,3 +316,10 @@ dialog h3 { margin: 0 0 2px; font-size: 1.15rem; font-weight: 900; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 [hidden] { display: none !important; }
+
+/* Corporate Design ruben gläser/ */
+body { font-size: 17px; }
+.brand-name { font-weight: 800; font-size: 1.7rem; line-height: 1; color: var(--indigo); letter-spacing: 0; }
+.brand-name em { font-style: normal; color: var(--magenta); }
+:root.dark .brand-name { color: #fff; }
+.logo { width: 34px; height: 34px; }
