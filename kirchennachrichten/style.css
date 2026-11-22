@@ -1,0 +1,300 @@
+/* Kirchennachrichten Dresden-Blasewitz – CD aus dem Druckheft:
+   Georgia, Dunkelgrün #1f6d35, Hellgrün-Grau #e3e8e0, Text #231f20 */
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --gruen: #1f6d35;
+  --gruen-dunkel: #17552a;
+  --gruen-hell: #e3e8e0;
+  --gruen-zart: #f1f4ef;
+  --text: #231f20;
+  --text-leise: #4f4a4b;
+  --linie: #c9d2c4;
+  --papier: #ffffff;
+  --serif: Georgia, Gelasio, 'Times New Roman', serif;
+  --kinder: 'Comic Sans MS', 'Comic Neue', 'Chalkboard SE', cursive;
+  --kopf: 52px;
+  --breite: 44rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.62;
+  color: var(--text);
+  background: var(--gruen-zart);
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gruen); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--gruen-dunkel); }
+:focus-visible { outline: 3px solid var(--gruen); outline-offset: 2px; border-radius: 2px; }
+p { margin: 0 0 .85em; }
+strong, b { font-weight: 700; }
+[id] { scroll-margin-top: calc(var(--kopf) + 14px); }
+
+.skip { position: absolute; left: -999px; top: 0; background: var(--gruen); color: #fff; padding: .6em 1em; z-index: 100; }
+.skip:focus { left: 8px; top: 8px; }
+
+/* ---------- Kopfleiste ---------- */
+.kopf {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--kopf);
+  background: var(--gruen);
+  color: #fff;
+  display: flex; align-items: center; gap: .75rem;
+  padding: 0 .5rem 0 1rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.08);
+}
+.kopf__titel { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; flex: 1; text-decoration: none; color: #fff; }
+.kopf__titel b { font-size: 1rem; }
+.kopf__titel span { font-size: .8rem; opacity: .88; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kopf__btn {
+  appearance: none; border: 1px solid rgba(255,255,255,.55); background: transparent; color: #fff;
+  font: 700 .95rem var(--serif); padding: .45rem .85rem; border-radius: 6px; min-height: 40px;
+  display: inline-flex; align-items: center; gap: .45rem; cursor: pointer;
+}
+.kopf__btn:hover { background: rgba(255,255,255,.12); }
+.kopf__btn svg { width: 18px; height: 18px; }
+
+/* ---------- Inhaltsmenü (Overlay) ---------- */
+.menue { position: fixed; inset: 0; z-index: 60; display: none; }
+.menue[data-offen="true"] { display: block; }
+.menue__grund { position: absolute; inset: 0; background: rgba(20,30,22,.45); }
+.menue__panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(25rem, 92vw);
+  background: var(--papier); overflow-y: auto; overscroll-behavior: contain;
+  box-shadow: -8px 0 24px rgba(0,0,0,.18);
+}
+.menue__kopf { position: sticky; top: 0; background: var(--gruen); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 .5rem 0 1rem; height: var(--kopf); }
+.menue__kopf b { font-size: 1.05rem; }
+.menue nav { padding: .5rem 0 2rem; }
+
+/* gemeinsame Liste für Menü & Inhaltsverzeichnis */
+.toc { list-style: none; margin: 0; padding: 0; }
+.toc > li > a {
+  display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
+  padding: .7rem 1rem; text-decoration: none; color: var(--text); font-weight: 700;
+  border-bottom: 1px solid var(--gruen-hell);
+}
+.toc > li > a:hover { background: var(--gruen-zart); color: var(--gruen); }
+.toc > li > a small { font-weight: 400; color: var(--text-leise); font-size: .85rem; white-space: nowrap; }
+.toc ul { list-style: none; margin: 0; padding: .25rem 0 .5rem; border-bottom: 1px solid var(--gruen-hell); }
+.toc ul a { display: block; padding: .38rem 1rem .38rem 1.75rem; font-size: .95rem; line-height: 1.35; text-decoration: none; color: var(--text-leise); }
+.toc ul a:hover { color: var(--gruen); background: var(--gruen-zart); }
+.toc a[aria-current="true"] { color: var(--gruen); box-shadow: inset 4px 0 0 var(--gruen); }
+
+/* ---------- Titel ---------- */
+.heft { max-width: var(--breite); margin: 0 auto; background: var(--papier); }
+.titel { padding: 1.75rem 1.25rem 0; text-align: center; }
+.titel__gemeinde { color: var(--gruen); font-size: 1.15rem; line-height: 1.3; margin: 0; }
+.titel h1 {
+  color: var(--gruen); font-weight: 400; margin: .2rem 0 .1rem;
+  font-size: clamp(1.9rem, 9vw, 3.4rem); line-height: 1.05; letter-spacing: -.01em; hyphens: none;
+}
+.titel__ausgabe {
+  display: inline-block; color: var(--gruen); font-size: 1.2rem; margin: .4rem 0 1.25rem;
+  border-top: 2px solid var(--gruen); border-bottom: 2px solid var(--gruen); padding: .2rem .6rem;
+}
+.titel__bild { margin: 0; }
+.titel__bild img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 62%; }
+.titel__bild figcaption { font-size: .82rem; color: var(--text-leise); padding: .45rem 1.25rem 0; text-align: left; }
+.losung { text-align: center; padding: 1.5rem 1.25rem 1.75rem; }
+.losung b { display: block; color: var(--gruen); font-size: 1.2rem; margin-bottom: .35rem; }
+.losung p { font-size: 1.3rem; line-height: 1.4; color: var(--gruen); margin: 0 0 .3rem; hyphens: none; }
+.losung cite { font-style: normal; font-size: .9rem; color: var(--gruen); }
+
+/* ---------- Inhaltsverzeichnis im Heft ---------- */
+.inhalt { border-top: 6px solid var(--gruen-hell); padding-bottom: .5rem; }
+.inhalt h2.balken { margin-top: 0; }
+
+/* ---------- Rubriken ---------- */
+.rubrik { padding-bottom: 1rem; border-top: 6px solid var(--gruen-hell); }
+h2.balken {
+  margin: 0 0 1.25rem; background: var(--gruen); color: #fff;
+  font-size: 1.15rem; line-height: 1.3; padding: .55rem 1.25rem; font-weight: 700; hyphens: none;
+}
+.innen { padding: 0 1.25rem; }
+.beitrag { padding: 0 1.25rem 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--gruen-hell); }
+.beitrag:last-child { border-bottom: 0; margin-bottom: 0; }
+.beitrag h3 { font-size: 1.28rem; line-height: 1.3; margin: 0 0 .6rem; hyphens: manual; }
+.beitrag h4 { font-size: 1.05rem; margin: 1.1rem 0 .3rem; color: var(--gruen); }
+.datum {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--gruen-hell); color: var(--gruen-dunkel);
+  font-size: .9rem; font-weight: 700; line-height: 1.2;
+  padding: .3rem .6rem; border-radius: 4px; margin: 0 0 .55rem; hyphens: none;
+}
+.datum svg { width: 15px; height: 15px; flex: none; }
+.gruss { font-style: italic; }
+.unterschrift { font-weight: 700; }
+
+figure { margin: 0 0 1rem; }
+figure img { width: 100%; border-radius: 3px; }
+figcaption { font-size: .85rem; line-height: 1.4; color: var(--text-leise); margin-top: .4rem; }
+.bild-rechts { float: right; width: 38%; max-width: 11rem; margin: .3rem 0 .6rem 1rem; }
+.bild-rechts.klein { width: 30%; max-width: 8rem; }
+.clear { clear: both; }
+
+.infobox {
+  background: var(--gruen-zart); border-left: 4px solid var(--gruen);
+  padding: .85rem 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0;
+}
+.infobox p:last-child { margin-bottom: 0; }
+
+.aktion {
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 48px; padding: .7rem 1.1rem; margin: .35rem 0 .75rem;
+  background: var(--gruen); color: #fff !important; text-decoration: none;
+  font-weight: 700; font-size: 1rem; border-radius: 6px; text-align: center; line-height: 1.25;
+}
+.aktion:hover { background: var(--gruen-dunkel); }
+.aktion svg { width: 18px; height: 18px; flex: none; }
+.aktion--hell { background: var(--papier); color: var(--gruen) !important; border: 1.5px solid var(--gruen); }
+.aktion--hell:hover { background: var(--gruen-zart); }
+
+/* Programm (Festwochenende, Bibelwoche …) */
+.programm { list-style: none; padding: 0; margin: .5rem 0 1rem; border-top: 1px solid var(--linie); }
+.programm li { padding: .7rem 0; border-bottom: 1px solid var(--linie); }
+.programm .zeit { display: block; font-weight: 700; color: var(--gruen); }
+.programm .titel-p { display: block; font-weight: 700; }
+.programm p { margin: .25rem 0 0; }
+.tag { font-size: 1.05rem; font-weight: 700; margin: 1.25rem 0 .2rem; padding-bottom: .2rem; border-bottom: 2px solid var(--gruen); }
+
+/* ---------- Gottesdienste ---------- */
+.spruch {
+  margin: 0 1.25rem 1.25rem; padding: 1rem 1.1rem; text-align: center;
+  border: 1.5px solid var(--gruen); border-radius: 4px; color: var(--gruen);
+}
+.spruch b { display: block; font-size: .95rem; margin-bottom: .3rem; }
+.spruch p { font-size: 1.15rem; line-height: 1.45; margin: 0 0 .3rem; hyphens: none; }
+.spruch cite { font-style: normal; font-size: .85rem; }
+
+.filter { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0 1.25rem .9rem; scrollbar-width: none; }
+.filter::-webkit-scrollbar { display: none; }
+.filter__hinweis { padding: 0 1.25rem .4rem; font-size: .85rem; color: var(--text-leise); margin: 0; }
+.chip {
+  appearance: none; flex: none; cursor: pointer;
+  border: 1.5px solid var(--gruen); background: var(--papier); color: var(--gruen);
+  font: 700 .9rem var(--serif); padding: .35rem .7rem; border-radius: 999px; min-height: 40px;
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.chip img { width: 22px; height: 22px; object-fit: contain; }
+.chip[aria-pressed="true"] { background: var(--gruen); color: #fff; }
+.chip img { background:#fff; border-radius:50%; padding:2px; width:26px; height:26px; }
+
+.gd-liste { list-style: none; margin: 0; padding: 0 1.25rem; }
+.gd { border: 1px solid var(--linie); border-radius: 6px; margin-bottom: .85rem; overflow: hidden; background: var(--papier); }
+.gd__kopf { background: var(--gruen-hell); padding: .55rem .9rem; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; }
+.gd__kopf b { font-size: 1.12rem; }
+.gd__kopf span { font-size: .92rem; color: var(--text-leise); }
+.gd__ort { padding: .6rem .9rem .5rem; border-top: 1px solid var(--gruen-hell); }
+.gd__ort:first-of-type { border-top: 0; }
+.gd__ortname { display: flex; align-items: center; gap: .45rem; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--gruen); font-weight: 700; margin-bottom: .2rem; }
+.gd__ortname img { width: 20px; height: 20px; object-fit: contain; }
+.gd__ortname small { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--text-leise); font-size: .8rem; }
+.feier { display: grid; grid-template-columns: 5.7rem 1fr; gap: .1rem .6rem; padding: .3rem 0; }
+.feier + .feier { border-top: 1px dashed var(--gruen-hell); }
+.feier__zeit { font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.feier__was { line-height: 1.4; }
+.feier__wer { display: block; font-size: .92rem; color: var(--text-leise); }
+.kigo { display: inline-flex; align-items: center; gap: .25rem; font-size: .8rem; color: var(--gruen); font-weight: 700; margin-top: .15rem; }
+.kigo svg { width: 15px; height: 15px; }
+.gd[hidden], .gd__ort[hidden] { display: none; }
+.leer { padding: 0 1.25rem; color: var(--text-leise); font-style: italic; }
+.kigo-legende { padding: .25rem 1.25rem 0; font-size: .88rem; color: var(--text-leise); display: flex; gap: .35rem; align-items: center; }
+.kigo-legende svg { width: 16px; height: 16px; color: var(--gruen); }
+
+/* ---------- Regelmäßige Veranstaltungen ---------- */
+.gruppe { margin: 0 1.25rem 1.25rem; }
+.gruppe h3 { color: var(--gruen); font-size: 1.25rem; margin: 0 0 .4rem; padding-bottom: .25rem; border-bottom: 2px solid var(--gruen); }
+.termine { list-style: none; margin: 0; padding: 0; }
+.termine li { padding: .55rem 0; border-bottom: 1px solid var(--gruen-hell); line-height: 1.45; }
+.termine li:last-child { border-bottom: 0; }
+.termine b { display: block; }
+.termine .wann { display: block; }
+.termine .wo { display: block; font-size: .95rem; color: var(--text-leise); }
+.termine .extra { display: inline-block; margin-top: .25rem; font-size: .85rem; background: var(--gruen-hell); color: var(--gruen-dunkel); padding: .1rem .45rem; border-radius: 3px; font-weight: 700; }
+abbr[title] { text-decoration: underline dotted 1px; text-underline-offset: 3px; cursor: help; }
+.legende { margin: 0 1.25rem 1rem; font-size: .92rem; background: var(--gruen-zart); padding: .9rem 1rem; border-radius: 4px; }
+.legende dl { display: grid; grid-template-columns: auto 1fr; gap: .15rem .75rem; margin: .4rem 0 .6rem; }
+.legende dt { font-weight: 700; }
+.legende dd { margin: 0; }
+.legende p { margin: .25rem 0 0; }
+
+/* ---------- Kinderseite ---------- */
+.kinder { font-family: var(--kinder); }
+.kinder .ausmal { border: 1px solid var(--linie); border-radius: 6px; padding: .75rem; background: #fff; margin-bottom: 1rem; }
+.kinder .ausmal img { max-height: 70vh; width: auto; margin: 0 auto; }
+
+/* ---------- Silvesterkonzert ---------- */
+.konzert { background: var(--gruen-hell); text-align: center; padding: 1.4rem 1.1rem; margin: .25rem 0 1rem; border-radius: 4px; color: var(--gruen); }
+.konzert .wann { margin: 0; font-size: 1.05rem; }
+.konzert h4 { font-size: 2rem; margin: .3rem 0 .15rem; color: var(--gruen); line-height: 1.1; hyphens: none; }
+.konzert .werk { font-weight: 700; font-size: 1.12rem; margin: 0; }
+.konzert .art { margin: 0 0 .8rem; }
+.konzert ul { list-style: none; padding: 0; margin: 0 0 .8rem; line-height: 1.45; }
+.konzert .karten { font-size: .9rem; margin: 0; }
+
+/* ---------- Kirchenvorstand ---------- */
+.namen { list-style: none; padding: 0; margin: .2rem 0 1rem; }
+.namen li { padding: .35rem 0; border-bottom: 1px solid var(--gruen-hell); line-height: 1.35; }
+.namen li span { display: block; font-size: .92rem; color: var(--text-leise); }
+
+/* Interview */
+.frage { font-weight: 700; margin: 1.1rem 0 .3rem; color: var(--gruen); }
+
+/* ---------- Kontakt ---------- */
+.kontakt h3 { color: var(--gruen); font-size: 1.15rem; margin: 1.3rem 0 .35rem; padding-bottom: .2rem; border-bottom: 2px solid var(--gruen); }
+.kontakt h3:first-child { margin-top: 0; }
+.karte { padding: .55rem 0; border-bottom: 1px solid var(--gruen-hell); line-height: 1.45; }
+.karte:last-child { border-bottom: 0; }
+.karte b { display: block; }
+.karte a { word-break: break-word; hyphens: none; }
+.zeiten { display: grid; grid-template-columns: auto auto; gap: .1rem 1rem; justify-content: start; margin: .2rem 0 .3rem; }
+.konto { background: var(--gruen-zart); padding: .7rem .9rem; border-radius: 4px; margin: .45rem 0; font-size: .97rem; }
+.konto b { display: block; }
+.iban { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92rem; letter-spacing: .02em; hyphens: none; }
+.impressum { font-size: .95rem; }
+.impressum dl { display: grid; grid-template-columns: auto 1fr; gap: .2rem .9rem; margin: 0 0 .6rem; }
+.impressum dt { font-weight: 700; }
+.impressum dd { margin: 0; }
+
+.fuss { background: var(--gruen); color: #fff; text-align: center; padding: 1.4rem 1.25rem 5rem; font-size: .9rem; }
+.fuss a { color: #fff; }
+.fuss p { margin: .2rem 0; }
+
+/* Nach-oben-Knopf */
+.hoch {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 40;
+  width: 48px; height: 48px; border-radius: 50%; border: 0;
+  background: var(--gruen); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  display: grid; place-items: center; cursor: pointer;
+  opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.hoch.sichtbar { opacity: 1; transform: none; pointer-events: auto; }
+.hoch svg { width: 22px; height: 22px; }
+
+/* Größere Bildschirme */
+@media (min-width: 48rem) {
+  body { font-size: 1.15rem; }
+  .heft { margin: 1.5rem auto 0; box-shadow: 0 2px 20px rgba(0,0,0,.06); }
+  .titel__bild img { aspect-ratio: auto; max-width: 26rem; margin: 0 auto; border-radius: 3px; }
+  .titel__bild figcaption { text-align: center; }
+  .innen, .beitrag, .gd-liste, .filter, .filter__hinweis, .leer, .kigo-legende { padding-left: 2rem; padding-right: 2rem; }
+  .gruppe, .legende, .spruch { margin-left: 2rem; margin-right: 2rem; }
+  h2.balken { padding-left: 2rem; padding-right: 2rem; }
+}
+
+@media print {
+  .kopf, .menue, .hoch, .filter, .filter__hinweis, .inhalt, .skip { display: none !important; }
+  body { background: #fff; font-size: 11pt; }
+  .gd[hidden], .gd__ort[hidden] { display: block !important; }
+  .aktion { background: none; color: var(--gruen) !important; border: 1px solid var(--gruen); }
+}
