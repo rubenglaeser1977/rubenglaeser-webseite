@@ -127,10 +127,12 @@
     b.type = 'button';
     b.className = 'teilen';
     b.setAttribute('aria-label', label);
-    b.innerHTML = '<svg aria-hidden="true"><use href="#i-teilen"/></svg><span>Teilen</span>';
+    b.innerHTML = '<svg aria-hidden="true"><use href="#i-teilen"/></svg>';
+    b.title = 'Teilen';
     return b;
   }
   var KOPF = 'Kirchennachrichten Dresden-Blasewitz';
+  window.KINA = { zeige: zeige, sauber: sauber, slug: slug };
 
   /* Gottesdienste: ein Knopf pro Tag */
   document.querySelectorAll('.gd').forEach(function (gd) {
@@ -169,17 +171,19 @@
     kopf.appendChild(b);
   });
 
-  /* Veranstaltungen: alle Beiträge mit Datumszeile */
+  /* Beiträge: jeder Beitrag bekommt oben rechts ein Teilen-Symbol */
   document.querySelectorAll('article.beitrag[id]').forEach(function (art) {
-    var datum = art.querySelector(':scope > .datum');
     var h = art.querySelector('h3');
-    if (!datum || !h) return;
-    var titel = sauber(h.textContent);
-    var b = knopf('Termin „' + titel + '“ teilen');
+    var sek = art.closest('section.rubrik');
+    var titel = sauber(h ? h.textContent : '') || sauber((art.querySelector('h4') || {}).textContent) || (sek ? sek.dataset.titel : KOPF);
+    var datum = art.querySelector('.datum, .wann');
+    var b = knopf('Beitrag „' + titel + '“ teilen');
+    b.classList.add('teilen--rund');
     b.addEventListener('click', function () {
-      teile({ titel: titel, text: titel + '\n' + sauber(datum.textContent), id: art.id });
+      teile({ titel: titel, text: titel + (datum ? '\n' + sauber(datum.textContent) : ''), id: art.id });
     });
-    datum.insertAdjacentElement('afterend', b);
+    art.classList.add('hat-teilen');
+    art.insertBefore(b, art.firstChild);
   });
 
   function teile(t) {
@@ -254,5 +258,160 @@
 
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); });
+  }
+})();
+
+/* ---------- Termine im Kalender speichern ---------- */
+(function () {
+  'use strict';
+  var H = window.KINA;
+  var ORTE = {
+    hg: 'Heilig-Geist-Kirche, Berggartenstraße 22a, 01277 Dresden',
+    bk: 'Bethlehemkirche, Marienberger Str. 65, 01279 Dresden',
+    vk: 'Versöhnungskirche, Schandauer Str. 35, 01277 Dresden',
+    vksaal: 'Großer Saal, Gemeindehaus der Versöhnungskirche, Schandauer Str. 35, 01277 Dresden',
+    gh: 'Gemeindehaus, Sebastian-Bach-Str. 13, 01277 Dresden',
+    bbz: 'Begegnungs- und Beratungszentrum der Ökumenischen Seniorenhilfe, Seidnitz Center (EG), Dresden'
+  };
+  var KIRCHE = { 'Heilig-Geist-Kirche': 'hg', 'Bethlehemkirche': 'bk', 'Versöhnungskirche': 'vk' };
+  var MONATE = { januar: 1, februar: 2, 'märz': 3, april: 4, mai: 5, juni: 6, juli: 7, august: 8, september: 9, oktober: 10, november: 11, dezember: 12 };
+  function zwei(n) { return (n < 10 ? '0' : '') + n; }
+  function plusMinuten(iso, min) {
+    var d = new Date(iso + ':00Z'); d.setUTCMinutes(d.getUTCMinutes() + min);
+    return d.toISOString().slice(0, 16);
+  }
+  function plusTag(tag) {
+    var d = new Date(tag + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 1);
+    return d.toISOString().slice(0, 10);
+  }
+  function knopf(titel) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'kal';
+    b.setAttribute('aria-label', '„' + titel + '“ im Kalender speichern');
+    b.title = 'Im Kalender speichern';
+    b.innerHTML = '<svg aria-hidden="true"><use href="#i-kal-plus"/></svg>';
+    return b;
+  }
+  function anker(el) { var a = el.closest('[id]'); return a ? a.id : ''; }
+
+  var termine = [];
+  /* 1. Gottesdienste aus der Kartenstruktur */
+  document.querySelectorAll('.gd').forEach(function (gd) {
+    var m = H.sauber(gd.querySelector('.gd__kopf b').textContent).match(/(\d+)\.\s*(\S+)/);
+    if (!m) return;
+    var monat = MONATE[m[2].toLowerCase()];
+    var jahr = monat === 12 ? 2026 : 2027;
+    var tag = jahr + '-' + zwei(monat) + '-' + zwei(+m[1]);
+    gd.querySelectorAll('.gd__ort').forEach(function (ort) {
+      var kirche = H.sauber((ort.querySelector('.gd__ortname small') || {}).textContent);
+      ort.querySelectorAll('.feier').forEach(function (f) {
+        var z = H.sauber(f.querySelector('.feier__zeit').textContent).match(/(\d+)\.(\d+)/);
+        if (!z) return;
+        var was = f.querySelector('.feier__was').cloneNode(true);
+        var wer = was.querySelector('.feier__wer'), kigo = was.querySelector('.kigo');
+        var werT = wer ? H.sauber(wer.textContent) : '';
+        if (wer) wer.remove(); if (kigo) kigo.remove();
+        var start = tag + 'T' + zwei(+z[1]) + ':' + z[2];
+        var titel = H.sauber(was.textContent) + ' – ' + kirche;
+        termine.push({
+          el: f, ziel: f.querySelector('.feier__was'), titel: titel, start: start, ende: plusMinuten(start, 60),
+          ort: ORTE[KIRCHE[kirche]] || kirche,
+          info: [werT, kigo ? 'mit Kindergottesdienst' : ''].filter(Boolean).join(', '),
+          id: gd.id
+        });
+      });
+    });
+  });
+  /* 2. Veranstaltungen mit hinterlegten Daten */
+  document.querySelectorAll('[data-kal-start]').forEach(function (el) {
+    var art = el.closest('article');
+    var h = art && art.querySelector('h3');
+    var titel = el.dataset.kalTitel || H.sauber(h ? h.textContent : '');
+    var ort = el.dataset.kalOrt || '';
+    termine.push({
+      el: el, ziel: el, titel: titel, start: el.dataset.kalStart,
+      ende: el.dataset.kalEnde || el.dataset.kalStart, ort: ORTE[ort] || ort,
+      rrule: el.dataset.kalRrule || '', info: '', id: anker(el)
+    });
+  });
+
+  termine.forEach(function (t) {
+    var b = knopf(t.titel);
+    b.addEventListener('click', function () { oeffne(t); });
+    if (t.ziel.matches('.feier__was')) t.el.appendChild(b);
+    else if (t.ziel.matches('li')) { var z = t.ziel.querySelector('.zeit'); (z || t.ziel).appendChild(b); }
+    else if (t.ziel.matches('.datum')) {
+      var zeile = document.createElement('div'); zeile.className = 'datum-zeile';
+      t.ziel.parentNode.insertBefore(zeile, t.ziel); zeile.appendChild(t.ziel); zeile.appendChild(b);
+    }
+    else t.ziel.appendChild(b);
+  });
+
+  /* Auswahl: Gerätekalender oder Google */
+  var blatt = document.getElementById('kal-blatt');
+  var aktuell = null;
+  function oeffne(t) {
+    aktuell = t;
+    blatt.querySelector('[data-kal-was]').textContent = t.titel;
+    blatt.hidden = false;
+    blatt.querySelector('[data-kal-ics]').focus();
+  }
+  function schliesse() { blatt.hidden = true; }
+  blatt.addEventListener('click', function (e) {
+    if (e.target === blatt || e.target.closest('[data-kal-zu]')) return schliesse();
+    if (e.target.closest('[data-kal-ics]')) { ics(aktuell); schliesse(); }
+    if (e.target.closest('[data-kal-google]')) { google(aktuell); schliesse(); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') schliesse(); });
+
+  function ganztags(t) { return t.start.length === 10; }
+  function link(t) { return location.origin + location.pathname + (t.id ? '#' + t.id : ''); }
+  function beschreibung(t) {
+    return (t.info ? t.info + '\n' : '') + 'Kirchennachrichten der Ev.-Luth. Kirchgemeinde Dresden-Blasewitz\n' + link(t);
+  }
+  function esc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n'); }
+  function kompakt(iso) { return iso.replace(/[-:]/g, ''); }
+  function falte(z) {
+    var out = [], s = z;
+    while (s.length > 70) { out.push(s.slice(0, 70)); s = ' ' + s.slice(70); }
+    out.push(s); return out.join('\r\n');
+  }
+  function ics(t) {
+    var jetzt = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+    var z = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Kirchgemeinde Dresden-Blasewitz//Kirchennachrichten//DE', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE', 'TZID:Europe/Berlin',
+      'BEGIN:DAYLIGHT', 'TZOFFSETFROM:+0100', 'TZOFFSETTO:+0200', 'TZNAME:CEST', 'DTSTART:19700329T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU', 'END:DAYLIGHT',
+      'BEGIN:STANDARD', 'TZOFFSETFROM:+0200', 'TZOFFSETTO:+0100', 'TZNAME:CET', 'DTSTART:19701025T030000', 'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU', 'END:STANDARD',
+      'END:VTIMEZONE', 'BEGIN:VEVENT',
+      'UID:' + kompakt(t.start) + '-' + H.slug(t.titel).slice(0, 40) + '@kina-blasewitz', 'DTSTAMP:' + jetzt];
+    if (ganztags(t)) {
+      z.push('DTSTART;VALUE=DATE:' + kompakt(t.start), 'DTEND;VALUE=DATE:' + kompakt(plusTag(t.ende)));
+    } else {
+      z.push('DTSTART;TZID=Europe/Berlin:' + kompakt(t.start) + '00', 'DTEND;TZID=Europe/Berlin:' + kompakt(t.ende) + '00');
+    }
+    if (t.rrule) z.push('RRULE:' + t.rrule);
+    z.push('SUMMARY:' + esc(t.titel));
+    if (t.ort) z.push('LOCATION:' + esc(t.ort));
+    z.push('DESCRIPTION:' + esc(beschreibung(t)), 'URL:' + link(t), 'END:VEVENT', 'END:VCALENDAR');
+    var text = z.map(falte).join('\r\n');
+    var name = H.slug(t.titel).slice(0, 50) + '.ics';
+    var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (ios) {
+      window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(text);
+      return;
+    }
+    var url = URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
+    var a = document.createElement('a'); a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    H.zeige('Termin-Datei geladen – zum Übernehmen öffnen.');
+  }
+  function google(t) {
+    var dates = ganztags(t)
+      ? kompakt(t.start) + '/' + kompakt(plusTag(t.ende))
+      : kompakt(t.start) + '00/' + kompakt(t.ende) + '00';
+    var p = new URLSearchParams({ action: 'TEMPLATE', text: t.titel, dates: dates, ctz: 'Europe/Berlin', details: beschreibung(t), location: t.ort });
+    if (t.rrule) p.set('recur', 'RRULE:' + t.rrule);
+    window.open('https://calendar.google.com/calendar/render?' + p.toString(), '_blank', 'noopener');
   }
 })();

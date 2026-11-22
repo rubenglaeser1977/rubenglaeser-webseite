@@ -342,3 +342,38 @@ abbr[title] { text-decoration: underline dotted 1px; text-underline-offset: 3px;
 button.aktion { font-family: var(--serif); cursor: pointer; width: 100%; }
 button.aktion:not(.aktion--hell) { border: 0; }
 .datum { margin-right: .4rem; }
+
+/* ---------- Kalender-Symbol ---------- */
+.kal {
+  display: inline-grid; place-items: center; flex: none; vertical-align: middle;
+  width: 34px; height: 34px; padding: 0; margin: 0 0 .55rem; border-radius: 50%;
+  background: #fff; color: var(--gruen); border: 1.5px solid var(--gruen); cursor: pointer;
+}
+.kal:hover { background: var(--gruen-hell); }
+.kal:focus-visible, .teilen:focus-visible { outline: 3px solid var(--gruen); outline-offset: 2px; }
+.kal svg { width: 18px; height: 18px; }
+.feier { grid-template-columns: 5.7rem 1fr auto; }
+.feier > .kal { margin: -.1rem 0 0 .4rem; align-self: start; }
+.programm .zeit .kal { width: 30px; height: 30px; margin: 0 0 0 .5rem; vertical-align: -8px; }
+.programm .zeit .kal svg { width: 16px; height: 16px; }
+
+/* Teilen als rundes Symbol */
+.teilen { width: 34px; height: 34px; min-height: 0; padding: 0; justify-content: center; border-radius: 50%; margin: 0; }
+.teilen svg { width: 17px; height: 17px; }
+.gd__kopf .teilen { padding: 0; }
+.beitrag.hat-teilen { position: relative; }
+.beitrag.hat-teilen > .teilen--rund { position: absolute; top: -.1rem; right: 1.25rem; z-index: 2; }
+.beitrag.hat-teilen > .teilen--rund + .bild-rechts { margin-top: 2.7rem; }
+#silvesterkonzert > .teilen--rund { top: .75rem; right: 2rem; background: #fff; }
+.datum-zeile { display: flex; align-items: flex-start; gap: .45rem; margin: 0 0 .55rem; }
+.datum-zeile .datum { margin: 0; }
+.datum-zeile .kal { margin: 0; flex: none; }
+.wann .kal { margin: .5rem auto 0; display: grid; }
+.beitrag.hat-teilen > h3 { padding-right: 2.9rem; }
+.beitrag.hat-teilen > h3[style] { padding-right: 0; }
+
+/* Auswahl Kalender */
+.kal-was { font-weight: 700; color: var(--text) !important; margin: 0 0 .8rem; }
+.kal-klein { font-size: .85rem !important; margin: -.4rem 0 .9rem; text-align: center; }
+.kal-abbrechen { display: block; width: 100%; background: none; border: 0; font: 700 1rem var(--serif); color: var(--text-leise); padding: .7rem; cursor: pointer; }
+@media print { .kal, .kal-blatt { display: none !important; } }

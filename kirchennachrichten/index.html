@@ -24,6 +24,7 @@
   <symbol id="i-menue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-teilen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></symbol>
   <symbol id="i-app" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 7v7M9 11l3 3 3-3M10 18h4"/></symbol>
+  <symbol id="i-kal-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.5 15.5h5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-kind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M9 4.5c1-1.5 2.5-2 3.5-1.2M9.2 12h.01M14.8 12h.01M9 16c1.6 1.4 4.4 1.4 6 0"/></symbol>
 </svg>
@@ -101,7 +102,7 @@
   <!-- ========== GEISTLICHER GEDANKE ========== -->
   <section class="rubrik" id="geistlicher-gedanke" data-titel="Geistlicher Gedanke">
     <h2 class="balken">Geistlicher Gedanke</h2>
-    <article class="beitrag">
+    <article class="beitrag" id="andacht">
       <p class="gruss">Liebe Gemeinde,</p>
       <p>eher zufällig bin ich in eine Ausstellung geraten: ein großer Raum, viele Menschen, und mittendrin diese Bilder. Wenige nur schauten sie an. Und auch ich wäre vermutlich schnell daran vorbeigelaufen, wenn ich nicht noch Zeit gehabt hätte. Zeit, die mir noch blieb, bis der Zug einfuhr. Die Ausstellung befand sich im Hauptbahnhof Dresden, mitten unter der gläsernen Kuppel im Hauptfoyer.</p>
       <p>Sie trägt den Titel „Du im Spiegel“. Es ist zu lesen, dass man diesen Ort bewusst gewählt hat: Ein Ort, an dem viele ankommen und kaum jemand bleibt. Es sind Schwarz-Weiß-Porträts von Menschen in einer besonderen Lebenssituation. Sie haben keine Wohnung, Menschen ohne Obdach. Sie schauen dem Betrachtenden direkt ins Gesicht. Eine ganz neue Perspektive. Wenn ich ihnen im Alltag auf der Straße begegnet wäre, wo wäre mein Blick hingegangen? In ihre Richtung? Hätte ich den Blick erwidert?</p>
@@ -297,7 +298,7 @@
 
     <article class="beitrag" id="taize-gebet">
       <h3>Taizé-Gebet</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 17. Januar · 19.00 Uhr · Gemeindesaal Sebastian-Bach-Straße 13</p>
+      <p class="datum" data-kal-start="2027-01-17T19:00" data-kal-ende="2027-01-17T20:00" data-kal-ort="gh" data-kal-titel="Taizé-Gebet"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 17. Januar · 19.00 Uhr · Gemeindesaal Sebastian-Bach-Straße 13</p>
       <img class="bild-rechts klein" src="img/taize.jpg" width="119" height="122" alt="Taizé-Kreuz" loading="lazy">
       <p>Mit Gesang, Lesung und meditativer Stille wollen wir das gemeinsame Gebet nach der Liturgie der Bruderschaft von Taizé feiern. Herzliche Einladung um 19.00 Uhr in den Gemeindesaal Sebastian-Bach-Straße 13.</p>
       <div class="clear"></div>
@@ -307,9 +308,9 @@
       <h3>Abendmahl mit Kindern 2027</h3>
       <p>Liebe Kinder, liebe Eltern, für den Abendmahlskurs für Kinder sind alle getauften Kinder der 3. Klasse herzlich eingeladen. Auch Kinder der Klassen 4 und 5, die das Angebot noch nicht wahrnehmen konnten, laden wir dazu ein. Die genauen Termine:</p>
       <ul class="programm">
-        <li><span class="zeit">Fr, 22. Januar, 16.30–17.30 Uhr</span>Abendmahlskurs mit Kindern im Gemeindehaus, Seb.-Bach-Str. 13</li>
-        <li><span class="zeit">Sa, 23. Januar, 10.00–12.00 Uhr</span>Tag der Liturgie für das Erstabendmahl mit Kindern und Eltern im Gemeindehaus, Seb.-Bach-Str. 13</li>
-        <li><span class="zeit">So, 24. Januar, 9.30 Uhr</span>Gottesdienst mit Erstabendmahl in der Heilig-Geist-Kirche</li>
+        <li data-kal-start="2027-01-22T16:30" data-kal-ende="2027-01-22T17:30" data-kal-ort="gh" data-kal-titel="Abendmahlskurs mit Kindern"><span class="zeit">Fr, 22. Januar, 16.30–17.30 Uhr</span>Abendmahlskurs mit Kindern im Gemeindehaus, Seb.-Bach-Str. 13</li>
+        <li data-kal-start="2027-01-23T10:00" data-kal-ende="2027-01-23T12:00" data-kal-ort="gh" data-kal-titel="Tag der Liturgie – Erstabendmahl mit Kindern"><span class="zeit">Sa, 23. Januar, 10.00–12.00 Uhr</span>Tag der Liturgie für das Erstabendmahl mit Kindern und Eltern im Gemeindehaus, Seb.-Bach-Str. 13</li>
+        <li data-kal-start="2027-01-24T09:30" data-kal-ende="2027-01-24T10:30" data-kal-ort="hg" data-kal-titel="Gottesdienst mit Erstabendmahl"><span class="zeit">So, 24. Januar, 9.30 Uhr</span>Gottesdienst mit Erstabendmahl in der Heilig-Geist-Kirche</li>
       </ul>
       <p>Anmeldung per Link über die Website oder einfach über den folgenden Button. Bei Fragen wenden Sie sich gerne an Gemeindepädagogin <a href="mailto:maddy.manzke@evlks.de">Maddy Manzke</a>.</p>
       <a class="aktion" href="https://kalender.evlks.de/webformular/input/liste/cdaf1963-28b8-412c-98ac-36667779b2f2" target="_blank" rel="noopener">Zur Anmeldung Abendmahlskurs <svg aria-hidden="true"><use href="#i-pfeil"/></svg></a>
@@ -317,7 +318,7 @@
 
     <article class="beitrag" id="kirchentag">
       <h3>„Du bist kostbar!“: Fahrt der Jugend zum Kirchentag 2027 in Düsseldorf</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>5. bis 9. Mai 2027 · Anmeldung bis 28. Februar</p>
+      <p class="datum" data-kal-start="2027-05-05" data-kal-ende="2027-05-09" data-kal-ort="Düsseldorf" data-kal-titel="Fahrt der Jugend zum Kirchentag 2027 in Düsseldorf"><svg aria-hidden="true"><use href="#i-kal"/></svg>5. bis 9. Mai 2027 · Anmeldung bis 28. Februar</p>
       <img class="bild-rechts klein" src="img/kirchentag.jpg" width="146" height="141" alt="Junge Menschen mit Kerzen in der Dunkelheit" loading="lazy">
       <p>Kirchentag ist einmalig: ein buntes Glaubens-, Kultur- und Musikfestival, eine Plattform für kritische Debatten, ein einzigartiger Anlass, um Gemeinschaft zu erleben! Vom 5. bis zum 9. Mai 2027 steht der Kirchentag in Düsseldorf unter der Losung „Du bist kostbar“ (nach Jes 43,4). Sei auch du dabei!</p>
       <p>Wir, die Evangelische Jugend Blasewitz, organisieren eine gemeinsame Fahrt für Jugendliche (ab 15 Jahren) und junge Erwachsene zum Kirchentag. Eine Anmeldung ist bis zum 28. Februar möglich. Weitere Infos findet ihr im Anmeldeformular oder bei Diakon <a href="mailto:sebastian.holzhausen@evlks.de">Sebastian Holzhausen</a>. Wir freuen uns auf einen inspirierenden Kirchentag!</p>
@@ -453,7 +454,7 @@
 
     <article class="beitrag" id="adventskalender-lebendig">
       <h3>Lebendiger Adventskalender</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>1. bis 23. Dezember · Striesen und Blasewitz</p>
+      <p class="datum" data-kal-start="2026-12-01" data-kal-ende="2026-12-23" data-kal-ort="Striesen und Blasewitz"><svg aria-hidden="true"><use href="#i-kal"/></svg>1. bis 23. Dezember · Striesen und Blasewitz</p>
       <img class="bild-rechts" src="img/stern.jpg" width="223" height="230" alt="Leuchtender Herrnhuter Stern" loading="lazy">
       <p>Herzliche Einladung nach Striesen und Blasewitz. Familien öffnen wieder ihre Häuser und Höfe und laden Mitbürger ein zum nachbarschaftlichen und adventlichen Beisammensein mit Musik, Glühwein, Gebäck, Geschichten und Basteleien. Beteiligt sind auch Kirchgemeinden in unserer Nachbarschaft, die katholische Gemeinde, das Bibelhaus und die Ökumenische Seniorenhilfe Dresden e.V.</p>
       <p>Genauere Informationen zu den adressierten Kalenderterminen entnehmen Sie bitte den gelben Aushängen in den Schaukästen unserer Kirchgemeinde sowie im Internet auf unserer <a href="https://www.kirchgemeinde-dresden-blasewitz.de" target="_blank" rel="noopener">Homepage</a>.</p>
@@ -462,7 +463,7 @@
 
     <article class="beitrag" id="ankommen">
       <h3>„Ankommen“. Adventsvesper mit dem Pop-Up-Chor</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 5. Dezember · 17.00 Uhr · Heilig-Geist-Kirche</p>
+      <p class="datum" data-kal-start="2026-12-05T17:00" data-kal-ende="2026-12-05T18:30" data-kal-ort="hg" data-kal-titel="„Ankommen“ – Adventsvesper mit dem Pop-Up-Chor"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 5. Dezember · 17.00 Uhr · Heilig-Geist-Kirche</p>
       <p>Am Vorabend des 2. Advents laden wir, in der mittlerweile vierten Auflage, herzlich zu einer besonderen musikalischen Adventsvesper ein, 17.00 Uhr, in die Heilig-Geist-Kirche.</p>
       <figure><img src="img/ankommen.jpg" width="467" height="237" alt="Plakatmotiv „Musikalische Adventsvesper – ankommen“ mit Tannenzweigen und Lichterkette" loading="lazy"></figure>
       <p>Lassen Sie sich von stimmungsvoller Musik aus Jazz, Pop und Gospel auf die Adventszeit einstimmen. Unter der Leitung von Rebecca Viertel gestalten eine Projekt-Band und der Pop-Up!-Chor den Abend. Im Anschluss sind alle zu einer stimmungsvollen Verköstigung und gemütlichem Beisammensein eingeladen.</p>
@@ -471,7 +472,7 @@
 
     <article class="beitrag" id="kammerorchester">
       <h3>Adventliche Vesper mit dem Kammerorchester</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 6. Dezember · 17.00 Uhr · Bethlehemkirche</p>
+      <p class="datum" data-kal-start="2026-12-06T17:00" data-kal-ende="2026-12-06T18:00" data-kal-ort="bk"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 6. Dezember · 17.00 Uhr · Bethlehemkirche</p>
       <figure><img src="img/kammerorchester.jpg" width="335" height="278" alt="Kammerorchester musiziert im Altarraum der Bethlehemkirche" loading="lazy"></figure>
       <p>Wie in jedem Jahr am zweiten Advent laden wir 17.00 Uhr zu einer musikalischen Stunde mit Musik, adventlichen Texten und bekannten Adventsliedern in die Bethlehemkirche ein. Es erklingt u.a. das Brandenburgische Konzert Nr. 4 (BWV 1049) von Johann Sebastian Bach.</p>
       <p>Als Solisten musizieren mit dem Kammerorchester der Kirchgemeinde: Marlon Schulz und Franca Volke, Blockflöten, sowie Nikolai Litsoukov, Violine. Den Cembalopart übernimmt Friedemann Kleinert. Der Eintritt ist frei, wir erbitten einen Unkostenbeitrag.</p>
@@ -479,7 +480,7 @@
 
     <article class="beitrag" id="senioren-advent">
       <h3>Advent heißt Ankunft. Adventsfeier für Seniorinnen und Senioren</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 9. Dezember · 14.30–16.00 Uhr · Großer Saal, Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2026-12-09T14:30" data-kal-ende="2026-12-09T16:00" data-kal-ort="vksaal" data-kal-titel="Adventsfeier für Seniorinnen und Senioren"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 9. Dezember · 14.30–16.00 Uhr · Großer Saal, Versöhnungskirche</p>
       <p>Liebe Menschen mit Lebenserfahrung, herzlich laden wir Sie ein zu einem besonderen Adventsnachmittag für Lebenskundige am Mittwoch, 14.30 bis 16.00 Uhr im Großen Saal des Gemeindehauses der Versöhnungskirche.</p>
       <figure>
         <img src="img/ankunft.jpg" width="472" height="313" alt="Ankunfts-Anzeigetafel mit Ankunftszeiten" loading="lazy">
@@ -492,7 +493,7 @@
 
     <article class="beitrag" id="adventsblasen">
       <h3>Adventsblasen im Schillergarten</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 12. Dezember · 11.00 Uhr · Schillergarten</p>
+      <p class="datum" data-kal-start="2026-12-12T11:00" data-kal-ende="2026-12-12T12:00" data-kal-ort="Schillergarten, Schillerplatz 9, 01309 Dresden"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 12. Dezember · 11.00 Uhr · Schillergarten</p>
       <p>Eine schöne Tradition gehört seit vielen Jahren zum Advent in unserem Stadtteil: Am Sonnabendvormittag erklingen um 11 Uhr wieder adventliche Bläserklänge im Schillergarten. Bläserinnen und Bläser aus den Posaunenchören im Dresdner Osten kommen unter Leitung von Sebastian Lange zusammen, um mit bekannten Advents- und Weihnachtsliedern auf das bevorstehende Fest einzustimmen.</p>
       <figure><img src="img/adventsblasen.jpg" width="528" height="326" alt="Bläserinnen und Bläser mit Posaunen und Trompeten musizieren im Freien" loading="lazy"></figure>
       <p>Die Tradition reicht bis ins Jahr 1967 zurück und wurde damals von Kantor Ullmann von der Bethlehemkirche ins Leben gerufen. Im vergangenen Jahr waren 26 Bläserinnen und Bläser dabei – und viele Menschen blieben stehen und hörten zu. Herzliche Einladung, auch in diesem Jahr dabei zu sein!</p>
@@ -500,26 +501,26 @@
 
     <article class="beitrag" id="festwochenende">
       <h3>Festwochenende „75 Jahre Bethlehemkirche“</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>12. und 13. Dezember · Bethlehemkirche Tolkewitz</p>
+      <p class="datum" data-kal-start="2026-12-12" data-kal-ende="2026-12-13" data-kal-ort="bk"><svg aria-hidden="true"><use href="#i-kal"/></svg>12. und 13. Dezember · Bethlehemkirche Tolkewitz</p>
       <img class="bild-rechts klein" src="img/logo-75.png" width="172" height="334" alt="Jubiläumslogo 75 Jahre Bethlehemkirche" loading="lazy">
       <p>Vor 75 Jahren, am 3. Advent 1951, wurde die Bethlehemkirche geweiht. Dieses Jubiläum möchten wir nicht nur mit einem Festgottesdienst begehen, sondern ein ganzes Wochenende lang miteinander feiern, zurückblicken und der Geschichte von Kirche und Gemeinde in Tolkewitz nachspüren. Bereits am 2. Advent stimmt die <a href="#kammerorchester">Adventsvesper</a> in der Bethlehemkirche auf das Jubiläum ein.</p>
       <p class="tag clear">Samstag, 12. Dezember</p>
       <ul class="programm">
-        <li><span class="zeit">14.00 Uhr</span><span class="titel-p">Auf den Spuren der Tolkewitzer Kirchengeschichte</span><p>Wir beginnen an der Kapelle des Johannisfriedhofs mit einem etwa einstündigen, von Martin Kaden geführten Spaziergang durch Tolkewitz. Der Weg führt zu Orten, die für die Geschichte der Gemeinde wichtig geworden sind – unter anderem zum früheren Haubergut mit dem „Kirchlichen Heim“, in dem die Tolkewitzer Gemeinde vor dem Bau der Bethlehemkirche ihr Zuhause hatte, und schließlich zur Kirche selbst.</p></li>
-        <li><span class="zeit">parallel ab 14.00 Uhr</span><span class="titel-p">Programm für Kinder</span><p>Im Gemeindehaus gibt es ein adventliches Kinderprogramm rund um Bethlehem mit Basteln und weiteren Aktionen.</p></li>
-        <li><span class="zeit">ab ca. 15.00 Uhr</span><span class="titel-p">Zeit für Begegnung</span><p>Anschließend treffen wir uns rund um Kirche und Gemeindehaus bei Suppe, Glühpunsch, Tee und Kaffee. Dabei gibt es viel Gelegenheit zum Wiedersehen und Erzählen. Ein kleiner Jubiläumsstand bietet unter anderem das Tolkewitz-Buch, historische Postkarten und besondere Erinnerungsstücke rund um die Bethlehemkirche an.</p></li>
-        <li><span class="zeit">17.00 Uhr</span><span class="titel-p">75 Jahre Bethlehemkirche – ein historischer Rückblick</span><p>In der Bethlehemkirche blickt Pfarrer i.R. Dr. Hans-Peter Hasse in einem Vortrag auf die Geschichte der Kirche und ihrer Gemeinde zurück. Kurze musikalische Beiträge rahmen den Vortrag.</p><p>Im Anschluss sind ehemalige Mitarbeitende, Kirchvorsteherinnen und Kirchvorsteher sowie weitere Wegbegleiter eingeladen, ihre Erinnerungen beizusteuern. Bei einem Glas Sekt wollen wir miteinander ins Gespräch kommen und Geschichten aus 75 Jahren Bethlehemkirche teilen.</p></li>
+        <li data-kal-start="2026-12-12T14:00" data-kal-ende="2026-12-12T15:00" data-kal-ort="Kapelle des Johannisfriedhofs, Dresden-Tolkewitz" data-kal-titel="Auf den Spuren der Tolkewitzer Kirchengeschichte (Spaziergang)"><span class="zeit">14.00 Uhr</span><span class="titel-p">Auf den Spuren der Tolkewitzer Kirchengeschichte</span><p>Wir beginnen an der Kapelle des Johannisfriedhofs mit einem etwa einstündigen, von Martin Kaden geführten Spaziergang durch Tolkewitz. Der Weg führt zu Orten, die für die Geschichte der Gemeinde wichtig geworden sind – unter anderem zum früheren Haubergut mit dem „Kirchlichen Heim“, in dem die Tolkewitzer Gemeinde vor dem Bau der Bethlehemkirche ihr Zuhause hatte, und schließlich zur Kirche selbst.</p></li>
+        <li data-kal-start="2026-12-12T14:00" data-kal-ende="2026-12-12T16:00" data-kal-ort="Gemeindehaus der Bethlehemkirche, Marienberger Str. 65, 01279 Dresden" data-kal-titel="Programm für Kinder – 75 Jahre Bethlehemkirche"><span class="zeit">parallel ab 14.00 Uhr</span><span class="titel-p">Programm für Kinder</span><p>Im Gemeindehaus gibt es ein adventliches Kinderprogramm rund um Bethlehem mit Basteln und weiteren Aktionen.</p></li>
+        <li data-kal-start="2026-12-12T15:00" data-kal-ende="2026-12-12T17:00" data-kal-ort="bk" data-kal-titel="Zeit für Begegnung – 75 Jahre Bethlehemkirche"><span class="zeit">ab ca. 15.00 Uhr</span><span class="titel-p">Zeit für Begegnung</span><p>Anschließend treffen wir uns rund um Kirche und Gemeindehaus bei Suppe, Glühpunsch, Tee und Kaffee. Dabei gibt es viel Gelegenheit zum Wiedersehen und Erzählen. Ein kleiner Jubiläumsstand bietet unter anderem das Tolkewitz-Buch, historische Postkarten und besondere Erinnerungsstücke rund um die Bethlehemkirche an.</p></li>
+        <li data-kal-start="2026-12-12T17:00" data-kal-ende="2026-12-12T18:30" data-kal-ort="bk" data-kal-titel="75 Jahre Bethlehemkirche – ein historischer Rückblick"><span class="zeit">17.00 Uhr</span><span class="titel-p">75 Jahre Bethlehemkirche – ein historischer Rückblick</span><p>In der Bethlehemkirche blickt Pfarrer i.R. Dr. Hans-Peter Hasse in einem Vortrag auf die Geschichte der Kirche und ihrer Gemeinde zurück. Kurze musikalische Beiträge rahmen den Vortrag.</p><p>Im Anschluss sind ehemalige Mitarbeitende, Kirchvorsteherinnen und Kirchvorsteher sowie weitere Wegbegleiter eingeladen, ihre Erinnerungen beizusteuern. Bei einem Glas Sekt wollen wir miteinander ins Gespräch kommen und Geschichten aus 75 Jahren Bethlehemkirche teilen.</p></li>
       </ul>
       <p class="tag">Sonntag, 13. Dezember – 3. Advent</p>
       <ul class="programm">
-        <li><span class="zeit">9.30 Uhr</span><span class="titel-p">Festgottesdienst „75 Jahre Bethlehemkirche“</span><p>Den Höhepunkt des Jubiläums bildet der Festgottesdienst am Sonntagmorgen. Die Festpredigt hält Superintendent Christian Behr. Auch musikalisch wird es festlich: Die Bläser rund um Matthias Ullmann rahmen festlich den Gottesdienst, die Seniorenkantorei musiziert unter Leitung von Kantorin Margret Leidenberger Johann Sebastian Bachs Kantate „Nun komm, der Heiden Heiland“ (BWV 62).</p></li>
-        <li><span class="zeit">Im Anschluss</span><span class="titel-p">Gemeinsam weiterfeiern</span><p>Nach dem Gottesdienst sind alle herzlich zu einem erweiterten Kirchenkaffee im und am Gemeindehaus eingeladen. Feiern Sie mit uns 75 Jahre Bethlehemkirche – und bringen Sie gern auch Ihre eigenen Erinnerungen an diesen besonderen Ort mit!</p></li>
+        <li data-kal-start="2026-12-13T09:30" data-kal-ende="2026-12-13T10:30" data-kal-ort="bk" data-kal-titel="Festgottesdienst „75 Jahre Bethlehemkirche“"><span class="zeit">9.30 Uhr</span><span class="titel-p">Festgottesdienst „75 Jahre Bethlehemkirche“</span><p>Den Höhepunkt des Jubiläums bildet der Festgottesdienst am Sonntagmorgen. Die Festpredigt hält Superintendent Christian Behr. Auch musikalisch wird es festlich: Die Bläser rund um Matthias Ullmann rahmen festlich den Gottesdienst, die Seniorenkantorei musiziert unter Leitung von Kantorin Margret Leidenberger Johann Sebastian Bachs Kantate „Nun komm, der Heiden Heiland“ (BWV 62).</p></li>
+        <li data-kal-start="2026-12-13T10:30" data-kal-ende="2026-12-13T12:30" data-kal-ort="bk" data-kal-titel="Gemeinsam weiterfeiern – 75 Jahre Bethlehemkirche"><span class="zeit">Im Anschluss</span><span class="titel-p">Gemeinsam weiterfeiern</span><p>Nach dem Gottesdienst sind alle herzlich zu einem erweiterten Kirchenkaffee im und am Gemeindehaus eingeladen. Feiern Sie mit uns 75 Jahre Bethlehemkirche – und bringen Sie gern auch Ihre eigenen Erinnerungen an diesen besonderen Ort mit!</p></li>
       </ul>
     </article>
 
     <article class="beitrag" id="blaesermusik">
       <h3>Festliche Bläsermusik zum Advent</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 13. Dezember · 17.00 Uhr · Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2026-12-13T17:00" data-kal-ende="2026-12-13T18:00" data-kal-ort="vk"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 13. Dezember · 17.00 Uhr · Versöhnungskirche</p>
       <p>Der Posaunenchor nimmt uns in diesem Jahr mit auf eine adventliche Reise durch die Bläserliteratur.</p>
       <figure><img src="img/posaunenchor.jpg" width="472" height="255" alt="Posaunenchor musiziert in der Versöhnungskirche" loading="lazy"></figure>
       <p>Von wunderschönen Doppelchören der Renaissance bis zu poppigen Vertonungen altbekannter Adventslieder ist alles dabei. Lassen Sie sich 17.00 Uhr in die Versöhnungskirche zum Zuhören und Mitsingen einladen. Der Eintritt ist frei, der Erlös ist für die Aktion <a href="#wohltemperiert">„Wohltemperiert“</a> in der Versöhnungskirche bestimmt.</p>
@@ -528,7 +529,7 @@
     <article class="beitrag" id="silvesterkonzert">
       <h3 class="sr-only" style="position:absolute;left:-9999px">Silvesterkonzert</h3>
       <div class="konzert">
-        <p class="wann">Donnerstag, 31. Dezember 2026<br>17 Uhr Versöhnungskirche</p>
+        <p class="wann" data-kal-start="2026-12-31T17:00" data-kal-ende="2026-12-31T19:30" data-kal-ort="vk" data-kal-titel="Silvesterkonzert: Händel „Messiah“">Donnerstag, 31. Dezember 2026<br>17 Uhr Versöhnungskirche</p>
         <h4>Silvesterkonzert</h4>
         <p class="werk">Georg Friedrich Händel: „Messiah“</p>
         <p class="art">Oratorium für Soli, Chor und Orchester</p>
@@ -552,7 +553,7 @@
 
     <article class="beitrag" id="krippenspiele">
       <h3>„Und die Hirten kehrten wieder um …“ Lange Nacht der Krippenspiele</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 9. Januar · 13.00 bis ca. 21.00 Uhr · Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2027-01-09T13:00" data-kal-ende="2027-01-09T21:00" data-kal-ort="vk" data-kal-titel="Lange Nacht der Krippenspiele"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 9. Januar · 13.00 bis ca. 21.00 Uhr · Versöhnungskirche</p>
       <p>Kaum ist der Heilige Abend vorbei, sind die liebevoll einstudierten Krippenspiele oft schon wieder verschwunden – nach nur einer einzigen Aufführung. Dabei steckt in jedem Hirten, jedem Engel und jedem Weisen auf dem Weg nach Bethlehem so viel mehr! Die Evangelische Jugend in Sachsen lädt deshalb auch 2027 wieder zur beliebten „Langen Nacht der Krippenspiele“ ein – dem großen Krippenspieltreffen für ganz Sachsen.</p>
       <figure>
         <img src="img/drei-koenige.jpg" width="475" height="300" alt="Drei junge Darstellerinnen als Heilige Drei Könige mit Kronen auf einer Bühne" loading="lazy">
@@ -565,7 +566,7 @@
 
     <article class="beitrag" id="workshop">
       <h3>Kirche hier und jetzt. Ein Workshop für junge Erwachsene</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 9. Januar · Gemeindehaus der Bethlehemkirche · Anmeldung bis 4. Januar</p>
+      <p class="datum" data-kal-start="2027-01-09" data-kal-ende="2027-01-09" data-kal-ort="Gemeindehaus der Bethlehemkirche, Marienberger Str. 65, 01279 Dresden" data-kal-titel="Workshop für junge Erwachsene: Kirche hier und jetzt"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 9. Januar · Gemeindehaus der Bethlehemkirche · Anmeldung bis 4. Januar</p>
       <figure class="bild-rechts">
         <img src="img/workshop.jpg" width="253" height="425" alt="Kirchturm spiegelt sich in einer Glasfassade" loading="lazy">
         <figcaption>© Melanie Händel</figcaption>
@@ -578,7 +579,7 @@
 
     <article class="beitrag" id="segnungsgottesdienst">
       <h3>Segnungsgottesdienst „Ich will dich segnen – und du sollst ein Segen sein.“</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 10. Januar · 18.00 Uhr · Heilig-Geist-Kirche</p>
+      <p class="datum" data-kal-start="2027-01-10T18:00" data-kal-ende="2027-01-10T19:00" data-kal-ort="hg" data-kal-titel="Segnungsgottesdienst"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 10. Januar · 18.00 Uhr · Heilig-Geist-Kirche</p>
       <p>Herzliche Einladung zu einem besonderen Abendgottesdienst mit Segnung aller ehrenamtlichen Mitarbeiterinnen und Mitarbeiter unserer Kirchgemeinde am Sonntag um 18.00 Uhr in der Heilig-Geist-Kirche. Viele Menschen sind ehrenamtlich in unserer Gemeinde unterwegs. Sie hören zu, denken und gestalten mit, packen an, sind einfach da – oft ganz selbstverständlich und manchmal ohne großes Dankeschön.</p>
       <p>Wir wollen innehalten, zur Ruhe kommen und gemeinsam feiern. Wir wollen Gott danken für alles, was durch Ihr Engagement wächst und lebendig wird. Und wir möchten miteinander unter dem Zuspruch ins neue Jahr gehen: „Ich will dich segnen – und du sollst ein Segen sein.“ Im Gottesdienst besteht die Möglichkeit, sich ganz persönlich segnen und stärken zu lassen – für das, was vor Ihnen liegt, für Ihre Aufgaben und für Ihren eigenen Lebensweg.</p>
       <p>Musikalisch gestaltet unsere Gemeindeband nomeso den Abend und lässt Lieder erklingen, die in diese nachweihnachtliche Zeit und an den Beginn eines neuen Jahres gehören. Kommen Sie, so wie Sie sind – mit dem, was Sie bewegt, mit Ihrer Freude und vielleicht auch mit dem, was gerade schwer ist. Wir freuen uns auf Sie!</p>
@@ -592,10 +593,10 @@
       <p>Seit vier Jahren lesen und erkunden wir in der Reihe „Zwischen den Zeilen lesen …“ auf kreative Weise biblische, religiöse und philosophische Texte. Nach „Zeit und Ewigkeit“, den Psalmen und den Gleichnissen Jesu führt uns die Reihe 2027 durch das Johannesevangelium. „Komm und sieh!“ – Entdeckungen im Johannesevangelium lautet das Jahresthema.</p>
       <p>Ein altes jüdisches Bild beschreibt die Tora als schwarzes Feuer auf weißem Feuer: Die Buchstaben als „schwarzes Feuer“ bilden den sichtbaren Text, das „weiße Feuer“ den Raum „dazwischen“ für das Verborgene, das Noch-nicht-Gedachte und die Leerstellen des Textes. Gerade das Johannesevangelium lädt zu solchem Lesen ein. Seine Sprache ist voller Bilder, Andeutungen und überraschender Perspektiven. Gemeinsam wollen wir ausgewählten Texten nachspüren und entdecken, was zwischen den Zeilen für uns sichtbar wird.</p>
       <ul class="programm">
-        <li><span class="zeit">Mittwoch, 20. Januar</span>Joh 1,1–18 – „Im Anfang war das Wort“</li>
-        <li><span class="zeit">Mittwoch, 28. April</span>Joh 3,1–10 – Nikodemus bei Nacht</li>
-        <li><span class="zeit">Mittwoch, 1. September</span>Joh 4,5–26 – Am Brunnen</li>
-        <li><span class="zeit">Mittwoch, 3. November</span>Joh 20,11–18 – „Maria!“</li>
+        <li data-kal-start="2027-01-20T19:30" data-kal-ende="2027-01-20T21:00" data-kal-ort="gh" data-kal-titel="Zwischen den Zeilen lesen: Joh 1,1–18"><span class="zeit">Mittwoch, 20. Januar</span>Joh 1,1–18 – „Im Anfang war das Wort“</li>
+        <li data-kal-start="2027-04-28T19:30" data-kal-ende="2027-04-28T21:00" data-kal-ort="gh" data-kal-titel="Zwischen den Zeilen lesen: Joh 3,1–10"><span class="zeit">Mittwoch, 28. April</span>Joh 3,1–10 – Nikodemus bei Nacht</li>
+        <li data-kal-start="2027-09-01T19:30" data-kal-ende="2027-09-01T21:00" data-kal-ort="gh" data-kal-titel="Zwischen den Zeilen lesen: Joh 4,5–26"><span class="zeit">Mittwoch, 1. September</span>Joh 4,5–26 – Am Brunnen</li>
+        <li data-kal-start="2027-11-03T19:30" data-kal-ende="2027-11-03T21:00" data-kal-ort="gh" data-kal-titel="Zwischen den Zeilen lesen: Joh 20,11–18"><span class="zeit">Mittwoch, 3. November</span>Joh 20,11–18 – „Maria!“</li>
       </ul>
       <p>Jeweils 19.30 Uhr im Gemeindesaal, Sebastian-Bach-Str. 13. Herzliche Einladung!</p>
       <p class="unterschrift">Antje Gumsch und Christoph Herbst</p>
@@ -608,22 +609,22 @@
       <figure><img src="img/drache.jpg" width="472" height="271" alt="Kunstvoll ornamentierter grüner Drachenkopf" loading="lazy"></figure>
       <p>Doch die Offenbarung will nicht Angst machen. Sie ist ein Buch der Hoffnung. Sie schaut den Mächten von Angst, Gewalt und Unrecht ins Gesicht und erzählt zugleich davon, dass sie nicht das letzte Wort behalten. Am Ende steht die große Verheißung Gottes: „Siehe, ich mache alles neu.“ Unter dem Leitwort „Dem Drachen ins Gesicht schauen“ wollen wir an vier Abenden ausgewählte Texte entdecken und miteinander ins Gespräch kommen, jeweils 19.30 Uhr im Gemeindehaus Sebastian-Bach-Str. 13. Herzliche Einladung!</p>
       <ul class="programm">
-        <li><span class="zeit">Montag, 25. Januar</span>Offenbarung 1,1–3 – Der Vorhang geht auf</li>
-        <li><span class="zeit">Dienstag, 26. Januar</span>Offenbarung 7,1–17 – Gott kennt die Seinen</li>
-        <li><span class="zeit">Mittwoch, 27. Januar</span>Offenbarung 12 – Dem Drachen ins Gesicht schauen</li>
-        <li><span class="zeit">Donnerstag, 28. Januar</span>Offenbarung 21,1–8 – Siehe, ich mache alles neu</li>
+        <li data-kal-start="2027-01-25T19:30" data-kal-ende="2027-01-25T21:00" data-kal-ort="gh" data-kal-titel="Ökumenische Bibelwoche: Offenbarung 1,1–3"><span class="zeit">Montag, 25. Januar</span>Offenbarung 1,1–3 – Der Vorhang geht auf</li>
+        <li data-kal-start="2027-01-26T19:30" data-kal-ende="2027-01-26T21:00" data-kal-ort="gh" data-kal-titel="Ökumenische Bibelwoche: Offenbarung 7,1–17"><span class="zeit">Dienstag, 26. Januar</span>Offenbarung 7,1–17 – Gott kennt die Seinen</li>
+        <li data-kal-start="2027-01-27T19:30" data-kal-ende="2027-01-27T21:00" data-kal-ort="gh" data-kal-titel="Ökumenische Bibelwoche: Offenbarung 12"><span class="zeit">Mittwoch, 27. Januar</span>Offenbarung 12 – Dem Drachen ins Gesicht schauen</li>
+        <li data-kal-start="2027-01-28T19:30" data-kal-ende="2027-01-28T21:00" data-kal-ort="gh" data-kal-titel="Ökumenische Bibelwoche: Offenbarung 21,1–8"><span class="zeit">Donnerstag, 28. Januar</span>Offenbarung 21,1–8 – Siehe, ich mache alles neu</li>
       </ul>
     </article>
 
     <article class="beitrag" id="probenwochenende">
       <h3>Probenwochenende des Jugendchors in Rosenthal</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>29. bis 31. Januar · Rosenthal, Sächsische Schweiz</p>
+      <p class="datum" data-kal-start="2027-01-29" data-kal-ende="2027-01-31" data-kal-ort="Rosenthal, Sächsische Schweiz" data-kal-titel="Probenwochenende des Jugendchors"><svg aria-hidden="true"><use href="#i-kal"/></svg>29. bis 31. Januar · Rosenthal, Sächsische Schweiz</p>
       <p>Es ist schon eine kleine Tradition, dass der Jugendchor im Winter zu einem Probenwochenende aufbricht und ein Konzert vorbereitet. Wir fahren wieder nach Rosenthal in die Sächsische Schweiz. Du kannst gerne mitfahren, wenn du Lust auf viel Musik und gute Gemeinschaft hast. Wir proben wieder das Musical „Eleasar“ von Gerd-Peter Münden und Sätze aus der Missa 4 you(th) von Tjark Baumann. Näheres bei Kantorin <a href="mailto:margret.leidenberger@evlks.de">Leidenberger</a>.</p>
     </article>
 
     <article class="beitrag" id="familienkirche">
       <h3>Familienkirche im neuen Jahr</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 31. Januar · 10.30 Uhr · Großer Saal, Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2027-01-31T10:30" data-kal-ende="2027-01-31T12:00" data-kal-ort="vksaal" data-kal-titel="Familienkirche"><svg aria-hidden="true"><use href="#i-kal"/></svg>So, 31. Januar · 10.30 Uhr · Großer Saal, Versöhnungskirche</p>
       <img class="bild-rechts" src="img/familienkirche.jpg" width="189" height="297" alt="Wasserfall zwischen Felsen" loading="lazy">
       <p>Herzliche Einladung zur ersten Familienkirche im neuen Jahr! Wir treffen uns 10.30 Uhr im großen Saal der Versöhnungskirche. In diesem Jahr dreht sich alles um das Thema Wasser. Wieso kommt Wasser in der Bibel so oft vor? Welche Geschichten gibt es überhaupt mit Wasser? Gibt es Wasser, das heilen kann? All diesen Fragen wollen wir uns widmen, und im Januar wollen wir uns dafür an einen ganz besonderen Teich begeben …</p>
       <p>Im Anschluss an den kurzen Gottesdienst essen wir zu Mittag und genießen die Gemeinschaft. Wer dafür etwas Kleines wie Nachtisch oder Salat mitbringen möchte, ist herzlich eingeladen das zu tun.</p>
@@ -638,7 +639,7 @@
 
     <article class="beitrag" id="exerzitien">
       <h3>Exerzitien im Alltag in der Passionszeit</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Infoabend: Mo, 1. Februar 2027 · 19.30 Uhr · Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2027-02-01T19:30" data-kal-ende="2027-02-01T21:00" data-kal-ort="vk" data-kal-titel="Infoabend Exerzitien im Alltag"><svg aria-hidden="true"><use href="#i-kal"/></svg>Infoabend: Mo, 1. Februar 2027 · 19.30 Uhr · Versöhnungskirche</p>
       <figure class="bild-rechts klein">
         <img src="img/vater-unser.jpg" width="153" height="153" alt="Aquarell in Blau- und Gelbtönen" loading="lazy">
         <figcaption>Andreas Felgner, Vater Unser IV, Aquarell, 2004</figcaption>
@@ -651,7 +652,7 @@
 
     <article class="beitrag" id="anima-nordica">
       <h3>Nordisches Chorkonzert „ÄNNU“ mit anima nordica</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 6. Februar · 19.00 Uhr · Bethlehemkirche</p>
+      <p class="datum" data-kal-start="2027-02-06T19:00" data-kal-ende="2027-02-06T20:30" data-kal-ort="bk" data-kal-titel="Chorkonzert „ÄNNU“ mit anima nordica"><svg aria-hidden="true"><use href="#i-kal"/></svg>Sa, 6. Februar · 19.00 Uhr · Bethlehemkirche</p>
       <img class="bild-rechts" src="img/anima-nordica.jpg" width="227" height="227" alt="Nordische Küstenlandschaft mit Felsen und Wasser" loading="lazy">
       <p>anima nordica ist zurück, mit einer Weiterentwicklung unseres nordischen Chorprogramms „KVAR“. In „ÄNNU“ (= immer noch) sinnieren wir über das, was wir haben, über Ressourcen und Erfahrungen, die uns weitertragen in einer veränderlichen Welt. Und auch wir selbst erfüllen uns lang gehegte Repertoireträume mit Jaakko Mäntyjärvis Meisterwerk „Canticum Calamitatis Maritimae“. Varmt välkomna! 19.00 Uhr Bethlehemkirche.</p>
       <p>Wie immer ist der Eintritt frei. Stattdessen sammeln wir Spenden. <a href="https://www.animanordica.de" target="_blank" rel="noopener">www.animanordica.de</a></p>
@@ -660,7 +661,7 @@
 
     <article class="beitrag" id="kinderbibeltage">
       <h3>Ökumenische Kinderbibeltage 2027</h3>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>18. bis 21. Februar (Winterferien) · Abschluss So, 11 Uhr, Versöhnungskirche</p>
+      <p class="datum" data-kal-start="2027-02-18" data-kal-ende="2027-02-21" data-kal-ort="vk" data-kal-titel="Ökumenische Kinderbibeltage 2027"><svg aria-hidden="true"><use href="#i-kal"/></svg>18. bis 21. Februar (Winterferien) · Abschluss So, 11 Uhr, Versöhnungskirche</p>
       <p>Liebe Kinder, herzlich laden wir euch zu den Kinderbibeltagen in den Winterferien ein! Kommt mit uns auf eine spannende Reise in die Tiefen der Bibel, auf der wir spannende Personen und aufregende Geschichten kennenlernen wollen. Mit ganz viel Spaß, Musik und Spiel werden wir gemeinsam Göttliches erkunden und Gemeinschaft feiern. Außerdem wollen wir uns selbst an einen Gottesdienst trauen, ihn also planen, gestalten und durchführen. Hier könnt ihr mal einen richtig eigenen Gottesdienst machen!</p>
       <p><b>Wann und wo?</b> Vom 18. bis 21.02., mit Abschlussgottesdienst am Sonntag, 11 Uhr in der Versöhnungskirche. Anmelden könnt ihr euch auf unserer Website oder über den Anmeldelink. Fragen gerne direkt an Gemeindepädagogin <a href="mailto:maddy.manzke@evlks.de">Maddy Manzke</a>. Wir freuen uns auf euch!</p>
       <a class="aktion" href="https://kalender.evlks.de/webformular/input/liste/a44e33bd-cfac-4a73-a36f-a19a9d568401" target="_blank" rel="noopener">Zur Anmeldung Kinderbibeltage <svg aria-hidden="true"><use href="#i-pfeil"/></svg></a>
@@ -716,13 +717,13 @@
     <article class="beitrag" id="begegnungszentrum">
       <h3>Empfehlungen aus dem Begegnungszentrum der Ökumenischen Seniorenhilfe Dresden e.V.</h3>
       <h4>Sterne basteln</h4>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 9.12. · 14.00–15.30 Uhr · Anmeldung bis 7. Dezember</p>
+      <p class="datum" data-kal-start="2026-12-09T14:00" data-kal-ende="2026-12-09T15:30" data-kal-ort="bbz" data-kal-titel="Sterne basteln (Seniorenhilfe)"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 9.12. · 14.00–15.30 Uhr · Anmeldung bis 7. Dezember</p>
       <p>„Weiße Igelsterne“ aus Filtertütenpapier, Vorkenntnisse sind nicht erforderlich, Materialien werden bereitgestellt.</p>
       <h4>Weihnachtscafé</h4>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 23.12. · 14.30–16.00 Uhr · Anmeldung bis 21. Dezember</p>
+      <p class="datum" data-kal-start="2026-12-23T14:30" data-kal-ende="2026-12-23T16:00" data-kal-ort="bbz" data-kal-titel="Weihnachtscafé (Seniorenhilfe)"><svg aria-hidden="true"><use href="#i-kal"/></svg>Mi, 23.12. · 14.30–16.00 Uhr · Anmeldung bis 21. Dezember</p>
       <p>Unter „In Gemeinschaft ist man weniger allein“ laden wir zu Kaffee, Stollen und weihnachtlichen Köstlichkeiten ein. Frau Reimann gestaltet den Nachmittag mit Gedichten und Liedern.</p>
       <h4>Angehörigengruppe Demenz</h4>
-      <p class="datum"><svg aria-hidden="true"><use href="#i-kal"/></svg>jeden ersten Mittwoch im Monat · 14.00–15.30 Uhr</p>
+      <p class="datum" data-kal-start="2027-01-06T14:00" data-kal-ende="2027-01-06T15:30" data-kal-ort="bbz" data-kal-titel="Angehörigengruppe Demenz" data-kal-rrule="FREQ=MONTHLY;BYDAY=1WE"><svg aria-hidden="true"><use href="#i-kal"/></svg>jeden ersten Mittwoch im Monat · 14.00–15.30 Uhr</p>
       <p>Wer einen Menschen mit Demenz begleitet oder pflegt, findet hier Raum für Austausch, Informationen und gegenseitige Unterstützung. Die Gruppe trifft sich jeweils am ersten Mittwoch im Monat von 14.00 bis 15.30 Uhr bei Kaffee und Kuchen und wird von einer Sozialarbeiterin begleitet.</p>
       <div class="infobox">
         <p>Alle Angebote finden im Begegnungs- und Beratungszentrum im Erdgeschoss des Seidnitz Centers statt.</p>
@@ -854,6 +855,17 @@
 </main>
 
 <div class="hinweis" id="hinweis" role="status" aria-live="polite"></div>
+
+<div class="ios-hilfe" id="kal-blatt" hidden role="dialog" aria-modal="true" aria-labelledby="kal-titel">
+  <div class="ios-hilfe__box">
+    <h2 id="kal-titel">Im Kalender speichern</h2>
+    <p class="kal-was" data-kal-was></p>
+    <button class="aktion" type="button" data-kal-ics><svg aria-hidden="true"><use href="#i-kal-plus"/></svg>Kalender auf dem Gerät</button>
+    <p class="kal-klein">iPhone, iPad, Mac, Outlook und die meisten Android-Kalender</p>
+    <button class="aktion aktion--hell" type="button" data-kal-google>Google Kalender</button>
+    <button class="kal-abbrechen" type="button" data-kal-zu>Abbrechen</button>
+  </div>
+</div>
 
 <div class="ios-hilfe" id="ios-hilfe" hidden role="dialog" aria-modal="true" aria-labelledby="ios-titel">
   <div class="ios-hilfe__box">

@@ -1,5 +1,5 @@
 /* Offline-Speicher der Kirchennachrichten */
-const CACHE = 'kina-2026-12-v1';
+const CACHE = 'kina-2026-12-v2';
 const DATEIEN = [
  "./",
  "index.html",
