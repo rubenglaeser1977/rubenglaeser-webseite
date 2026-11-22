@@ -7,6 +7,13 @@
 <title>Kirchennachrichten Dezember 2026 / Januar 2027 – Ev.-Luth. Kirchgemeinde Dresden-Blasewitz</title>
 <meta name="description" content="Kirchennachrichten der Ev.-Luth. Kirchgemeinde Dresden-Blasewitz für Dezember 2026 und Januar 2027: Gottesdienste, Termine, 75 Jahre Bethlehemkirche, regelmäßige Veranstaltungen und Kontakte.">
 <meta name="theme-color" content="#1f6d35">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kirchennachr.">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,6 +22,8 @@
   <symbol id="i-pfeil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-hoch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
   <symbol id="i-menue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-teilen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></symbol>
+  <symbol id="i-app" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 7v7M9 11l3 3 3-3M10 18h4"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-kind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M9 4.5c1-1.5 2.5-2 3.5-1.2M9.2 12h.01M14.8 12h.01M9 16c1.6 1.4 4.4 1.4 6 0"/></symbol>
 </svg>
@@ -39,6 +48,9 @@
       <button class="kopf__btn" data-zu aria-label="Menü schließen"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <nav aria-label="Sprungmarken" id="menue-nav"></nav>
+    <div class="menue__fuss">
+      <button class="aktion app-knopf" type="button" data-app-installieren><svg aria-hidden="true"><use href="#i-app"/></svg>Als App speichern</button>
+    </div>
   </div>
 </div>
 
@@ -837,8 +849,24 @@
     <p><b>Ev.-Luth. Kirchgemeinde Dresden-Blasewitz</b></p>
     <p>Kirchennachrichten Dezember 2026 / Januar 2027</p>
     <p><a href="https://www.kirchgemeinde-dresden-blasewitz.de/fileadmin/download/kina/kina-2026-12.pdf" target="_blank" rel="noopener">Druckausgabe als PDF</a></p>
+    <p><button class="aktion aktion--hell app-knopf" type="button" data-app-installieren><svg aria-hidden="true"><use href="#i-app"/></svg>Als App speichern</button></p>
   </footer>
 </main>
+
+<div class="hinweis" id="hinweis" role="status" aria-live="polite"></div>
+
+<div class="ios-hilfe" id="ios-hilfe" hidden role="dialog" aria-modal="true" aria-labelledby="ios-titel">
+  <div class="ios-hilfe__box">
+    <h2 id="ios-titel">Als App speichern</h2>
+    <ol>
+      <li>Unten in Safari auf <b>Teilen</b> tippen (Quadrat mit Pfeil nach oben).</li>
+      <li><b>Zum Home-Bildschirm</b> wählen.</li>
+      <li>Mit <b>Hinzufügen</b> bestätigen.</li>
+    </ol>
+    <p>Die Kirchennachrichten erscheinen dann als eigenes Symbol auf dem Startbildschirm und funktionieren auch offline.</p>
+    <button class="aktion" type="button" data-ios-zu>Verstanden</button>
+  </div>
+</div>
 
 <button class="hoch" id="hoch" aria-label="Nach oben"><svg aria-hidden="true"><use href="#i-hoch"/></svg></button>
 
