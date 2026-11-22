@@ -1,5 +1,5 @@
 /* Offline-Speicher der Kirchennachrichten */
-const CACHE = 'kina-2026-12-v2';
+const CACHE = 'kina-2026-12-v3';
 const DATEIEN = [
  "./",
  "index.html",
@@ -58,8 +58,10 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Kalenderdateien nie abfangen – direkt vom Server
+  if (url.pathname.endsWith('.ics')) return;
   // Seite selbst: immer zuerst aktuell aus dem Netz, offline aus dem Speicher
-  if (req.mode === 'navigate' || (url.origin === location.origin && /\.(html|css|js|webmanifest)$/.test(url.pathname))) {
+  if ((req.mode === 'navigate' && !/\.[a-z0-9]+$/i.test(url.pathname.replace(/\/$/, ''))) || (url.origin === location.origin && /\.(html|css|js|webmanifest)$/.test(url.pathname))) {
     e.respondWith(fetch(req).then(r => {
       if (r.ok) { const k = r.clone(); caches.open(CACHE).then(c => c.put(req.mode === 'navigate' ? './' : req, k)); }
       return r;

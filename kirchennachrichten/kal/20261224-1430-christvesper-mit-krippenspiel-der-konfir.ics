@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kirchgemeinde Dresden-Blasewitz//Kirchennachrichten//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261224-1430-christvesper-mit-krippenspiel-der-konfir@kina-blasew
+ itz
+DTSTAMP:20261122T120000Z
+DTSTART;TZID=Europe/Berlin:20261224T143000
+DTEND;TZID=Europe/Berlin:20261224T153000
+SUMMARY:Christvesper mit Krippenspiel der Konfirmanden – Heilig-Geist-
+ Kirche
+LOCATION:Heilig-Geist-Kirche\, Berggartenstraße 22a\, 01277 Dresden
+DESCRIPTION:Pfarrer Dr. Herbst\nKirchennachrichten der Ev.-Luth. Kirch
+ gemeinde Dresden-Blasewitz\nhttps://rubenglaeser.de/kirchennachrichte
+ n/#gd-do-24-dezember
+URL:https://rubenglaeser.de/kirchennachrichten/#gd-do-24-dezember
+END:VEVENT
+END:VCALENDAR

@@ -335,6 +335,12 @@
     });
   });
 
+  var vergeben = {};
+  termine.forEach(function (t) {
+    var d = kompakt(t.start).slice(0, 13).replace('T', '-') + '-' + H.slug(t.titel).slice(0, 40).replace(/-$/, '');
+    while (vergeben[d]) d += '-2';
+    vergeben[d] = 1; t.datei = d;
+  });
   termine.forEach(function (t) {
     var b = knopf(t.titel);
     b.addEventListener('click', function () { oeffne(t); });
@@ -365,7 +371,8 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') schliesse(); });
 
   function ganztags(t) { return t.start.length === 10; }
-  function link(t) { return location.origin + location.pathname + (t.id ? '#' + t.id : ''); }
+  var BASIS = 'https://rubenglaeser.de/kirchennachrichten/';
+  function link(t) { return BASIS + (t.id ? '#' + t.id : ''); }
   function beschreibung(t) {
     return (t.info ? t.info + '\n' : '') + 'Kirchennachrichten der Ev.-Luth. Kirchgemeinde Dresden-Blasewitz\n' + link(t);
   }
@@ -376,14 +383,13 @@
     while (s.length > 70) { out.push(s.slice(0, 70)); s = ' ' + s.slice(70); }
     out.push(s); return out.join('\r\n');
   }
-  function ics(t) {
-    var jetzt = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  function icsText(t) {
     var z = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Kirchgemeinde Dresden-Blasewitz//Kirchennachrichten//DE', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
       'BEGIN:VTIMEZONE', 'TZID:Europe/Berlin',
       'BEGIN:DAYLIGHT', 'TZOFFSETFROM:+0100', 'TZOFFSETTO:+0200', 'TZNAME:CEST', 'DTSTART:19700329T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU', 'END:DAYLIGHT',
       'BEGIN:STANDARD', 'TZOFFSETFROM:+0200', 'TZOFFSETTO:+0100', 'TZNAME:CET', 'DTSTART:19701025T030000', 'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU', 'END:STANDARD',
       'END:VTIMEZONE', 'BEGIN:VEVENT',
-      'UID:' + kompakt(t.start) + '-' + H.slug(t.titel).slice(0, 40) + '@kina-blasewitz', 'DTSTAMP:' + jetzt];
+      'UID:' + t.datei + '@kina-blasewitz', 'DTSTAMP:20261122T120000Z'];
     if (ganztags(t)) {
       z.push('DTSTART;VALUE=DATE:' + kompakt(t.start), 'DTEND;VALUE=DATE:' + kompakt(plusTag(t.ende)));
     } else {
@@ -393,17 +399,19 @@
     z.push('SUMMARY:' + esc(t.titel));
     if (t.ort) z.push('LOCATION:' + esc(t.ort));
     z.push('DESCRIPTION:' + esc(beschreibung(t)), 'URL:' + link(t), 'END:VEVENT', 'END:VCALENDAR');
-    var text = z.map(falte).join('\r\n');
-    var name = H.slug(t.titel).slice(0, 50) + '.ics';
+    return z.map(falte).join('\r\n') + '\r\n';
+  }
+  /* Für die Erzeugung der statischen Dateien (kal/*.ics) */
+  window.KINA_ICS = function () { return termine.map(function (t) { return { datei: t.datei, text: icsText(t) }; }); };
+
+  function ics(t) {
+    /* Echte Datei vom Server: funktioniert auf iPhone/iPad (Safari bietet „Hinzufügen“ an),
+       auf Android und am Computer wird sie geladen und mit dem Kalender geöffnet. */
+    var url = 'kal/' + t.datei + '.ics';
     var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (ios) {
-      window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(text);
-      return;
-    }
-    var url = URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
-    var a = document.createElement('a'); a.href = url; a.download = name;
+    if (ios) { window.location.href = url; return; }
+    var a = document.createElement('a'); a.href = url; a.download = t.datei + '.ics';
     document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
     H.zeige('Termin-Datei geladen – zum Übernehmen öffnen.');
   }
   function google(t) {
