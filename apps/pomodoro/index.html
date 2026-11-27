@@ -100,9 +100,16 @@ body.dark .ctrl button{background:transparent;color:var(--sky);border-color:#4a4
 body.dark .ctrl button#go{background:var(--magenta);border-color:var(--magenta);color:#fff}
 body.dark #dm,body.dark .srow button,body.dark .snd summary{color:var(--sky);border-color:#4a4690}
 body.dark .snd{border-color:#322f66}body.dark li.done{color:#6f6c99}
+
+/* feste Ziffernbreite: Gemunu Libre hat keine Tabellenziffern */
+.time .dg{display:inline-block;width:.59em;text-align:center}.time .cl{display:inline-block;width:.26em;text-align:center;position:relative;top:-.06em}
+/* Einstellungen während des Laufs ausblenden */
+body.running #cfg{display:none}
+body.running .app{grid-template-columns:1fr !important}
+body.running #tc{grid-column:1/-1}
 </style></head><body><div class="app">
 <div class="head"><h1>Pomodoro<em>/</em></h1><button id="dm">Dunkel</button></div>
-<div class="card">
+<div class="card" id="cfg">
 <div class="tabs"><button id="t1" class="on">Nach Dauer</button><button id="t2">Nach Zielzeit</button></div>
 <div id="m1">
 <label>Arbeitsphase (Minuten)</label><input id="w1" type="number" min="1" value="25">
@@ -121,7 +128,7 @@ body.dark .snd{border-color:#322f66}body.dark li.done{color:#6f6c99}
 </details>
 </div>
 <div class="card work" id="tc">
-<div class="phase" id="ph">Bereit</div><div class="time" id="tm">00:00</div>
+<div class="phase" id="ph">Bereit</div><div class="time" id="tm"><span class="dg">0</span><span class="dg">0</span><span class="cl">:</span><span class="dg">0</span><span class="dg">0</span></div>
 <div class="bar"><div id="pb"></div></div><div class="sub" id="sub"></div><div class="sub" id="wk" style="font-size:.75rem;opacity:.7"></div>
 <div class="ctrl"><button id="go">Start</button><button id="pa" disabled>Pause</button><button id="sk" disabled>Überspringen</button><button id="rs">Reset</button></div>
 <ol id="plan"></ol>
@@ -135,6 +142,7 @@ const $=id=>document.getElementById(id);let mode=1,steps=[],idx=0,endAt=0,remain
 $('t1').onclick=()=>setMode(1);$('t2').onclick=()=>setMode(2);
 function setMode(m){if(tick)return;mode=m;$('t1').classList.toggle('on',m==1);$('t2').classList.toggle('on',m==2);$('m1').hidden=m!=1;$('m2').hidden=m!=2;calc()}
 const d=new Date(Date.now()+2*3600e3);$('end').value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const setT=t=>{$('tm').innerHTML=t.split('').map(c=>c==':'?'<span class="cl">:</span>':'<span class="dg">'+c+'</span>').join('')};
 const fmt=s=>{s=Math.max(0,Math.ceil(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):String(m).padStart(2,'0'))+':'+String(x).padStart(2,'0')};
 const clock=t=>new Date(t).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
 function build(){let w,b,n;const info=$('info');info.classList.remove('err');
@@ -146,7 +154,7 @@ function build(){let w,b,n;const info=$('info');info.classList.remove('err');
  const s=[];for(let i=0;i<n;i++){s.push({t:'Arbeit',d:w,i:i+1});if(i<n-1&&b>0)s.push({t:'Pause',d:b,i:i+1})}
  const tot=s.reduce((a,x)=>a+x.d,0);info.textContent=(mode==2?'Arbeitsphase: '+fmt(w)+' · ':'')+'Gesamt: '+fmt(tot)+' · Ende ca. '+clock(Date.now()+tot*1000);
  return {s,n}}
-function calc(){if(tick)return;const r=build();steps=r?r.s:[];idx=0;renderPlan();if(steps[0]){$('tm').textContent=fmt(steps[0].d)}}
+function calc(){if(tick)return;const r=build();steps=r?r.s:[];idx=0;renderPlan();if(steps[0]){setT(fmt(steps[0].d))}}
 document.querySelectorAll('input:not([type=range])').forEach(i=>i.oninput=calc);
 function renderPlan(){$('plan').innerHTML=steps.map((s,i)=>`<li class="${i<idx?'done':i==idx&&tick?'cur':''}">${s.t}${s.t=='Arbeit'?' '+s.i:''} – ${fmt(s.d)}</li>`).join('')}
 let wl=null,wlOn=false,nsv=null;
@@ -187,17 +195,17 @@ function beep(endedType){if(endedType=='Arbeit')play($('sw').value,+$('vw').valu
  try{if(window.Notification&&Notification.permission=='granted')new Notification('Pomodoro',{body:steps[idx]?steps[idx].t+' beginnt':'Fertig'})}catch(e){}}
 function startStep(){const s=steps[idx];endAt=Date.now()+s.d*1000;$('tc').className='card '+(s.t=='Arbeit'?'work':'brk');
  $('ph').textContent=s.t=='Arbeit'?'Arbeitsphase '+s.i+' / '+steps.filter(x=>x.t=='Arbeit').length:'Pause';renderPlan()}
-function loop(){if(paused)return;const s=steps[idx];const r=(endAt-Date.now())/1000;$('tm').textContent=fmt(r);$('pb').style.width=(100*(1-r/s.d))+'%';
+function loop(){if(paused)return;const s=steps[idx];const r=(endAt-Date.now())/1000;setT(fmt(r));$('pb').style.width=(100*(1-r/s.d))+'%';
  const totalLeft=r+steps.slice(idx+1).reduce((a,x)=>a+x.d,0);$('sub').textContent='Ende um '+clock(Date.now()+totalLeft*1000);document.title=fmt(r)+' – '+s.t;
  if(r<=0)next()}
 function next(){const ended=steps[idx]&&steps[idx].t;idx++;beep(ended);if(idx>=steps.length){finish();return}startStep()}
-function finish(){wake(false);clearInterval(tick);tick=null;$('ph').textContent='Geschafft';$('tm').textContent='00:00';$('pb').style.width='100%';$('sub').textContent='Alle Phasen abgeschlossen.';
+function finish(){document.body.classList.remove('running');wake(false);clearInterval(tick);tick=null;$('ph').textContent='Geschafft';setT('00:00');$('pb').style.width='100%';$('sub').textContent='Alle Phasen abgeschlossen.';
  $('go').disabled=false;$('pa').disabled=$('sk').disabled=true;document.title='Pomodoro Timer';renderPlan()}
-$('go').onclick=()=>{ac();calc();if(!steps.length)return;try{if(window.Notification&&Notification.permission=='default')Notification.requestPermission()}catch(e){}
+$('go').onclick=()=>{ac();calc();if(!steps.length)return;document.body.classList.add('running');window.scrollTo(0,0);try{if(window.Notification&&Notification.permission=='default')Notification.requestPermission()}catch(e){}
  wake(true);idx=0;paused=false;tick=setInterval(loop,250);startStep();loop();$('go').disabled=true;$('pa').disabled=$('sk').disabled=false;$('pa').textContent='Pause'};
 $('pa').onclick=()=>{if(!paused){paused=true;remain=endAt-Date.now();$('pa').textContent='Weiter'}else{paused=false;endAt=Date.now()+remain;$('pa').textContent='Pause'}};
 $('sk').onclick=()=>{if(paused){paused=false;$('pa').textContent='Pause'}next()};
-$('rs').onclick=()=>{wake(false);clearInterval(tick);tick=null;paused=false;$('go').disabled=false;$('pa').disabled=$('sk').disabled=true;$('pa').textContent='Pause';
+$('rs').onclick=()=>{document.body.classList.remove('running');wake(false);clearInterval(tick);tick=null;paused=false;$('go').disabled=false;$('pa').disabled=$('sk').disabled=true;$('pa').textContent='Pause';
  $('ph').textContent='Bereit';$('pb').style.width='0';$('sub').textContent='';$('tc').className='card work';document.title='Pomodoro Timer';calc()};
 calc();
 </script></body></html>
